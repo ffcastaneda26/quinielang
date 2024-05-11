@@ -36,7 +36,7 @@ class PermissionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label(__('Create Permission')),
                 Tables\Actions\AttachAction::make()->label(__('Attach Permission'))
                     ->preloadRecordSelect()
                     ->color('success'),

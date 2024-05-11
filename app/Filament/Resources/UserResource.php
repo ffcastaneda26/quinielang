@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Group;
+use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
@@ -71,10 +72,6 @@ class UserResource extends Resource
                             ->offIcon('heroicon-m-x-circle')
                             ->onColor('success')
                             ->offColor('danger'),
-                        Select::make('companies')
-                            ->label('Empresas')
-                            ->preload()
-                            ->relationship('companies', 'company'),
                         ])->columns(2),
 
                     ])->columnSpanFull(),
@@ -87,10 +84,6 @@ class UserResource extends Resource
                     CheckboxList::make('roles')
                         ->relationship(titleAttribute: 'name')
                         ->searchable(),
-                    // CheckboxList::make('permissions')
-                    //         ->label('Permisos')
-                    //          ->relationship(titleAttribute: 'name')
-                    //         ->searchable(),
                     Select::make('permissions')
                         ->label('Permisos')
                         ->multiple()

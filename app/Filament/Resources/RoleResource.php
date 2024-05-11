@@ -30,6 +30,7 @@ class RoleResource extends Resource
     protected static ?int $navigationSort = 2;
 
 
+
     public static function getNavigationLabel(): string
     {
         return __('Roles');
@@ -56,16 +57,10 @@ class RoleResource extends Resource
             ->schema([
                 Group::make()
                     ->schema([
-                        TextInput::make('name')->required()->unique(ignoreRecord: true),
-                        // Select::make('permissions')
-                        //     ->multiple()
-                        //     ->relationship(titleAttribute:'name')
-                        //     ->preload()
-                        //     ->createOptionForm([
-                        //         Forms\Components\TextInput::make('name')
-                        //             ->required()
-                        //             ->unique()
-                        //     ]),
+                        TextInput::make('name')
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->translateLabel(),
                     ])->columns(2)
             ]);
     }
@@ -74,7 +69,7 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('name')->translateLabel()->searchable()->sortable(),
                 TextColumn::make('users_count')
                     ->counts('users')
                     ->label('Usuarios'),
