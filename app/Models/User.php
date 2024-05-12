@@ -3,15 +3,20 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Excellsus\Traits\UserTrait;
+use Filament\Panel;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
+
 {
     use HasApiTokens;
     use HasFactory;
@@ -19,6 +24,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use UserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +35,20 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'active',
+        'alias',
     ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+
+
+        if ($panel->getId() === 'admin') {
+            return $this->isAdmin();
+        }
+
+        return false;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

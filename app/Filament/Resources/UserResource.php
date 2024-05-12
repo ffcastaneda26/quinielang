@@ -84,6 +84,10 @@ class UserResource extends Resource
                     CheckboxList::make('roles')
                         ->relationship(titleAttribute: 'name')
                         ->searchable(),
+                    // CheckboxList::make('permissions')
+                    //         ->label('Permisos')
+                    //          ->relationship(titleAttribute: 'name')
+                    //         ->searchable(),
                     Select::make('permissions')
                         ->label('Permisos')
                         ->multiple()
