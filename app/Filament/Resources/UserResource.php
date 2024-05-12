@@ -46,6 +46,10 @@ class UserResource extends Resource
         return __('Users');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
     // public static function getNavigationGroup(): string
     // {
     //     return __('Security');
