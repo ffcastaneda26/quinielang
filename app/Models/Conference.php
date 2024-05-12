@@ -4,18 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Team extends Model
+class Conference extends Model
 {
     use HasFactory;
-    protected $table = 'teams';
+    protected $table = 'conferences';
     public $timestamps = false;
 
     protected $fillable = [
         'name',
-        'alias',
         'short',
         'logo',
-        'logo_gris'
+        'league_id'
     ];
+
+    public function league(): BelongsTo
+    {
+        return $this->belongsTo(League::class);
+    }
 }

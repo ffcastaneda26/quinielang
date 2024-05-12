@@ -22,10 +22,14 @@ class DatabaseSeeder extends Seeder
             'users',
             'roles',
             'permissions',
+            'leagues',
+            'conferences',
         ]);
 
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(UserAdminTableSeeder::class);
+        $this->call(LeagueSeeder::class);
+        $this->call(ConferenceSeeder::class);
     }
 
     protected function truncateTables(array $tables) {
