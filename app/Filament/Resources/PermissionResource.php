@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\Security;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -23,6 +24,9 @@ class PermissionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-check';
 
     protected static ?int $navigationSort = 3;
+    // Se mueve a una navegación dentro de la página principal
+    protected static ?string $cluster = Security::class;
+
     // Se abrirá hasta que se abra Roles
     // protected static ?string $navigationParentItem = 'Roles';
 
@@ -43,9 +47,9 @@ class PermissionResource extends Resource
         return __('Permissions');
     }
 
-    public static function getNavigationGroup(): string {
-        return __('Security');
-    }
+    // public static function getNavigationGroup(): string {
+    //     return __('Security');
+    // }
 
     public static function form(Form $form): Form
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\Security;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -28,6 +29,7 @@ class RoleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     protected static ?int $navigationSort = 2;
+    protected static ?string $cluster = Security::class;
 
 
     public static function getNavigationLabel(): string
@@ -47,9 +49,9 @@ class RoleResource extends Resource
         return __('Roles');
     }
 
-    public static function getNavigationGroup(): string {
-        return __('Security');
-    }
+    // public static function getNavigationGroup(): string {
+    //     return __('Security');
+    // }
     public static function form(Form $form): Form
     {
         return $form

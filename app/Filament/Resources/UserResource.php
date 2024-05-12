@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\Security;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
@@ -27,6 +28,7 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $cluster = Security::class;
     public static function getNavigationLabel(): string
     {
         return __('Users');
@@ -44,10 +46,10 @@ class UserResource extends Resource
         return __('Users');
     }
 
-    public static function getNavigationGroup(): string
-    {
-        return __('Security');
-    }
+    // public static function getNavigationGroup(): string
+    // {
+    //     return __('Security');
+    // }
     public static function form(Form $form): Form
     {
         return $form
