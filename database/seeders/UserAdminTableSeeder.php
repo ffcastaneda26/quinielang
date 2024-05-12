@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class UserAdminTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +15,9 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             "name"      => "Administrador General",
-            "email"     => "admin@quinielanfl.com",
-            "password"  => bcrypt("adminquinielanfl"),
+            "email"     => "admin@quinielang.com",
+            "password"  => bcrypt("adminquinielang"),
+            "active"    => 1
         ])->assignRole('Admin');
 
     }

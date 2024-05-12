@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(RoleAndPermissionSeeder::class);
-        $this->call(UsersTableSeeder::class);
+        $this->call(UserAdminTableSeeder::class);
     }
 
     protected function truncateTables(array $tables) {
