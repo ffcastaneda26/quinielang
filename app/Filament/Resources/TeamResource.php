@@ -2,16 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TeamResource\Pages;
-use App\Filament\Resources\TeamResource\RelationManagers;
-use App\Models\Team;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Team;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\TeamResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TeamResource\RelationManagers;
+use App\Models\Conference;
+use App\Models\Division;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 
 class TeamResource extends Resource
 {
@@ -42,31 +50,57 @@ class TeamResource extends Resource
     }
 
 
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->translateLabel()
-                    ->required()
-                    ->maxLength(50),
-                Forms\Components\TextInput::make('alias')
-                    ->translateLabel()
-                    ->required()
-                    ->maxLength(50),
-                Forms\Components\TextInput::make('short')
-                    ->translateLabel()
-                    ->required()
-                    ->maxLength(3),
-                // TODO:: Agregar la liga para que seleccione las divisiones
-                Forms\Components\Select::make('division_id')
-                    ->relationship('division', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('logo')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('logo_gris')
-                    ->maxLength(255),
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->translateLabel()
+                            ->required()
+                            ->maxLength(50),
+                        TextInput::make('alias')
+                            ->translateLabel()
+                            ->required()
+                            ->maxLength(50),
+                        TextInput::make('short')
+                            ->translateLabel()
+                            ->required()
+                            ->maxLength(3),
+                    ])->columns(3),
 
+                // TODO:: Agregar la liga para que seleccione las divisiones
+                // Select::make('conference_id')
+                //     ->label('Conference')
+                //     ->reactive()
+                //     ->required()
+                //     ->options(Conference::all()->pluck('name', 'id')->toArray())
+                //     ->afterStateUpdated(fn(callable $set) => $set('division_id', null))
+                //     ->searchable(),
+                // Select::make('division_id')
+                //     ->translateLabel()
+                //     ->required()
+                //     ->options(function (callable $get) {
+                //         $conference = Conference::find($get('conference_id'));
+                //         if (!$conference) {
+                //             return;
+                //         }
+                //         return $conference->divisions->pluck('name', 'id');
+                //     }),
+
+                // Select::make('division_id')
+                //     ->relationship('division', 'name')
+                //     ->required(),
+                FileUpload::make('logo')
+                    ->translateLabel()
+                    ->directory('teams')
+                    ->preserveFilenames(),
+                FileUpload::make('logo_gris')
+                    ->translateLabel()
+                    ->directory('teams')
+                    ->preserveFilenames()
             ]);
     }
 
@@ -74,25 +108,25 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                // TextColumn::make('division.conference.name')
+                //     ->sortable(),
+                // TextColumn::make('division.name')
+                //     ->sortable(),
+                TextColumn::make('name')
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('alias')
+                TextColumn::make('alias')
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('short')
+                TextColumn::make('short')
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('logo')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('logo_gris')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('division.name')
-                    ->numeric()
-                    ->sortable(),
+                ImageColumn::make('logo'),
+                ImageColumn::make('logo_gris'),
+
             ])
             ->filters([
                 //

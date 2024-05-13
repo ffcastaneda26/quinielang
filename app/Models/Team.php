@@ -10,6 +10,19 @@ class Team extends Model
 {
     use HasFactory;
 
+    protected $table = 'teams';
+    public $timestamps = false;
+
+
+    protected $fillable = [
+        'name',
+        'alias',
+        'short',
+        'logo',
+        'logo_gris',
+        'division_id',
+    ];
+
     public function division(): BelongsTo
     {
         return $this->belongsTo(Division::class);
