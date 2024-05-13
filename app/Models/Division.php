@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Division extends Model
 {
     use HasFactory;
-    protected $table = 'conferences';
+    protected $table = 'divisions';
     public $timestamps = false;
 
     protected $fillable = [

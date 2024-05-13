@@ -14,10 +14,11 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50)->unique()->comment('Nombre');
-            $table->string('alias',50)->unique()->comment('Alias');
-            $table->string('short',3)->unique()->comment('Corto');
-            $table->string('logotipo')->nullable()->default(null)->comment('Logo');
+            $table->string('name',50)->comment('Nombre');
+            $table->string('alias',50)->comment('Alias');
+            $table->string('short',3)->comment('Corto');
+            $table->string('logo')->nullable()->default(null)->comment('Logo');
+            $table->string('logo_gris')->nullable()->default(null)->comment('Logo');
             $table->foreignIdFor(Division::class)->comment('División');
         });
     }
