@@ -24,12 +24,16 @@ class DatabaseSeeder extends Seeder
             'permissions',
             'leagues',
             'conferences',
+            'divisions',
+            'teams'
         ]);
 
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(UserAdminTableSeeder::class);
         $this->call(LeagueSeeder::class);
         $this->call(ConferenceSeeder::class);
+        $this->call(DivisionSeeder::class);
+        $this->call(TeamSeeder::class);
     }
 
     protected function truncateTables(array $tables) {
