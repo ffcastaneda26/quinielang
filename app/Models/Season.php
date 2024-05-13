@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Season extends Model
 {
@@ -27,4 +29,30 @@ class Season extends Model
         'league_id',
         'active',
     ];
+
+    public function rounds(): HasMany
+    {
+        return $this->hasMany(Round::class);
+    }
+
+    public  function field_super_bowl(): BelongsTo
+    {
+        return $this->belongsTo(Team::class,'field_id');
+    }
+
+    public  function champio_ship(): BelongsTo
+    {
+        return $this->belongsTo(Team::class,'champion_ship_id');
+    }
+
+    public  function sub_champio_ship(): BelongsTo
+    {
+        return $this->belongsTo(Team::class,'sub_champion_ship_id');
+    }
+
+    public  function league(): BelongsTo
+    {
+        return $this->belongsTo(League::class);
+    }
+
 }
