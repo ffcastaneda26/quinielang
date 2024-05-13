@@ -28,7 +28,7 @@ class TeamResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-trophy';
     protected static ?string $activeNavigationIcon = 'heroicon-s-shield-check';
-    protected static ?int $navigationSort = 22;
+    protected static ?int $navigationSort = 10;
 
     public static function getNavigationLabel(): string
     {
