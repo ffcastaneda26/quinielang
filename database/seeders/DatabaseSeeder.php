@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             'divisions',
             'teams',
             'seasons',
-            'rounds'
+            'rounds',
+            'games',
         ]);
 
         $this->call(RoleAndPermissionSeeder::class);
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TeamSeeder::class);
         $this->call(SeasonSeeder::class);
         $this->call(RoundSeeder::class);
+        $this->call(GameSeeder::class);
     }
 
     protected function truncateTables(array $tables) {
