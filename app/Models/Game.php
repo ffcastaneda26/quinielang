@@ -34,8 +34,10 @@ class Game extends Model
     protected $casts = [
         'game_day'  => 'datetime:Y-m-d',
         'game_time' => 'datetime:H:i',
-        'game_date' => 'datetime'
+        'game_date' => 'datetime',
     ];
+
+
 
     public function round(): BelongsTo
     {

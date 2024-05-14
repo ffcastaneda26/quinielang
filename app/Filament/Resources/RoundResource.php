@@ -79,6 +79,7 @@ class RoundResource extends Resource
     {
         return $table
             ->columns([
+                tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('start')
                     ->date()
                     ->searchable()
@@ -96,6 +97,10 @@ class RoundResource extends Resource
                     ->searchable()
                     ->translateLabel()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->translateLabel()
+                    ->badge(),
+
                 // Tables\Columns\TextColumn::make('season.name')
                 //     ->translateLabel()
                 //     ->sortable(),

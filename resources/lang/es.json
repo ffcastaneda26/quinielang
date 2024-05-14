@@ -23,5 +23,15 @@
     "Finish": "Final",
     "Type": "Tipo",
     "Seasons": "Temporadas",
-    "Season": "Temporada"
+    "Season": "Temporada",
+    "Games": "Partidos",
+    "Game": "Partido",
+    "Local": "Local",
+    "Points": "Puntos",
+    "Visit": "Visita",
+    "Game day": "Fecha",
+    "Game time": "Hora",
+    "Game date": "Fecha Hora",
+    "Winner": "Ganador"
+
 }
