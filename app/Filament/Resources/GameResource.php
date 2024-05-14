@@ -91,18 +91,22 @@ class GameResource extends Resource
                     ->translateLabel()
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('local_team.name')
-                    ->label(__('Local'))
-                    ->searchable()
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('local_team.logo')
+                    ->alignCenter()
+                    ->circular(),
+                // Tables\Columns\TextColumn::make('local_team.name')
+                //     ->label(__('Local'))
+                //     ->searchable()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('local_points')
                     ->label(__('Points'))
                     ->alignCenter()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('visit_team.name')
-                    ->label(__('Visit'))
-                    ->searchable()
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('visit_team.logo')->alignCenter()->circular(),
+                // Tables\Columns\TextColumn::make('visit_team.name')
+                //     ->label(__('Visit'))
+                //     ->searchable()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('visit_points')
                     ->numeric()
                     ->label(__('Points'))
@@ -130,8 +134,8 @@ class GameResource extends Resource
             ->defaultPaginationPageOption(16)
             ->filters([
                 Tables\Filters\SelectFilter::make('round_id')
-                ->label(__('Round'))
-                ->relationship('round', 'id')
+                    ->label(__('Round'))
+                    ->relationship('round', 'id')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
