@@ -32,6 +32,17 @@
     "Game day": "Fecha",
     "Game time": "Hora",
     "Game date": "Fecha Hora",
-    "Winner": "Ganador"
-
+    "Winner": "Ganador",
+    "Configuration": "Configuración",
+    "Website name": "Nombre Sitio",
+    "Website url":"URL Sitio",
+    "Minuts before picks":"Umbral Pronóstico",
+    "Allow ties":"¿Permite Empates?",
+    "Create mssing picks":"¿Crear Pronósticos Faltantes",
+    "Assig role to user":"¿Asignar Rol a Usuario al Registrarse?",
+    "Require points in picks":"¿Puntos en Pronóstios?",
+    "Language": "Idioma",
+    "Spanish": "Español",
+    "English": "Inglés",
+    "Image": "Imagen"
 }

@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->breadcrumbs(false)
             ->font('Poppins')
             ->favicon(asset('images/nfl.png'))
             ->unsavedChangesAlerts()

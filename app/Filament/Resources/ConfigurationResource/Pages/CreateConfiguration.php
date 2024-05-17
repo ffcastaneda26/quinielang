@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Filament\Resources\ConfigurationResource\Pages;
+
+use App\Filament\Resources\ConfigurationResource;
+use Filament\Actions;
+use Filament\Resources\Pages\CreateRecord;
+
+class CreateConfiguration extends CreateRecord
+{
+    protected static string $resource = ConfigurationResource::class;
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}
