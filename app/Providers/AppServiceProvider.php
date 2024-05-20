@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Classes\Configuration;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
+use Illuminate\Support\Facades\App;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,5 +38,10 @@ class AppServiceProvider extends ServiceProvider
                 ->circular();
                 // ->outsidePanelPlacement(Placement::TopRight);
         });
+
+        App::singleton(Configuration::class, function () {
+            return Configuration::getInstance();
+        });
+
     }
 }
