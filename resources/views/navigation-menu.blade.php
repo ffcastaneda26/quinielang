@@ -15,6 +15,8 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @include('menus.participant')
+
                 </div>
             </div>
 
@@ -142,6 +144,9 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @include('menus.participant_responsive')
+
         </div>
 
         <!-- Responsive Settings Options -->

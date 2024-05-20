@@ -1,5 +1,7 @@
 <?php
 
+use App\Classes\Configuration;
+use App\Livewire\SelectRound;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,6 +14,11 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $configuration = app(Configuration::class);
+        return view('dashboard',compact('configuration'));
     })->name('dashboard');
+
+
 });
+
+Route::get('current_round',SelectRound::class);

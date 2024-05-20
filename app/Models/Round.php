@@ -6,6 +6,7 @@ use App\Enums\RoundTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Round extends Model
 {
@@ -26,5 +27,37 @@ class Round extends Model
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);
+    }
+
+    public function  read_current_round()
+    {
+        $sql = "UPDATE rounds SET active=0";
+        DB::update($sql);
+
+        $today = now()->toDateString();
+        $minDate = Round::min('start');
+        $current_round = null;
+        if ($minDate >= $today) {
+            $current_round = Round::where('start', $minDate)->first();
+        }
+
+        if (!$current_round) {
+            $current_round = $this::where('start', '<=', $today)
+                ->where('finish', '>=', $today)
+                ->first();
+            if (!$current_round) {
+                $current_round = $this::where('id', $this->max('id'))->first();
+            }
+        }
+
+
+
+        if ($current_round) {
+
+            $current_round->active = 1;
+            $current_round->save();
+            return $current_round;
+        }
+        return null;
     }
 }
