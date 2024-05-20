@@ -13,8 +13,11 @@ class ConfigurationSeeder extends Seeder
      */
     public function run(): void
     {
-        $sql="INSERT INTO configuration  VALUES
-        (1, 'QUINIELA NFL 2024', 'quiniela.life/', 'ffcastaneda@gmail.com', 5, 0, 1, 1, 0, 'es', 1,null);";
-        DB::update($sql);
+        $this->command->warn(PHP_EOL . 'Creando Configuración...');
+        $sql="INSERT INTO configuration VALUES
+        (1, 'QUINIELA NFL 2024', 'quiniela.life/', 'ffcastaneda@gmail.com', 5, 0, 1, 1, 0, 'es', 0, 'configuration/logonfl.jpg');";
+         DB::update($sql);
+
+        $this->command->info('Configuración Creada');
     }
 }

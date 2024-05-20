@@ -13,6 +13,11 @@ class GameSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $this->command->warn(PHP_EOL . 'Creando Partidos...');
+
+
+
         $sql = "INSERT INTO games VALUES
        (1, 1, 30, 20, 6, 21, '2023-09-07', '19:20:00', '2023-11-10 01:38:49', 2),
         (2, 1, 4, 20, 13, 16, '2023-09-10', '12:00:00', '2023-11-10 01:04:02', 1),
@@ -306,6 +311,8 @@ class GameSeeder extends Seeder
         DB::update($sql);
         $sql = "UPDATE games SET game_date=CONCAT(game_day,' ',game_time);";
         DB::update($sql);
+
+        $this->command->info('Los Partidos Han Sido Creados');
 
     }
 }

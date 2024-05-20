@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
 {
@@ -32,12 +33,15 @@ class Game extends Model
     ];
 
     protected $casts = [
-        'game_day'  => 'datetime:Y-m-d',
+        'game_day' => 'datetime:Y-m-d',
         'game_time' => 'datetime:H:i',
         'game_date' => 'datetime',
     ];
 
-
+    public function picks(): HasMany
+    {
+        return $this->hasMany(Pick::class);
+    }
 
     public function round(): BelongsTo
     {
@@ -59,16 +63,17 @@ class Game extends Model
         return !is_null($this->visit_points) || !is_null($this->local_points);
     }
 
-        // ¿Gana local o visita?
-        public function win()
-        {
-            return $this->local_points > $this->visit_points ? 1 : 2;
-        }
+    // ¿Gana local o visita?
+    public function win()
+    {
+        return $this->local_points > $this->visit_points ? 1 : 2;
+    }
 
-        // ¿Se acertó el partido?
-        public function hit_game($winner){
-            return  $this->winner === $winner;
-        }
+    // ¿Se acertó el partido?
+    public function hit_game($winner)
+    {
+        return $this->winner === $winner;
+    }
 
 
 }

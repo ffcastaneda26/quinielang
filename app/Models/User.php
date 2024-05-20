@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser
@@ -82,5 +83,24 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function picks(): HasMany
+    {
+        return $this->hasMany(Pick::class);
+    }
+
+    public function picks_game($game_id): HasMany
+    {
+        return $this->hasMany(Pick::class)->where('game_id',$game_id);
+    }
+
+    public function pick_game($game_id): HasMany
+    {
+        return $this->hasMany(Pick::class)->where('game_id',$game_id)->first();
+    }
+
+    public function game_pick($game_id){
+        return $this->picks()->where('game_id',$game_id)->first();
     }
 }

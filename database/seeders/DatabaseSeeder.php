@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->truncateTables([
+            'configuration',
             'user_roles',
             'role_permissions',
             'user_permissions',
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'games',
         ]);
 
+        $this->call(ConfigurationSeeder::class);
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(UserAdminTableSeeder::class);
         $this->call(LeagueSeeder::class);
