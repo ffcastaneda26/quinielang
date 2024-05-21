@@ -1,0 +1,22 @@
+:root {
+    --main-bg-color: #dddddd;
+    --second-bg-color: #957633;
+    --texto-azul: #04273c;
+    --fondo-azul: #04273c;
+    --texto-oro: var(--second-bg-color);
+    /* --main-bg-color: #08d5f5; */
+}
+
+body {
+    font-family: "Pilat", sans-serif;
+    /* Otros estilos para el cuerpo del documento */
+}
+
+.game_winner{
+    background-color: #9ECAAA;
+    font-weight: bold;
+}
+.game_loser {
+    background-color: #f42a2a ;
+}
+
