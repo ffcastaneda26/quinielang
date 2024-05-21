@@ -22,7 +22,7 @@ Route::middleware([
         $configuration = app(Configuration::class);
         return view('dashboard',compact('configuration'));
     })->name('dashboard');
-    Route::get('pics',Picks::class)->name('picks');
+    Route::get('picks',Picks::class)->name('picks');
 
 });
 

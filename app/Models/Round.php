@@ -6,6 +6,7 @@ use App\Enums\RoundTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 class Round extends Model
@@ -24,6 +25,12 @@ class Round extends Model
     protected $casts = [
         'type'        => RoundTypeEnum::class,
     ];
+
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class)->orderBy('game_day')->orderBy('game_time');
+    }
+
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);
@@ -59,5 +66,11 @@ class Round extends Model
             return $current_round;
         }
         return null;
+    }
+
+    // Regresa el último partido de la jornada
+    public function get_last_game_round()
+    {
+        return $this->games->last();
     }
 }

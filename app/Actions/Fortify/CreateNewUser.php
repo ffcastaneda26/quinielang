@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Classes\Configuration;
+use App\Models\Configuration;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +38,7 @@ class CreateNewUser implements CreatesNewUsers
             'active'    => 1
         ]);
 
-        $configuration = app(Configuration::class);
+        $configuration = Configuration::first();
         if($configuration->assig_role_to_user){
             $participant_role = Role::where('name','Participante')->first();
             if($participant_role){

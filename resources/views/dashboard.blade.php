@@ -3,7 +3,7 @@
 
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <div class="flex">
-                {{ $configuration->website_name }}
+                {{ env('APP_NAME','QUINIELA 2024') }}
             </div>
 
         </h2>

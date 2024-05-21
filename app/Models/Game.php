@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Game extends Model
 {
@@ -75,5 +76,29 @@ class Game extends Model
         return $this->winner === $winner;
     }
 
+    // ¿Es el último partido de la jornada?
+    public function is_last_game_round()
+    {
+        return $this->round->get_last_game_round()->id == $this->id;
+    }
+
+    // ¿Permite pronosticar?
+    public function allow_pick()
+    {
+        if (!is_null($this->local_points) || !is_null($this->visit_points)) {
+            return false;
+        }
+        return true;
+
+        // date_default_timezone_set("America/Chihuahua");
+        // $configuracion = Configuration::first();
+        // $newDateTime = Carbon::now()->subMinutes($configuracion->minuts);
+        // $newDateTime = Carbon::now()->subMinute($configuracion->minuts_before_picks);
+        // $string_to_date = substr($this->game_day, 0, 10) . ' ' . substr($this->game_time, 11, 8);
+        // $fecha_juego = new Carbon($string_to_date);
+        // $fecha_juego->subMinute($configuracion->minuts_before_picks);
+
+        // return $fecha_juego > $newDateTime;
+    }
 
 }

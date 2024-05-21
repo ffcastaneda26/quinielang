@@ -39,9 +39,9 @@ class AppServiceProvider extends ServiceProvider
                 // ->outsidePanelPlacement(Placement::TopRight);
         });
 
-        App::singleton(Configuration::class, function () {
-            return Configuration::getInstance();
-        });
+        // App::singleton(Configuration::class, function () {
+        //     return Configuration::getInstance();
+        // });
 
     }
 }
