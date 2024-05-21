@@ -17,6 +17,7 @@ class UserAdminTableSeeder extends Seeder
             "name"      => "Administrador General",
             "email"     => "admin@quinielang.com",
             "password"  => bcrypt("adminquinielang"),
+            "alias"     => "Admin",
             "active"    => 1
         ])->assignRole('Admin');
 

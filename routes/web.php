@@ -1,10 +1,15 @@
 <?php
 
-use App\Classes\Configuration;
+use App\Livewire\Picks;
 use App\Livewire\SelectRound;
+use App\Classes\Configuration;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/dashboard');
+    }
     return view('welcome');
 });
 
@@ -17,7 +22,7 @@ Route::middleware([
         $configuration = app(Configuration::class);
         return view('dashboard',compact('configuration'));
     })->name('dashboard');
-
+    Route::get('pics',Picks::class)->name('picks');
 
 });
 

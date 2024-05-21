@@ -19,7 +19,7 @@ class RoleAndPermissionSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $this->command->warn(PHP_EOL . 'Creando Permisos...');
+        $this->command->warn(PHP_EOL . __('Creating Permissions'));
         // create permissions
         $permissions = [
 
@@ -30,14 +30,17 @@ class RoleAndPermissionSeeder extends Seeder
                 Permission::create(['name' => $permission]);
             }
         }
-        $this->command->info('Permisos Creados');
+        $this->command->info(__('Permissions Created'));
 
-
-        $this->command->info('Creando role Admin');
+        $this->command->info(__('Creating Role Admin'));
 
         // Admin con todos los permisos
         $role = Role::create(['name' => 'Admin']);
-        $this->command->info('Rol Admin Creado');
+        $this->command->info(__('Admin Role Created'));
+        $this->command->info(__('Creating Role Paritipant'));
+        $role = Role::create(['name' => 'Participante']);
+        $this->command->info(__('Participant Role Created'));
+
 
     }
 }

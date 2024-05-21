@@ -46,5 +46,12 @@
     "English": "Inglés",
     "Image": "Imagen",
     "Dashboard": "Panel Inicial",
-    "Current Round": "Jornada Actual"
+    "Current Round": "Jornada Actual",
+    "Creating Role Paritipant": "Creando Rol Participante",
+    "Creating Role Admin": "Creando Rol Admin",
+    "Participant Role Created": "Rol Pariticpante Creado",
+    "Admin Role Created": "Rol Admin Creado",
+    "Permissions Created": "Permisos Creados",
+    "Picks": "Pronósticos",
+    "Pick": "Pronóstico"
 }
