@@ -1,20 +1,28 @@
-{{-- <thead class="thead">
-    <tr align="center" class="bg-dark text-white text-center">
-        <th>Fecha</th>
-        <th>Visita</th>
-        <th>&nbsp;</th>
-        <th class="w-auto text-center">Pronóstico</th>
-        <th>&nbsp;</th>
-        <th>Local</th>
-    </tr>
-</thead> --}}
 <thead>
     <tr>
-        <th class="bg-black text-white font-bold">Fecha</th>
-        <th class="bg-black text-white font-bold">Visita</th>
-        <th class="bg-black text-white font-bold">&nbsp;</th>
-        <th class="bg-black text-white font-bold">Pronóstico</th>
-        <th class="bg-black text-white font-bold">&nbsp;</th>
-        <th class="bg-black text-white font-bold">LOCAL</th>
+        <th>
+            <div
+                class="flex items-center justify-center pb-2 pt-4 text-start uppercase tracking-wide text-black bg-gray-200 sm:text-xs lg:text-xs">
+                {{ __('Date') }}
+            </div>
+        </th>
+        <th role="columnheader">
+            <div
+                class="flex items-center justify-center pb-2 pt-4 text-start uppercase tracking-wide text-black bg-gray-200 sm:text-xs lg:text-xs">
+                {{ __('Visit') }}
+            </div>
+        </th>
+        <th colspan="3" role="columnheader">
+            <div
+                class="flex items-center justify-center pb-2 pt-4 text-end uppercase tracking-wide text-black bg-gray-200 sm:text-xs lg:text-xs">
+                {{ __('Pick') }}
+            </div>
+        </th>
+        <th role="columnheader">
+            <div
+                class="flex items-center justify-center pb-2 pt-4 text-start uppercase tracking-wide text-black bg-gray-200 sm:text-xs lg:text-xs">
+                Local
+            </div>
+        </th>
     </tr>
 </thead>
