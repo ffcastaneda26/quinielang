@@ -40,7 +40,6 @@ class PickGame extends Component
     public $local_points;
 
 
-    protected $listeners = ['update_winner_pick'];
     public function mount(Game $game,$id_game_tie_breaker,$configuration){
         $this->id_game_tie_breaker = $id_game_tie_breaker;
         $this->game = $game;
