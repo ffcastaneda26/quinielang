@@ -5,6 +5,7 @@ use App\Models\Round;
 use App\Livewire\Picks;
 use App\Livewire\SelectRound;
 use App\Classes\Configuration;
+use App\Livewire\Ejemplos\Dashboard;
 use App\Models\Configuration as ModelsConfiguration;
 use App\Models\Pick;
 use App\Traits\FuncionesGenerales;
@@ -70,3 +71,4 @@ Route::middleware([
 });
 
 Route::get('current_round', SelectRound::class);
+Route::get('ejemplos/dashboard',Dashboard::class)->name('ejemplos.dashboard');

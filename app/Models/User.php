@@ -42,8 +42,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-
-
         if ($panel->getId() === 'admin') {
             return $this->isAdmin();
         }
@@ -83,6 +81,11 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function todos():HasMany
+    {
+        return $this->hasMany(Todo::class);
     }
 
     public function picks(): HasMany

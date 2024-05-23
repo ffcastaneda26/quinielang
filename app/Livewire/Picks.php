@@ -11,10 +11,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Picks extends Component
 {
-    // public function render()
-    // {
-    //     return view('livewire.picks');
-    // }
     use AuthorizesRequests;
     use FuncionesGenerales;
 
@@ -22,9 +18,7 @@ class Picks extends Component
     public function mount()
     {
         $this->configuration = Configuration::first();
-
         $this->rounds = $this->read_rounds();
-
         $round = new Round();
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;
@@ -44,16 +38,6 @@ class Picks extends Component
     public function render()
     {
         return view('livewire.picks.index');
-    }
-
-    public function update_winner_game($winner)
-    {
-        // $this->dispatch('update_winner_game',$this->selected_round->id);
-    }
-
-    public function update_points()
-    {
-
     }
 
 }
