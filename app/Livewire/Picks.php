@@ -19,12 +19,12 @@ class Picks extends Component
     use FuncionesGenerales;
 
     protected $listeners = ['read_round_games'];
-
     public function mount()
     {
         $this->configuration = Configuration::first();
 
         $this->rounds = $this->read_rounds();
+
         $round = new Round();
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;
@@ -46,5 +46,14 @@ class Picks extends Component
         return view('livewire.picks.index');
     }
 
+    public function update_winner_game($winner)
+    {
+        // $this->dispatch('update_winner_game',$this->selected_round->id);
+    }
+
+    public function update_points()
+    {
+
+    }
 
 }

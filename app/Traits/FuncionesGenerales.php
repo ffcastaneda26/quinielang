@@ -12,6 +12,7 @@ use App\Excellsus\Traits\UserTrait;
 use App\Models\Configuration;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 
 trait FuncionesGenerales
 {
@@ -22,6 +23,10 @@ trait FuncionesGenerales
     public $round_games = null;
     public $current_round = null;
 
+    public $id_game_tie_breaker;
+    public $months_short_spanish = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
+    public $months_short_english = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dec");
+
     /*+----------------------------------+
       | Partidos de Jornada Seleccionada |
       +----------------------------------+
@@ -30,7 +35,8 @@ trait FuncionesGenerales
     {
         if ($round) {
             $this->selected_round = $round;
-            $this->round_games = $round->games()->get();
+            $this->round_games = $round->games()->orderby('game_day')->orderby('game_time')->get();
+            $this->id_game_tie_breaker = Game::where('round_id',$round->id)->orderByDesc('game_day')->orderByDesc('game_time')->first()->id;
         }
     }
 
@@ -130,5 +136,10 @@ trait FuncionesGenerales
         }
     }
 
+    // Lee el nombre del mes corto
+    public function read_short_month_name($date){
+        return App::isLocale('es') ? $this->months_short_spanish[substr(date($date),5,2)-1]
+                                   : $this->months_short_english[substr(date($date),5,2)-1];
+    }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,7 +62,7 @@ class Game extends Model
 
     public function has_result()
     {
-        return !is_null($this->visit_points) || !is_null($this->local_points);
+        return !is_null($this->visit_points) || !is_null($this->local_points) || !is_null($this->winner);
     }
 
     // ¿Gana local o visita?
@@ -73,7 +74,7 @@ class Game extends Model
     // ¿Se acertó el partido?
     public function hit_game($winner)
     {
-        return $this->winner === $winner;
+        return $this->has_result() && $this->winner === $winner;
     }
 
     // ¿Es el último partido de la jornada?
@@ -85,20 +86,26 @@ class Game extends Model
     // ¿Permite pronosticar?
     public function allow_pick()
     {
-        if (!is_null($this->local_points) || !is_null($this->visit_points)) {
+        if (!is_null($this->local_points) || !is_null($this->visit_points) || !is_null($this->winner)) {
             return false;
         }
-        return true;
+        date_default_timezone_set("America/Chihuahua");
 
-        // date_default_timezone_set("America/Chihuahua");
-        // $configuracion = Configuration::first();
-        // $newDateTime = Carbon::now()->subMinutes($configuracion->minuts);
-        // $newDateTime = Carbon::now()->subMinute($configuracion->minuts_before_picks);
-        // $string_to_date = substr($this->game_day, 0, 10) . ' ' . substr($this->game_time, 11, 8);
-        // $fecha_juego = new Carbon($string_to_date);
-        // $fecha_juego->subMinute($configuracion->minuts_before_picks);
+        $configuration = Configuration::first();
+        $newDateTime = Carbon::now()->subMinutes($configuration->minuts_before_picks);
+        $string_to_date = substr($this->game_day, 0, 10) . ' ' . substr($this->game_time, 11, 8);
+        $fecha_juego = new Carbon($string_to_date);
+        $fecha_juego->subMinutes($configuration->minuts_before_picks);
+        return $fecha_juego > $newDateTime;
+    }
 
-        // return $fecha_juego > $newDateTime;
+    // Pronóstico del juegoy del usuario
+    public function pick_user(User $user=null)
+    {
+        if(!$user){
+            $user=Auth::user();
+        }
+        return $this->picks->where('user_id', $user->id)->first();
     }
 
 }

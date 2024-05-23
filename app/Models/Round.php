@@ -28,7 +28,7 @@ class Round extends Model
 
     public function games(): HasMany
     {
-        return $this->hasMany(Game::class)->orderBy('game_day')->orderBy('game_time');
+        return $this->hasMany(Game::class);
     }
 
     public function season(): BelongsTo
