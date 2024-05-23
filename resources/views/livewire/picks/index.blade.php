@@ -13,7 +13,7 @@
                                                               'configuration'       => $configuration],
                                                               key($game->id))
                             </tr>
-                    @endforeach
+                        @endforeach
                 </tbody>
             </table>
         </div>
