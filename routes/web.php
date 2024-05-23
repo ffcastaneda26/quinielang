@@ -72,3 +72,6 @@ Route::middleware([
 
 Route::get('current_round', SelectRound::class);
 Route::get('ejemplos/dashboard',Dashboard::class)->name('ejemplos.dashboard');
+Route::get('welcome-counter',function(){
+    return view('livewire.ejemplos.welcome_counter');
+})->name('welcome-counter');

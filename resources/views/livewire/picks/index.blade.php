@@ -8,16 +8,12 @@
                     <tbody>
                         @foreach ($round_games as $game)
                             <tr class="text-center">
-                                @livewire('picks.pick-game', ['game'                => $game,
-                                                              'id_game_tie_breaker' => $id_game_tie_breaker,
-                                                              'configuration'       => $configuration],
-                                                              key($game->id))
+                                @livewire('picks.pick-game', ['game' => $game, 'id_game_tie_breaker' => $id_game_tie_breaker, 'configuration' => $configuration], key($game->id))
                             </tr>
                         @endforeach
-                </tbody>
-            </table>
-        </div>
-
-    @endif
-</div>
+                    </tbody>
+                </table>
+            </div>
+        @endif
+    </div>
 </div>
