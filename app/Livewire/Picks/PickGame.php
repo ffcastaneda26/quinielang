@@ -50,7 +50,8 @@ class PickGame extends Component
 
     public function render()
     {
-        return view('livewire.picksgames.pick-game-cols');
+        // return view('livewire.picksgames.pick-game-cols');
+        return view('livewire.picksgames.index');
     }
 
     /*+-------------------------------------------------+

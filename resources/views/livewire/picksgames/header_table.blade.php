@@ -1,10 +1,8 @@
-<thead class="thead">
-    <tr align="center" class="bg-dark text-white text-center">
-        <th>Fecha</th>
-        <th>Visita</th>
-        <th>&nbsp;</th>
-        <th class="w-auto text-center">Pronóstico</th>
-        <th>&nbsp;</th>
-        <th>Local</th>
-    </tr>
-</thead>
+<div class="w-full bg-gray-800 text-white text-center font-bold ">
+    <div class="grid grid-cols-8">
+        <div class="col-span-1 text-right">{{ __('Date') }}</div>
+        <div class="col-span-2 text-right">{{ __('Visit') }}</div>
+        <div class="col-span-3">{{ __('Pick') }}</div>
+        <div class="col-span-2 text-center">{{ __('Local') }}</div>
+    </div>
+</div>
