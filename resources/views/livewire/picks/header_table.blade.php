@@ -4,5 +4,6 @@
         <th colspan="2">{{ __('Visit') }}</th>
         <th colspan="3">{{ __('Pick') }}</th>
         <th colspan="2">Local</th>
+        <th colspan="2">Jornada: {{ $selected_round->id }}</th>
     </tr>
 </thead>

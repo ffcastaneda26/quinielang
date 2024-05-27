@@ -44,12 +44,13 @@ class PickGame extends Component
         $this->id_game_tie_breaker = $id_game_tie_breaker;
         $this->game = $game;
         $this->configuration = $configuration;
+
         $this->prepare_data_to_view();
     }
 
     public function render()
     {
-        return view('livewire.picks.pickgame.index');
+        return view('livewire.picksgames.pick-game-cols');
     }
 
     /*+-------------------------------------------------+
@@ -59,36 +60,37 @@ class PickGame extends Component
       +-------------------------------------------------+
      */
     public function prepare_data_to_view(){
-        $this->game_month = $this->read_short_month_name($this->game->game_day);
         $this->game_day = substr(date($this->game->game_day),8,2);
+        $this->game_month = $this->months_short_spanish[substr(date($this->game->game_day),5,2)-1];
+
         $this->allow_pick = $this->game->allow_pick();
+
         $this->game_has_result = $this->game->has_result();
         $this->is_game_tie_breaker = $this->id_game_tie_breaker == $this->game->id;
 
         $this->pick_user = $this->game->pick_user();
+        if(!$this->pick_user){
+            $this->pick_user = $this->create_pick_user_game($this->game,Auth::user());
+        }
+        $this->winner = $this->pick_user->winner;
+        $this->pick_user_winner = $this->pick_user->winner;
+        $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
 
+        $this->visit_points =  $this->pick_user->visit_points;
+        $this->local_points =  $this->pick_user->local_points;
 
-        // if($this->pick_user){
-            $this->winner = $this->pick_user->winner;
-            $this->pick_user_winner = $this->pick_user->winner;
-            $this->visit_points =  $this->pick_user->visit_points;
-            $this->local_points =  $this->pick_user->local_points;
-        // }
-
-        $this->hit_game =  $this->game->hit_game($this->winner);
-        $this->visit_points = 99;
     }
 
-    public function update_winner_game($winner)
+    public function update_winner_game()
     {
-        $this->validateOnly('winner');
+        // $this->validateOnly('winner');
         $this->pick_user->winner = $this->pick_user_winner;
         $this->pick_user->save();
         $this->pick_user->refresh();
     }
 
     public function update_points(){
-        dd('Estoy por actualizar puntos');
+
         if( strlen( $this->local_points) > 1){
             $this->local_points = ltrim($this->local_points, "0");
         }
@@ -112,25 +114,19 @@ class PickGame extends Component
             'local_points.not_ind' => 'No Permitido',
         ]);
 
-
-
         if ($this->visit_points == $this->local_points) {
             $this->addError('visit_points', 'No Empates');
             $this->addError('local_points', 'No Empates');
             return;
         }
-
-        if(is_null($this->local_points) || is_null($this->visit_points)){
-            return;
-        }
-
+        // TODO:: Revisar si se cambió el partido de desempate hay que quitar los puntos al anterior
         $pick_user = $this->game->pick_user();
-
         if($pick_user){
             $pick_user->visit_points = $this->visit_points;
             $pick_user->local_points = $this->local_points;
-            $pick_user->winner       =  $this->winner;
+            $pick_user->winner = $this->local_points > $this->visit_points ? 1 : 2;
             $pick_user->save();
         }
     }
+
 }

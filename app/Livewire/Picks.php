@@ -28,7 +28,7 @@ class Picks extends Component
                 $this->create_missing_picks_to_user($this->current_round);
             }
         }
-        $this->read_round_games($this->current_round);
+        $this->read_round_games($this->selected_round);
 
     }
     /*+-----------------+
