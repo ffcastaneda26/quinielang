@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\GameWinnerEnum;
+use App\Observers\GameObserver;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,11 @@ class Game extends Model
         'winner',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::observe(GameObserver::class);
+    }
     protected $casts = [
         'game_day' => 'datetime:Y-m-d',
         'game_time' => 'datetime:H:i',
