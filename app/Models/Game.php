@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\GameWinnerEnum;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -38,7 +39,10 @@ class Game extends Model
         'game_day' => 'datetime:Y-m-d',
         'game_time' => 'datetime:H:i',
         'game_date' => 'datetime',
+        // 'winner'    => GameWinnerEnum::class,
     ];
+
+
 
     public function picks(): HasMany
     {
