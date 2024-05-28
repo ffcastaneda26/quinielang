@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Position;
 use App\Models\User;
 use App\Models\Round;
 use App\Livewire\Picks;
@@ -11,6 +12,21 @@ use App\Traits\FuncionesGenerales;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
+Route::get('crea_posiciones_faltantes',function(){
+    $gameProcess = New Position();
+    $gameProcess->create_missing_positions();
+});
+
+Route::get('usuarios_rol/{role}',function($role){
+    $record_role = Role::where('name',$role)->first();
+    if($record_role){
+        $users = User::role($role)->get();
+        dd($users->count());
+    }else{
+        dd('El Rol No Existe');
+    }
+});
 
 Route::get('crea_pronosticos', function () {
     echo 'Comanzamos a las: ' . now()->format('d M Y') . '<br>';

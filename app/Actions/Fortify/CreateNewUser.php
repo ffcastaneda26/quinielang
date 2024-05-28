@@ -40,7 +40,7 @@ class CreateNewUser implements CreatesNewUsers
 
         $configuration = Configuration::first();
         if($configuration->assig_role_to_user){
-            $participant_role = Role::where('name','Participante')->first();
+            $participant_role = Role::where('name',env('ROLE_PARTICIPANT','Participante'))->first();
             if($participant_role){
                 $user->assignRole($participant_role);
             }

@@ -38,7 +38,7 @@ class RoleAndPermissionSeeder extends Seeder
         $role = Role::create(['name' => 'Admin']);
         $this->command->info(__('Admin Role Created'));
         $this->command->info(__('Creating Role Paritipant'));
-        $role = Role::create(['name' => 'Participante']);
+        $role = Role::create(['name' => env('ROLE_PARTICIPANT','Participante')]);
         $this->command->info(__('Participant Role Created'));
 
 

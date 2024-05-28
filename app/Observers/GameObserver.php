@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Classes\GameProcess;
 use App\Models\Game;
+use App\Models\Position;
 
 class GameObserver
 {
@@ -28,6 +29,11 @@ class GameObserver
             if($game->is_last_game_round()){
                 $gameProcess->update_tie_breaker($game);
             }
+            // Posiciones x Jornada
+            // Crea las posiciones que falten a los usuarios
+            $position_instance= new Position();
+            $position_instance->create_missing_positions();
+            $gameProcess->update_positions_round($game->round_id);
          }
 
     }

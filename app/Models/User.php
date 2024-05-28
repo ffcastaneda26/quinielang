@@ -83,6 +83,7 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+
     public function todos():HasMany
     {
         return $this->hasMany(Todo::class);
@@ -110,4 +111,9 @@ class User extends Authenticatable implements FilamentUser
     public function game_pick($game_id){
         return $this->picks()->where('game_id',$game_id)->first();
     }
+    // Tiene registro de posición en la jornada
+    public function has_position_record_round($round_id){
+        return $this->positions->where('round_id',$round_id)->count();
+     }
+
 }
