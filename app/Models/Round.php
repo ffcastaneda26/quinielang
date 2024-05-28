@@ -31,10 +31,15 @@ class Round extends Model
         return $this->hasMany(Game::class);
     }
 
+    public function positions(): HasMany
+    {
+        return $this->hasMany(Position::class);
+    }
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);
     }
+
 
     public function  read_current_round()
     {
