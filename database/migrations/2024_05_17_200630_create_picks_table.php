@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('dif_points_total')->nullable()->default(null)->comment('Diferencia de puntos con total');
             $table->integer('dif_points_local')->nullable()->default(null)->comment('Diferencia de puntos con lotal');
             $table->integer('dif_points_visit')->nullable()->default(null)->comment('Diferencia de puntos con visita');
-            $table->tinyInteger('hit_last_game')->nullable()->default(null)->comment('¿Acertó último partido');
+            $table->boolean('hit_last_game')->nullable()->default(null)->comment('¿Acertó último partido');
             $table->boolean('hit_local')->nullable()->default(null)->comment('¿Acertó local');
             $table->boolean('hit_visit')->nullable()->default(null)->comment('¿Acertó visita');
             $table->integer('dif_victory')->nullable()->default(null)->comment('Dif absoluta puntos total del partido - puntos totales pronosticados');

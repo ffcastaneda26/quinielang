@@ -1,4 +1,6 @@
 {
+    "Visit points": "Puntos Visita",
+    "Local points": "Puntos Local",
     "Admin Panel": "Panel Administrativo",
     "Date": "Fecha",
     "User": "Usuario",
@@ -33,6 +35,7 @@
     "Visit": "Visita",
     "Visit team": "Visita",
     "Local Team": "Local",
+    "Local team": "Local",
     "Game day": "Fecha",
     "Game time": "Hora",
     "Game date": "Fecha Hora",

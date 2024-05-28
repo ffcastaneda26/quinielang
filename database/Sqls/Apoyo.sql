@@ -1,3 +1,21 @@
+-- Partidos de una jornada
+USE quinielang;
+SELECT ga.id,
+ 	DATE_FORMAT(	ga.game_date, "%d-%M-%Y %H:%i:%s") as FECHA,
+	tv.name AS VISITANTE,
+	ga.visit_points AS MVISITA,
+	tl.name AS LOCAL,
+	ga.local_points AS MLOCAL,
+	CASE ga.winner
+           WHEN 1 THEN 'LOCAL'
+           WHEN 2 THEN 'VISITA'
+       END AS GANADOR
+FROM games ga,teams tv,teams tl
+WHERE tv.id = ga.visit_team_id
+  AND tl.id = ga.local_team_id
+  AND ga.round_id = 1
+ORDER BY ga.game_date
+
 -- Pronósticos de usuario y si acertó o no
 USE quinielang;
 SELECT ga.id AS 'Juego Id',

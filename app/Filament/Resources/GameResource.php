@@ -9,17 +9,11 @@ use App\Models\Round;
 use Filament\Forms\Get;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-// use Filament\Tables\Columns\TextColumn;
 use Filament\Resources\Resource;
-use Illuminate\Support\Facades\App;
 use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Enums\FiltersLayout;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\GameResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\GameResource\RelationManagers;
 
 class GameResource extends Resource
 {
@@ -67,66 +61,61 @@ class GameResource extends Resource
             ->schema([
                 Group::make()
                     ->schema([
+                        Section::make([
+                            Forms\Components\Select::make('round_id')
+                                ->translateLabel()
+                                ->relationship('round', 'id')
+                                ->required(),
+                            Forms\Components\DatePicker::make('game_day')
+                                ->required()
+                                ->translateLabel()
+                                ->live(onBlur: true),
+                            Forms\Components\TextInput::make('game_time')
+                                ->required()
+                                ->translateLabel()
+                                ->live(onBlur: true),
+                        ])->columns(3),
                         Section::make()
                             ->schema([
-                                Forms\Components\Select::make('round_id')
-                                    ->translateLabel()
-                                    ->relationship('round', 'id')
-                                    ->required(),
-                                Forms\Components\Select::make('local_team_id')
-                                    ->relationship('local_team', 'name'),
                                 Forms\Components\Select::make('visit_team_id')
+                                    ->translateLabel()
                                     ->relationship('visit_team', 'name'),
-                            ])->columns(3),
-                    ]),
-                Group::make()
-                    ->schema([
+                                Forms\Components\TextInput::make('visit_points')
+                                    ->translateLabel()
+                                    ->live(onBlur: true)
+                                    ->numeric()
+                                    ->required(fn(Get $get): bool => filled($get('local_points')))
+                                    ->minValue(2)
+                                    ->maxValue(999)
+                                    ->different('local_points')
+                                    ->translateLabel(),
+
+                            ])->columns(2),
                         Section::make()
                             ->schema([
-                                Forms\Components\DatePicker::make('game_day')
-                                    ->required()
-                                    ->live(onBlur: true),
-                                Forms\Components\TextInput::make('game_time')
-                                    ->required()
-                                    ->live(onBlur: true),
-                                // Forms\Components\DateTimePicker::make('game_date')
-                                //     ->required(),
+                                Forms\Components\Select::make('local_team_id')
+                                    ->translateLabel()
+                                    ->relationship('local_team', 'name'),
+                                Forms\Components\TextInput::make('local_points')
+                                    ->translateLabel()
+                                    ->live(onBlur: true)
+                                    ->numeric()
+                                    ->required(fn(Get $get): bool => filled($get('visit_points')))
+                                    ->minValue(2)
+                                    ->maxValue(999)
+                                    ->different('visit_points')
+                                    ->translateLabel(),
                             ])->columns(2),
+
                     ]),
-                Section::make()
-                    ->schema([
-                        Forms\Components\TextInput::make('local_points')
-                            ->live(onBlur: true)
-                            ->numeric()
-                            ->required(fn(Get $get): bool => filled($get('visit_points')))
-                            ->minValue(2)
-                            ->maxValue(999)
-                            ->different('visit_points')
-                            ->translateLabel(),
-                        Forms\Components\TextInput::make('visit_points')
-                            ->live(onBlur: true)
-                            ->numeric()
-                            ->required(fn(Get $get): bool => filled($get('local_points')))
-                            ->minValue(2)
-                            ->maxValue(999)
-                            ->different('local_points')
-                            ->translateLabel(),
-                        Radio::make('winner')
-                            ->options([
-                                '1' => 'Local',
-                                '2' => 'Visit'
-                            ])
-                            ->translateLabel()
-                            ->disabled()
-
-                    ])->columns(3)
-
-
-                // Forms\Components\TextInput::make('visit_points')
-                //     ->numeric(),
-
-
-
+                // Radio::make('winner')
+                // ->options([
+                //     '1' => 'Local',
+                //     '2' => 'Visit'
+                // ])
+                // ->translateLabel()
+                // ->disabled()
+                // ->inline()
             ]);
     }
 
@@ -166,7 +155,7 @@ class GameResource extends Resource
                     ->description(function (Tables\Columns\TextColumn $column): ?string {
                         $state = $column->getState();
                         return $state == 1 ? 'Local' : __('Visit');
-                     }, 'above')
+                    }, 'above')
                     ->translateLabel()
             ])
             ->defaultPaginationPageOption(16)

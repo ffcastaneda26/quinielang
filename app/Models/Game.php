@@ -118,4 +118,5 @@ class Game extends Model
         return $this->picks->where('user_id', $user->id)->first();
     }
 
+
 }
