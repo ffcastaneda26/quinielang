@@ -85,10 +85,15 @@ class GameResource extends Resource
                                     ->live(onBlur: true)
                                     ->numeric()
                                     ->required(fn(Get $get): bool => filled($get('local_points')))
-                                    ->minValue(2)
+                                    ->minValue(0)
                                     ->maxValue(999)
+                                    ->notIn([1])
                                     ->different('local_points')
-                                    ->translateLabel(),
+                                    ->translateLabel()
+                                    ->validationAttribute('Puntos de Visita')
+                                    ->validationMessages([
+                                        'different' => 'No se permiten empates',
+                                    ]),
 
                             ])->columns(2),
                         Section::make()
@@ -101,10 +106,15 @@ class GameResource extends Resource
                                     ->live(onBlur: true)
                                     ->numeric()
                                     ->required(fn(Get $get): bool => filled($get('visit_points')))
-                                    ->minValue(2)
+                                    ->minValue(0)
                                     ->maxValue(999)
                                     ->different('visit_points')
-                                    ->translateLabel(),
+                                    ->notIn([1])
+                                    ->translateLabel()
+                                    ->validationAttribute('Puntos de Local')
+                                    ->validationMessages([
+                                        'different' => 'No se permiten empates'
+                                    ]),
                             ])->columns(2),
 
                     ]),

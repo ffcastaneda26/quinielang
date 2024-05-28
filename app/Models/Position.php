@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Position extends Model
 {
     use HasFactory;
+    protected $table = 'positions';
+
     protected $fillable = [
         'round_id',
         'user_id',
@@ -43,13 +45,17 @@ class Position extends Model
                 ->get();
              foreach($rounds as $round){
                 foreach($users as $user){
+
+
                     if(!$user->has_position_record_round($round->id)){
                         Position::create([
                             'round_id' => $round->id,
                             'user_id' => $user->id,
                         ]);
+                        dd('Ya debe haber en la tabla de posiciones algo');
                     }
                 }
             }
+            dd('Revisa por favor');
         }
 }
