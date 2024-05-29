@@ -16,7 +16,6 @@ class GeneralPosition extends Model
         'hits',
         'hits_breaker',
         'total_error',
-        'total_points',
         'position'
     ];
 
