@@ -20,8 +20,6 @@ class PickGame extends Component
 
     // Para las vistas y hacer la lógica en el backend
     public $game_month;
-    public $game_day;
-    public $game_date;
     public $pick_user;
     public $pick_user_winner;
     public $allow_pick;
@@ -61,10 +59,9 @@ class PickGame extends Component
       +-------------------------------------------------+
      */
     public function prepare_data_to_view(){
-        $this->game_day = substr(date($this->game->game_day),8,2);
-        $this->game_month = $this->months_short_spanish[substr(date($this->game->game_day),5,2)-1];
 
-        $this->allow_pick = $this->game->allow_pick();
+        $this->game_month = $this->months_short_spanish[substr(date($this->game->game_date),5,2)-1];
+        $this->allow_pick = $this->game->allow_pick($this->configuration->minuts_before_picks);
 
         $this->game_has_result = $this->game->has_result();
         $this->is_game_tie_breaker = $this->id_game_tie_breaker == $this->game->id;

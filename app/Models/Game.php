@@ -30,8 +30,6 @@ class Game extends Model
         'local_points',
         'visit_team_id',
         'visit_points',
-        'game_day',
-        'game_time',
         'game_date',
         'winner',
     ];
@@ -42,10 +40,7 @@ class Game extends Model
         static::observe(GameObserver::class);
     }
     protected $casts = [
-        'game_day' => 'datetime:Y-m-d',
-        'game_time' => 'datetime:H:i',
         'game_date' => 'datetime',
-        // 'winner'    => GameWinnerEnum::class,
     ];
 
 
@@ -81,6 +76,11 @@ class Game extends Model
         return $this->local_points > $this->visit_points ? 1 : 2;
     }
 
+    public function winner()
+    {
+        $this->winner = $this->local_points > $this->visit_points ? 1 : 2;
+        $this->save();
+    }
     // ¿Se acertó el partido?
     public function hit_game($winner)
     {
@@ -94,19 +94,17 @@ class Game extends Model
     }
 
     // ¿Permite pronosticar?
-    public function allow_pick()
+    public function allow_pick($minuts_before_picks = null)
     {
         if (!is_null($this->local_points) || !is_null($this->visit_points) || !is_null($this->winner)) {
             return false;
         }
         date_default_timezone_set("America/Chihuahua");
-
-        $configuration = Configuration::first();
-        $newDateTime = Carbon::now()->subMinutes($configuration->minuts_before_picks);
-        $string_to_date = substr($this->game_day, 0, 10) . ' ' . substr($this->game_time, 11, 8);
-        $fecha_juego = new Carbon($string_to_date);
-        $fecha_juego->subMinutes($configuration->minuts_before_picks);
-        return $fecha_juego > $newDateTime;
+        if(!$minuts_before_picks){
+            $minuts_before_picks = Configuration::first()->minuts_before_picks;
+        }
+        // $configuration = Configuration::first();
+        return $this->game_date->subMinutes($minuts_before_picks) > Carbon::now()->subMinutes($minuts_before_picks);
     }
 
     // Pronóstico del juegoy del usuario

@@ -35,8 +35,8 @@ trait FuncionesGenerales
     {
         if ($round) {
             $this->selected_round = $round;
-            $this->round_games = $round->games()->orderby('game_day')->orderby('game_time')->get();
-            $this->id_game_tie_breaker = Game::where('round_id',$round->id)->orderByDesc('game_day')->orderByDesc('game_time')->first()->id;
+            $this->round_games = $round->games()->orderby('game_date')->get();
+            $this->id_game_tie_breaker = Game::where('round_id',$round->id)->orderByDesc('game_date')->first()->id;
         }
     }
 
@@ -76,7 +76,9 @@ trait FuncionesGenerales
         if(!$user){
             $user = Auth::user();
         }
-        $this->configuration = app(Configuration::class);
+        if(!$this->configuration){
+            $this->configuration = Configuration::first();
+        }
         date_default_timezone_set("America/Chihuahua");
         $newDateTime = Carbon::now()->subMinutes($this->configuration->minuts_before_picks);
         $games = Game::whereDoesntHave('picks', function (Builder $query) use ($user) {
@@ -89,7 +91,7 @@ trait FuncionesGenerales
             ->get();
 
         foreach ($games as $game) {
-            if ($game->allow_pick()) {
+            if ($game->allow_pick($this->configuration->minuts_before_picks)) {
                 $this->create_pick_user_game($game);
             }
         }

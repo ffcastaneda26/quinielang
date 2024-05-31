@@ -8,6 +8,25 @@ use App\Models\Position;
 
 class GameObserver
 {
+    /**
+     * Handle the Game "created" event.
+     */
+    public function created(Game $game): void
+    {
+        if ($game->local_points && $game->visit_points) {
+            $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
+        }else{
+            $game->winner = null;
+        }
+    }
+
+    public function updating(Game $game): void
+    {
+        if ($game->isDirty('local_points') || $game->isDirty('visit_points')) {
+            $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
+        }
+
+    }
 
     /**
      * Handle the Game "updated" event.
@@ -22,8 +41,8 @@ class GameObserver
          * 5) Calcular tabla de posiciones general
          */
 
+
         if ($game->isDirty('local_points') || $game->isDirty('visit_points')) {
-            $game->win();
             $gameProcess = new GameProcess();
             $gameProcess->qualify_picks();
             if ($game->is_last_game_round()) {

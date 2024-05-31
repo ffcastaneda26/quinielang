@@ -14,6 +14,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Enums\FiltersLayout;
 use App\Filament\Resources\GameResource\Pages;
+use Filament\Tables\Columns\TextColumn;
 
 class GameResource extends Resource
 {
@@ -66,14 +67,11 @@ class GameResource extends Resource
                                 ->translateLabel()
                                 ->relationship('round', 'id')
                                 ->required(),
-                            Forms\Components\DatePicker::make('game_day')
+                            Forms\Components\DateTimePicker::make('game_date')
                                 ->required()
-                                ->translateLabel()
-                                ->live(onBlur: true),
-                            Forms\Components\TextInput::make('game_time')
-                                ->required()
-                                ->translateLabel()
-                                ->live(onBlur: true),
+                                // ->format('d/m/Y')
+                                ->seconds(false)
+                                ->timezone(env('APP_TIMEZONE','America/Chihuahua'))
                         ])->columns(3),
                         Section::make()
                             ->schema([
@@ -118,14 +116,6 @@ class GameResource extends Resource
                             ])->columns(2),
 
                     ]),
-                // Radio::make('winner')
-                // ->options([
-                //     '1' => 'Local',
-                //     '2' => 'Visit'
-                // ])
-                // ->translateLabel()
-                // ->disabled()
-                // ->inline()
             ]);
     }
 
@@ -133,12 +123,10 @@ class GameResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('round.id')
-                    ->numeric()
-                    ->translateLabel()
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\ImageColumn::make('visit_team.logo')->alignCenter()->circular(),
+                Tables\Columns\ImageColumn::make('visit_team.logo')
+                    ->alignCenter()
+                    ->circular()
+                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('visit_points')
                     ->numeric()
                     ->label(__('Points'))
@@ -147,7 +135,8 @@ class GameResource extends Resource
 
                 Tables\Columns\ImageColumn::make('local_team.logo')
                     ->alignCenter()
-                    ->circular(),
+                    ->circular()
+                    ->translateLabel(),
                 Tables\Columns\TextColumn::make('local_points')
                     ->label(__('Points'))
                     ->alignCenter()
@@ -168,11 +157,11 @@ class GameResource extends Resource
                     }, 'above')
                     ->translateLabel()
             ])
-            ->defaultPaginationPageOption(16)
+            // ->defaultPaginationPageOption(16)
             ->filters([
-                Tables\Filters\SelectFilter::make('round_id')
-                    ->label(__('Round'))
-                    ->relationship('round', 'id')
+                // Tables\Filters\SelectFilter::make('round_id')
+                //     ->label(__('Round'))
+                //     ->relationship('round', 'id')
             ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -181,7 +170,8 @@ class GameResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public static function getRelations(): array

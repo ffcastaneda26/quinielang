@@ -34,12 +34,13 @@ Route::get('crea_pronosticos', function () {
     $winner_points = 2;
     $rounds = Round::orderby('id')->get();
     $users = User::role('Participante')->get();
+    $configuration = Configuration::first();
     echo 'Inicializamos tabla de pronósticos' . '<br>';
     DB::table('picks')->truncate();
     foreach ($rounds as $round) {
         echo 'Creando Pronósticos para la jornada: ' . $round->id . '<br';
         foreach ($round->games as $game) {
-            if ($game->allow_pick()) {
+            if ($game->allow_pick($configuration->minuts_before_picks)) {
                 foreach ($users as $user) {
                     echo 'Creando para usuario: ' . $user->name . '<br';
                     $winner = mt_rand(1, 2);
