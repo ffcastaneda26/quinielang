@@ -1,8 +1,8 @@
 :root {
     --main-bg-color: #dddddd;
-    --second-bg-color: #957633;
-    --texto-azul: #04273c;
-    --fondo-azul: #04273c;
+    --second-bg-color: #fdfcfa;
+    --texto-azul: #053858;
+    --fondo-azul: #0f98ed;
     --texto-oro: var(--second-bg-color);
     /* --main-bg-color: #08d5f5; */
 }
@@ -18,5 +18,10 @@ body {
 }
 .game_loser {
     background-color: #f42a2a ;
+}
+
+.fondo-encabezado {
+    background-color:var(--fondo-azul);
+    color: #F3F4F6;
 }
 

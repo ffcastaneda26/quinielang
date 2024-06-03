@@ -116,4 +116,8 @@ class User extends Authenticatable implements FilamentUser
         return $this->positions->where('round_id',$round_id)->count();
      }
 
+     // Filtros con Scope
+     public function scopeActive($query,$active=true){
+        $query->where('active',$active);
+     }
 }

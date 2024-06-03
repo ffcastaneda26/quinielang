@@ -21,6 +21,7 @@
                         <label for="picks_nav" class="my-fondo-header">{{ __('Admin Panel') }}</label>
                     </x-nav-link>
                     @endrole
+                    
                     @role('Participante')
                         @include('menus.participant')
                     @endrole

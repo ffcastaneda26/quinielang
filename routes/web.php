@@ -6,6 +6,7 @@ use App\Models\Round;
 use App\Livewire\Picks;
 use App\Livewire\SelectRound;
 use App\Classes\Configuration;
+use App\Livewire\TablePicks;
 use App\Models\Configuration as ModelsConfiguration;
 use App\Models\Pick;
 use App\Traits\FuncionesGenerales;
@@ -83,6 +84,7 @@ Route::middleware([
         return view('dashboard', compact('configuration'));
     })->name('dashboard');
     Route::get('picks', Picks::class)->name('picks');
+    Route::get('table-picks',TablePicks::class)->name('table-picks');
 
 });
 

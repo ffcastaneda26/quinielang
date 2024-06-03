@@ -27,6 +27,20 @@ trait FuncionesGenerales
     public $months_short_spanish = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
     public $months_short_english = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dec");
 
+	public $search;
+    private $pagination = 16; //paginación de tabla
+
+    /** Ordenar  */
+    public $sort = 'id';
+    public $sort_game = 'game_date';
+    public $direction ='asc';
+    public $sort_secondary = 'alias';
+    public $sort_by = 'hits';
+    public $order_by = 'hits_desc';
+    public $tie_breaker_game;
+    public $tie_breaker_game_allow_pick = false;
+    public $tie_breaker_game_has_result = false;
+    public $round_has_games_played = false;
     /*+----------------------------------+
       | Partidos de Jornada Seleccionada |
       +----------------------------------+
