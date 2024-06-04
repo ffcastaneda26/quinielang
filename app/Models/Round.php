@@ -78,4 +78,13 @@ class Round extends Model
     {
         return $this->games->last();
     }
+
+    // Filtra los juegos en la jornada que NO tengan NULO en 'local_points' o en 'visit_points'
+    public function has_games_played()
+    {
+        return $this->games()->where(function ($query) {
+            $query->whereNotNull('local_points');
+            $query->whereNotNull('visit_points');
+        })->count();
+    }
 }
