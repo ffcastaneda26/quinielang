@@ -47,6 +47,7 @@ trait FuncionesGenerales
     */
     public function read_round_games(Round $round)
     {
+
         if ($round) {
             $this->selected_round = $round;
             $this->round_games = $round->games()->orderby('game_date')->get();

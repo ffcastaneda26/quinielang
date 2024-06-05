@@ -6,7 +6,7 @@ use App\Models\Round;
 use App\Livewire\Picks;
 use App\Livewire\SelectRound;
 use App\Classes\Configuration;
-use App\Livewire\TablePicks;
+use App\Livewire\Picks\TablePicks\TablePicks;
 use App\Models\Configuration as ModelsConfiguration;
 use App\Models\Pick;
 use App\Traits\FuncionesGenerales;

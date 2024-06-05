@@ -11,14 +11,14 @@ class GameObserver
     /**
      * Handle the Game "created" event.
      */
-    public function created(Game $game): void
-    {
-        if ($game->local_points && $game->visit_points) {
-            $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
-        }else{
-            $game->winner = null;
-        }
-    }
+    // public function created(Game $game): void
+    // {
+    //     if ($game->local_points && $game->visit_points) {
+    //         $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
+    //     }else{
+    //         $game->winner = null;
+    //     }
+    // }
 
     public function updating(Game $game): void
     {

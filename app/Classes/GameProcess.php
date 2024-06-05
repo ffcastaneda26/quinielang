@@ -158,7 +158,7 @@ class GameProcess
         if ($picks_to_positions->count()) {
             foreach ($picks_to_positions as $pick_to_position) {
                 $user = User::findOrFail($pick_to_position->user_id);
-                $this->update_position_round_user($round_id, $user->id, $pick_to_position);
+                 $this->update_position_round_user($user,$round_id, $pick_to_position);
             }
         }
     }
@@ -189,13 +189,13 @@ class GameProcess
 
 
     // Actualiza la tabla de POSICIONES
-    private function update_position_round_user($user_id, $round_id, $pick_to_position)
+    private function update_position_round_user($user, $round_id, $pick_to_position)
     {
-        $position_record = Position::where('user_id', $user_id)->where('round_id', $round_id)->first();
+        $position_record = $user->positions_round($round_id);
         if (!$position_record) {
             $position_record = Position::create([
                 'round_id' => $round_id,
-                'user_id' => $user_id
+                'user_id' => $user->id
             ]);
         }
 
@@ -210,11 +210,6 @@ class GameProcess
         $position_record->hit_visit = $pick_to_position->hit_visit;
         $position_record->hit_local = $pick_to_position->hit_local;
         $position_record->save();
-
-
-        // $position_record->best_shot = $pick_to_position->dif_local_points > $pick_to_position->dif_visit_points
-        // ? $pick_to_position->dif_visit_points
-        // : $pick_to_position->dif_local_points;
     }
 
     private function create_position_round_user($round_id, $user_id)
@@ -276,7 +271,6 @@ class GameProcess
                 $position++;
                 $general_position = GeneralPosition::where('user_id',$sum_position->user_id)->first();
                 if(!$general_position){
-                    dd('Voy a crearlo');
                     $this->create_general_position_record($sum_position,$position);
                 }else{
                     $this->update_general_position_record($general_position,$sum_position,$position);

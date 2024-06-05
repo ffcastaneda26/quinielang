@@ -144,7 +144,7 @@ class GameResource extends Resource
 
                 Tables\Columns\TextColumn::make('game_date')
                     ->date('D d M y H:i')
-                    ->translateLabel(),
+                    ->label(__('Game date')),
                 Tables\Columns\TextColumn::make('winner')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {

@@ -37,25 +37,32 @@ class Position extends Model
         return $this->belongsTo(User::class);
     }
 
-        // Crea registros faltantes en tabla de posiciones
-        public function create_missing_positions(){
-            $rounds = Round::select('id')->get();
-            $users = User::role(env('ROLE_PARTICIPANT','Participante'))
-                ->select('id')
-                ->get();
-             foreach($rounds as $round){
-                foreach($users as $user){
+    // Crea registros faltantes en tabla de posiciones
+    public function create_missing_positions(){
+        $rounds = Round::select('id')->get();
+        $users = User::role(env('ROLE_PARTICIPANT','Participante'))
+            ->select('id')
+            ->get();
+            foreach($rounds as $round){
+            foreach($users as $user){
 
 
-                    if(!$user->has_position_record_round($round->id)){
-                        Position::create([
-                            'round_id' => $round->id,
-                            'user_id' => $user->id,
-                        ]);
-                        dd('Ya debe haber en la tabla de posiciones algo');
-                    }
+                if(!$user->has_position_record_round($round->id)){
+                    Position::create([
+                        'round_id' => $round->id,
+                        'user_id' => $user->id,
+                    ]);
+                    dd('Ya debe haber en la tabla de posiciones algo');
                 }
             }
-            dd('Revisa por favor');
         }
+        dd('Revisa por favor');
+    }
+
+    public function user_position_round($user_id,$round_id){
+        $record = $this->where('user_id',$user_id)
+                        ->where('round_id',$round_id)
+                        ->first();
+        dd($record);
+    }
 }

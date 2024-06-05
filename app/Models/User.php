@@ -14,6 +14,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser
@@ -84,10 +85,6 @@ class User extends Authenticatable implements FilamentUser
     }
 
 
-    public function todos():HasMany
-    {
-        return $this->hasMany(Todo::class);
-    }
 
     public function picks(): HasMany
     {
@@ -108,6 +105,21 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Position::class);
     }
+
+    public function positions_round($round_id)
+    {
+        if($round_id != 1){
+            dd('Jornada No.' . $round_id);
+        }
+
+        return $this->positions()->where('round_id',$round_id)->first();
+    }
+
+    public function generalPosition(): HasOne
+    {
+       return $this->hasOne(GeneralPosition::class);
+    }
+
     public function game_pick($game_id){
         return $this->picks()->where('game_id',$game_id)->first();
     }
@@ -120,4 +132,6 @@ class User extends Authenticatable implements FilamentUser
      public function scopeActive($query,$active=true){
         $query->where('active',$active);
      }
+
+
 }
