@@ -15,6 +15,7 @@ class TablePicks extends Component
     use WithPagination;
     use FuncionesGenerales;
     protected $listeners = ['read_round_games'];
+
     public function mount()
     {
         $this->configuration = Configuration::first();
@@ -26,65 +27,22 @@ class TablePicks extends Component
     }
     public function render()
     {
-        return view('livewire.picks.tablepicks.index', ['users' => $this->read_data()]);
+        return view('livewire.picks.tablepicks.index',
+            ['users' => $this->read_users()]);
     }
 
-    private function read_data()
+    private function read_users()
     {
-
         $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
-            ->Join('picks', 'picks.user_id', '=', 'users.id')
-            ->Join('games', 'picks.game_id', '=', 'games.id')
-            ->where('games.round_id', $this->current_round->id)
-            ->where('users.active', '1')
-            ->select('users.id as user_id,users.name')
-            ->select(
-                'users.id as user_id',
-                'users.name'
-            )
-            ->orderby('games.game_date','ASC')
+            ->wherehas('picks',function($query){
+                    $query->wherehas('game',function($query){
+                        $query->where('round_id',$this->selected_round->id);
+                    });
+                })
+            ->orderBy('name')
             ->get();
         return $users;
 
     }
 
-    public function old_read_data()
-    {
-
-        return User::role('Participante')
-            ->wherehas('picks')
-            ->wherehas('positions', function ($query) {
-                $query->where('round_id', $this->current_round->id);
-            })
-            ->get();
-    }
-    public function read_data_temporaly()
-    {
-        $users = User::role('participante')
-            ->join('positions', 'users.id', '=', 'positions.user_id')
-            ->join('rounds', 'positions.round_id', '=', 'rounds.id')
-            ->join('general_positions', 'users.id', '=', 'general_positions.user_id')
-            ->where('rounds.id', '=', $this->selected_round->id)
-            ->where('users.active', '1')
-            ->where('users.name', 'LIKE', "%$this->search%")
-            ->orwhere('users.alias', 'LIKE', "%$this->search%")
-            ->orwhere('users.email', 'LIKE', "%$this->search%")
-            ->groupBy(
-                'users.id',
-                'positions.position',
-                'positions.hits',
-                'rounds.id',
-                'general_positions.hits'
-            )
-            ->select(
-                'users.name',
-                'positions.position',
-                'positions.hits',
-                'rounds.id as round_id',
-                'general_positions.hits as acummulated'
-            )
-            ->orderby('positions.hits', $this->direction);
-        $users = $users->paginate($this->pagination);
-        return $users;
-    }
 }

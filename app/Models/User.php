@@ -108,8 +108,8 @@ class User extends Authenticatable implements FilamentUser
 
     public function positions_round($round_id)
     {
-        if($round_id != 1){
-            dd('Jornada No.' . $round_id);
+        if($round_id == 1){
+            dd($this->positions()->where('round_id',$round_id)->first());
         }
 
         return $this->positions()->where('round_id',$round_id)->first();

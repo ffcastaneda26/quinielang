@@ -45,7 +45,7 @@ trait FuncionesGenerales
       | Partidos de Jornada Seleccionada |
       +----------------------------------+
     */
-    public function read_round_games(Round $round)
+    public function read_round_games(Round $round=null)
     {
 
         if ($round) {
