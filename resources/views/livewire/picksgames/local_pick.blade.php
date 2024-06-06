@@ -18,8 +18,9 @@
         wire:model.live="pick_user_winner"
         wire:click="update_winner_game"
         name="winner-game{{ $game->id }}"
-        value="2"
+        id="winner-game{{ $game->id }}"
+        value="1"
         {{ $allow_pick ? '' : 'disabled' }}
-        {{ $pick_user_winner === 2 ? 'checked' : '' }}
+        {{ $pick_user_winner === 1 ? 'checked' : '' }}
     />
 @endif

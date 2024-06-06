@@ -4,4 +4,3 @@
         <div>{{ $game->visit_team->name }}</div>
     </div>
 
-    @include('livewire.picksgames.visit_pick')

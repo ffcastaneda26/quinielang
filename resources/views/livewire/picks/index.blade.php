@@ -6,7 +6,7 @@
         @include('livewire.picksgames.header_table')
 
         @foreach ($round_games as $game)
-            <div class="container mx-auto  bg-gray-100 rounded-md px-4">
+             <div class="container mx-auto  bg-gray-100 rounded-md px-4">
                 @livewire('picks.pick-game',
                     ['game' => $game,
                      'id_game_tie_breaker' => $id_game_tie_breaker,

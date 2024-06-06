@@ -52,7 +52,7 @@ Route::get('crea_pronosticos', function () {
                     ]);
 
                     // Si es el último partido de la jornada pone puntos
-                    if($game->is_last_game_round()){
+                    if($game->id_game_tie_breaker()){
                         $new_pick->local_points = $winner == 1 ? $winner_points : $loser_points;
                         $new_pick->visit_points = $winner == 2 ? $winner_points : $loser_points;
                         $new_pick->save();

@@ -38,17 +38,12 @@ class PickGame extends Component
     public $local_points;
 
 
-    public function mount(Game $game,$id_game_tie_breaker,$configuration){
-        $this->id_game_tie_breaker = $id_game_tie_breaker;
-        $this->game = $game;
-        $this->configuration = $configuration;
-
+    public function mount(){
         $this->prepare_data_to_view();
     }
 
     public function render()
     {
-        // return view('livewire.picksgames.pick-game-cols');
         return view('livewire.picksgames.index');
     }
 
@@ -73,7 +68,6 @@ class PickGame extends Component
         $this->winner = $this->pick_user->winner;
         $this->pick_user_winner = $this->pick_user->winner;
         $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
-
         $this->visit_points =  $this->pick_user->visit_points;
         $this->local_points =  $this->pick_user->local_points;
 
@@ -81,7 +75,8 @@ class PickGame extends Component
 
     public function update_winner_game()
     {
-        // $this->validateOnly('winner');
+
+        $this->pick_user = $this->game->pick_user();
         $this->pick_user->winner = $this->pick_user_winner;
         $this->pick_user->save();
         $this->pick_user->refresh();

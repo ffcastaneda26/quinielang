@@ -76,7 +76,7 @@ class Round extends Model
     // Regresa el último partido de la jornada
     public function get_last_game_round()
     {
-        return $this->games->last();
+        return $this->games()->orderby('game_date','desc')->first();
     }
 
     // Filtra los juegos en la jornada que NO tengan NULO en 'local_points' o en 'visit_points'

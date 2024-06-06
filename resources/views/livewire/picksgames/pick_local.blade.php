@@ -1,5 +1,4 @@
    {{-- Datos del Local --}}
-   @include('livewire.picksgames.local_pick')
 
    <div class="flex flex-row items-center">
        <div>{{ $game->local_team->name }}</div>

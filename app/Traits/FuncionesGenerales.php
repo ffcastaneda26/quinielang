@@ -51,7 +51,7 @@ trait FuncionesGenerales
         if ($round) {
             $this->selected_round = $round;
             $this->round_games = $round->games()->orderby('game_date')->get();
-            $this->id_game_tie_breaker = Game::where('round_id',$round->id)->orderByDesc('game_date')->first()->id;
+            $this->id_game_tie_breaker = $round->get_last_game_round()->id;
         }
     }
 
@@ -146,7 +146,7 @@ trait FuncionesGenerales
             return;
         }
 
-        if ($game->is_last_game_round()) {
+        if ($game->id_game_tie_breaker()) {
             $new_pick->local_points = $winner == 1 ? $winner_points : $loser_points;
             $new_pick->visit_points = $winner == 2 ? $winner_points : $loser_points;
             $new_pick->save();

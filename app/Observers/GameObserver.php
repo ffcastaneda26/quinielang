@@ -45,7 +45,7 @@ class GameObserver
         if ($game->isDirty('local_points') || $game->isDirty('visit_points')) {
             $gameProcess = new GameProcess();
             $gameProcess->qualify_picks();
-            if ($game->is_last_game_round()) {
+            if ($game->id_game_tie_breaker()) {
                 $gameProcess->update_tie_breaker($game);
             }
             // Posiciones x Jornada

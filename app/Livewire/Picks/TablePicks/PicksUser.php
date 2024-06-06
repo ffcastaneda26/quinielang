@@ -38,7 +38,7 @@ class PicksUser extends Component
             $this->bg_color_cell = $this->hit_game ? 'bg-green-500' : 'bg-red-500';
         }
 
-        $this->is_last_game = $this->game->is_last_game_round();
+        $this->is_last_game = $this->game->id_game_tie_breaker();
         if($this->is_last_game){
             $this->local_points = $this->game->local_points;
             $this->visit_points = $this->game->visit_points;

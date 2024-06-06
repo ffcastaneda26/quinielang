@@ -88,7 +88,7 @@ class Game extends Model
     }
 
     // ¿Es el último partido de la jornada?
-    public function is_last_game_round()
+    public function id_game_tie_breaker()
     {
         return $this->round->get_last_game_round()->id == $this->id;
     }
