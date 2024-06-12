@@ -18,7 +18,6 @@ class TablePicks extends Component
 
     public function mount()
     {
-        $this->configuration = Configuration::first();
         $this->rounds = $this->read_rounds();
         $round = new Round();
         $this->current_round = $round->read_current_round();
@@ -27,46 +26,35 @@ class TablePicks extends Component
     }
     public function render()
     {
-        return view('livewire.picks.tablepicks.index',
-            ['users' => $this->read_users()]);
+        return view(
+            'livewire.picks.tablepicks.index',
+            ['users' => $this->read_users()]
+        );
     }
 
     private function read_users()
     {
-
-
         $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
-        ->wherehas('picks', function ($query) {
-            $query->wherehas('game', function ($query) {
-                $query->where('round_id', $this->selected_round->id);
-            });
-        })
-        ->with([
-            'picks' => function ($query) {
+            ->wherehas('picks', function ($query) {
                 $query->wherehas('game', function ($query) {
                     $query->where('round_id', $this->selected_round->id);
                 });
-            },
-            'positions' => function($query){
-                $query->where('round_id',$this->selected_round->id);
-            },
-            'generalPosition',
-        ])
-        ->orderBy('name')
-        ->paginate($this->pagination);
+            })
+            ->with([
+                'picks' => function ($query) {
+                    $query->wherehas('game', function ($query) {
+                        $query->where('round_id', $this->selected_round->id);
+                    });
+                },
+                'positions' => function ($query) {
+                    $query->where('round_id', $this->selected_round->id);
+                },
+                'generalPosition',
+            ])
+            ->orderBy('name')
+            ->paginate($this->pagination);
 
         return $users;
-
-        // $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
-        //     ->wherehas('picks',function($query){
-        //             $query->wherehas('game',function($query){
-        //                 $query->where('round_id',$this->selected_round->id);
-        //             });
-        //         })
-        //     ->orderBy('name')
-        //     ->get();
-        // return $users;
-
     }
 
 }
