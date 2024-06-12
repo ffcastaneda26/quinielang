@@ -33,15 +33,39 @@ class TablePicks extends Component
 
     private function read_users()
     {
+
+
         $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
-            ->wherehas('picks',function($query){
-                    $query->wherehas('game',function($query){
-                        $query->where('round_id',$this->selected_round->id);
-                    });
-                })
-            ->orderBy('name')
-            ->get();
+        ->wherehas('picks', function ($query) {
+            $query->wherehas('game', function ($query) {
+                $query->where('round_id', $this->selected_round->id);
+            });
+        })
+        ->with([
+            'picks' => function ($query) {
+                $query->wherehas('game', function ($query) {
+                    $query->where('round_id', $this->selected_round->id);
+                });
+            },
+            'positions' => function($query){
+                $query->where('round_id',$this->selected_round->id);
+            },
+            'generalPosition',
+        ])
+        ->orderBy('name')
+        ->paginate($this->pagination);
+
         return $users;
+
+        // $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
+        //     ->wherehas('picks',function($query){
+        //             $query->wherehas('game',function($query){
+        //                 $query->where('round_id',$this->selected_round->id);
+        //             });
+        //         })
+        //     ->orderBy('name')
+        //     ->get();
+        // return $users;
 
     }
 

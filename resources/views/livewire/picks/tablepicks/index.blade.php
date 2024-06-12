@@ -5,12 +5,7 @@
         </div>
         {{-- Encabezado  --}}
         @include('livewire.picks.tablepicks.table_picks_header')
-        <div class="w-full grid grid-cols-12 border">
-            Jornada: {{ $selected_round->id }}
-        </div>
-        @php
-            $round_to_round_position = $selected_round
-        @endphp
+
         {{-- Detalle --}}
         <div class="w-full flex items-center mt-2">
             @foreach ($users as $user)
@@ -19,19 +14,22 @@
 
                     <div class="w-auto col-span-7 border border-black text-center">
                         <div class="flex flex-row">
-                            @foreach ($round_games as $game)
-                                @livewire('picks.tablepicks.picks-user',
-                                    ['game' => $game,'user'=> $user],
-                                    key('pg-'.$game->id))
+                            @foreach ($user->picks as $pick)
+                                @livewire('picks.tablepicks.picks-user', ['game' => $pick->game, 'user' => $user], key('pick-' . $pick->id))
                             @endforeach
                         </div>
                     </div>
 
-                    @livewire('user-round-position',
-                        ['user' => $user, 'round' => $round_to_round_position],
-                        key('rpu-' . $user->id .'rpr'.$round_to_round_position->id))
-
-                    @livewire('user-general-position', ['user' => $user], key('gp-' . $user->id))
+                    <div class="flex flex-col col-span-1 border items-center justify-start border-black">
+                        <span class="block mt-2 py-5">{{ $user->positions->count() ? $user->positions->first()->hits : '' }}</span>
+                    </div>
+                    @if(env('PRINT_ACUMULATED_BY_ROUND',false))
+                        <div class="flex flex-col col-span-1 border items-center justify-start border-black">
+                            <span class="block mt-2 py-5">
+                                {{ $user->generalPosition->count() ? $user->generalPosition->first()->hits : '' }}
+                            </span>
+                        </div>
+                    @endif
 
                 </div>
             @endforeach

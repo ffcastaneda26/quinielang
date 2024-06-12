@@ -24,6 +24,7 @@ class PicksUser extends Component
 
     public function render()
     {
+
         return view('livewire.picks.tablepicks.picks_user');
     }
 
