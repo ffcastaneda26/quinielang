@@ -1,23 +1,18 @@
 @auth
     <div class="flex items-start flex-col">
 
-        @if (Route::has('dashboard'))
-            <x-responsive-nav-link href="{{ route('dashboard') }}">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        @endif
-
         @if (Route::has('picks'))
             <x-responsive-nav-link href="{{ route('picks') }}">
                 Pronósticos
             </x-responsive-nav-link>
         @endif
 
-        @if (Route::has('results-by-round'))
-            <x-responsive-nav-link href="{{ route('results-by-round') }}">
+        @if (Route::has('table-picks'))
+            <x-responsive-nav-link href="{{ route('table-picks') }}">
                 Tabla de Pronósticos
             </x-responsive-nav-link>
         @endif
+
 
         @if (Route::has('positions-by-round'))
             <x-responsive-nav-link href="{{ route('positions-by-round') }}">
