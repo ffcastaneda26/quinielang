@@ -6,7 +6,6 @@ namespace App\Livewire\Picks\TablePicks;
 use App\Models\User;
 use App\Models\Round;
 use Livewire\Component;
-use App\Models\Configuration;
 use App\Traits\FuncionesGenerales;
 use Livewire\WithPagination;
 
