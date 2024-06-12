@@ -15,7 +15,7 @@
                     <div class="w-auto col-span-7 border border-black text-center">
                         <div class="flex flex-row">
                             @foreach ($user->picks as $pick)
-                                @livewire('picks.tablepicks.picks-user', ['game' => $pick->game, 'user' => $user], key('pick-' . $pick->id))
+                                @livewire('picks.table-picks.user-pick',['pick'=>$pick],key('pick-' . $pick->id))
                             @endforeach
                         </div>
                     </div>

@@ -93,6 +93,12 @@ class Game extends Model
         return $this->round->get_last_game_round()->id == $this->id;
     }
 
+    public function is_last_game()
+    {
+        
+        return $this->round->get_last_game_round()->id == $this->id;
+    }
+
     // ¿Permite pronosticar?
     public function allow_pick($minuts_before_picks = null)
     {

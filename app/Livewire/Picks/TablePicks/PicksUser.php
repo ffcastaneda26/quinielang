@@ -7,6 +7,7 @@ use Livewire\Component;
 class PicksUser extends Component
 {
     public $game, $user;
+    public $pick;
     public $pick_user_game;
     public $allow_pick = false;
     public $has_result = false;
@@ -24,7 +25,7 @@ class PicksUser extends Component
 
     public function render()
     {
-
+        dd('Si, este es el componente con el pick',$this->pick);
         return view('livewire.picks.tablepicks.picks_user');
     }
 
@@ -49,6 +50,5 @@ class PicksUser extends Component
             $this->visit_points = $this->game->visit_points;
             $this->hit_last_game = $this->hit_game;
         }
-
     }
 }

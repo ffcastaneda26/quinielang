@@ -17,7 +17,7 @@ class TablePicks extends Component
 
     public function mount()
     {
-        $this->rounds = $this->read_rounds();
+        // $this->rounds = $this->read_rounds();
         $round = new Round();
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;
@@ -25,10 +25,8 @@ class TablePicks extends Component
     }
     public function render()
     {
-        return view(
-            'livewire.picks.tablepicks.index',
-            ['users' => $this->read_users()]
-        );
+        return view('livewire.picks.tablepicks.index',['users' => $this->read_users()]);
+
     }
 
     private function read_users()
