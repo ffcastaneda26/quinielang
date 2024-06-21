@@ -1,15 +1,17 @@
 @if($is_game_tie_breaker)
+    <div class="text-xs w-full h-2">
         <input type='number'
                 wire:model="local_points"
                 wire:change="update_points"
                 wire:blur="update_points"
                 min=0
                 max=99
-                class="text-xs w-full"
-                    {{ $errors->has('local_points') ? 'border border-red-500 border-double' : '' }}
-                                                    {{ $allow_pick ? '' : 'bg-slate-200' }}"
+                class="{{ $errors->has('local_points') ? 'border border-red-500 border-double' : '' }}
+                {{ $allow_pick ? '' : 'bg-slate-200' }}"
                 {{ $allow_pick ? '' : 'disabled' }}
             />
+    </div>
+
         @error('local_points')
             <span class="badge rounded-pill fondo-secundario">{{ $message }}</span>
         @enderror
