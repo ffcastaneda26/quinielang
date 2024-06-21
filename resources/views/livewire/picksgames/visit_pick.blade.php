@@ -5,8 +5,7 @@
                 wire:blur="update_points"
                 min=0
                 max=99
-                size="50px"
-                class="font-4xl text-center w-auto mr-4 {{ $errors->has('visit_points') ? 'border border-red-500 border-double' : '' }}
+                class="text-xs w-full" {{ $errors->has('visit_points') ? 'border border-red-500 border-double' : '' }}
                                         {{ $allow_pick ? '' : 'bg-slate-200' }}"
                 {{ $allow_pick ? '' : 'disabled' }}
             />

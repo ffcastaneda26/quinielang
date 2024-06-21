@@ -5,9 +5,9 @@
                 wire:blur="update_points"
                 min=0
                 max=99
-                size="100px"
-                class="font-4xl text-center {{ $errors->has('local_points') ? 'border border-red-500 border-double' : '' }}
-                                        {{ $allow_pick ? '' : 'bg-slate-200' }}"
+                class="text-xs w-full"
+                    {{ $errors->has('local_points') ? 'border border-red-500 border-double' : '' }}
+                                                    {{ $allow_pick ? '' : 'bg-slate-200' }}"
                 {{ $allow_pick ? '' : 'disabled' }}
             />
         @error('local_points')
