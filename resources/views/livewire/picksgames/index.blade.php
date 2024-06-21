@@ -3,7 +3,7 @@
         <div class="grid grid-cols-9">
             <div class="col-span-2">
                 {{ $game->game_date->format('d') . '-' . $game_month }}-{{ $game->game_date->format('y') }}
-                {{ $game->game_date->format('h:m A') }}
+                {{ $game->game_date->format('h:i A') }}
             </div>
 
             @include('livewire.picksgames.pick_visit')
