@@ -47,6 +47,7 @@
                 </div>
             @else
                 @include('livewire.picksgames.pick_visit')
+                
                 @include('livewire.picksgames.visit_pick')
 
                 @include('livewire.picksgames.pick_icono_acerto')
