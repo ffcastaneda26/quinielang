@@ -17,7 +17,6 @@ class TablePicks extends Component
 
     public function mount()
     {
-        // $this->rounds = $this->read_rounds();
         $round = new Round();
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;
