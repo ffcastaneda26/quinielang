@@ -1,29 +1,24 @@
 <div>
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="bg-slate-50">
-            <div class="text-center uppercase">
+            <div class="text-center uppercase mt-2">
                 <p>{{ __('Round') }}</p>
             </div>
-            <div class="d-flex justify-content-center text-center mt-2 mb-4">
-
-                <select class="w-full mt-3"
+            <div class="d-flex justify-content-center text-center mb-2">
+                <select class="w-auto"
                         wire:model="round_selected"
                         wire:change="round_select">
-                    <option value="">Seleccionar ronda</option>
                     @foreach ($rounds as $round)
                         <option value="{{ $round->id }}">{{ $round->id }}</option>
                     @endforeach
                 </select>
             </div>
-        </div>
     </div>
 
-    <div class="flex justify-center mt-2 hidden sm:block">
-        <div class="bg-slate-50">
+    <div class="justify-center  hidden sm:block">
             <div class="text-center uppercase">
                 <p>{{ __('Rounds') }}</p>
             </div>
-            <div class="d-flex justify-content-center text-center mt-2 mb-4">
+            <div class="d-flex justify-content-center text-center mb-2">
                 @foreach ($rounds as $round)
                     <button wire:click="select_round({{ $round->id }})"
                         class="cursor-pointer inline-flex items-center px-1 py-1
@@ -40,6 +35,5 @@
                     </button>
                 @endforeach
             </div>
-        </div>
     </div>
 </div>
