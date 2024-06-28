@@ -104,7 +104,7 @@ class PickGame extends Component
             'visit_points.not_in' => 'No Permitido',
             'local_points.required' => 'Indique puntos',
             'local_points.different' => 'No Empates',
-            'local_points.not_ind' => 'No Permitido',
+            'local_points.not_in' => 'No Permitido',
         ]);
 
         if ($this->visit_points == $this->local_points) {
@@ -119,6 +119,7 @@ class PickGame extends Component
             $pick_user->local_points = $this->local_points;
             $pick_user->winner = $this->local_points > $this->visit_points ? 1 : 2;
             $pick_user->save();
+            $pick_user->refresh();
         }
     }
 
