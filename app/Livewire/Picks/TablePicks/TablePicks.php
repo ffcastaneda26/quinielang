@@ -34,13 +34,15 @@ class TablePicks extends Component
         $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
             ->wherehas('picks', function ($query) {
                 $query->wherehas('game', function ($query) {
-                    $query->where('round_id', $this->selected_round->id);
+                    $query->where('round_id', $this->selected_round->id)
+                    ->orderBy('game_id');
                 });
             })
             ->with([
                 'picks' => function ($query) {
                     $query->wherehas('game', function ($query) {
-                        $query->where('round_id', $this->selected_round->id);
+                        $query->where('round_id', $this->selected_round->id)
+                            ->orderBy('game_date');
                     });
                 },
                 'positions' => function ($query) {

@@ -61,6 +61,10 @@ class UserResource extends Resource
                 Group::make()->schema([
                     Section::make('Generales')->schema([
                         TextInput::make('name')->required(),
+                        TextInput::make('alias')
+                            ->required()
+                            ->unique(ignoreRecord: true),
+
                         TextInput::make('email')->email()
                             ->required()
                             ->unique(ignoreRecord: true),
