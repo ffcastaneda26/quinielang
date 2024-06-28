@@ -1,9 +1,5 @@
 <div wire:poll>
     <style>
-        .text-xxs {
-            font-size: 0.65rem;
-        }
-
         input[type="radio"] {
             background-color: white; /* Cambiar el color de fondo a rojo */
         }

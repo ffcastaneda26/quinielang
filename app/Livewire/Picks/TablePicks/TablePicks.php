@@ -21,6 +21,7 @@ class TablePicks extends Component
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;
         $this->read_round_games($this->selected_round);
+        $this->round_has_games_played = $this->selected_round->has_games_played();
     }
     public function render()
     {

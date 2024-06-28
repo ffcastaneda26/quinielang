@@ -1,45 +1,76 @@
-{{-- Encabezado  --}}
-<div class="w-full flex items-center mt-2">
-    <div class="w-full grid grid-cols-12 border">
-        {{-- <div class="w-auto col-span-2 border border-blue-900">NOMBRE</div> --}}
-        <div class="w-auto col-span-2 border border-blue-900 flex items-center justify-center uppercase">{{ __('Name') }}</div>
-        <div class="w-auto col-span-7 border border-blue-900 text-center">
-            <div class="flex flex-row">
-                @foreach ($round_games as $game)
-                    <div class="flex flex-col text-center gap-4 ml-2">
-                        @if($game->local_points || $game->visit_points)
-                            <img src="{{ Storage::url($game->visit_team->logo) }}"
-                                class="h-[25px] w-[25px] rounded-full mx-4 border-solid  shadow-xl
-                                    {{  $game->visit_points > $game->local_points ? 'shadow-green-500 h-[35px] w-[35px]'
-                                                                                  : ''}} " >
-                            <img src="{{ Storage::url($game->local_team->logo) }}"
-                                class="h-[25px] w-[25px] rounded-full mx-4 shadow-xl
-                                    {{  $game->local_points > $game->visit_points ? 'shadow-green-500 h-[35px] w-[35px]'
-                                                                                  : ''}}">
-                            <span class="text-center">
-                                <label class="rounded-full">
+{{-- Móvil  --}}
+<div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+        <div class="w-full grid grid-cols-12 border">
+            <div class="col-span-2 flex items-center text-center font-bold ">{{ __('Name') }}</div>
+            <div class="col-span-9">
+                <div class="flex flex-row gap-2 justify-between items-center border">
+                    @foreach ($round_games as $game)
+                        <div class="col-span-1 gap-2">
+                                @if ($game->local_points || $game->visit_points)
+                                    <img src="{{ Storage::url($game->visit_team->logo) }}"
+                                        class="w-4 h-4 rounded-full border-solid  shadow-xl
+                                        {{ $game->visit_points > $game->local_points ? 'shadow-green-500 w-35 h-35' : '' }} ">
+
+                                    <img src="{{ Storage::url($game->local_team->logo) }}"
+                                        class="w-4 h-4 rounded-full border-solid  shadow-xl
+                                        {{ $game->local_points > $game->visit_points ? 'shadow-green-500 w-35 h-35' : '' }} ">
+
+                                    <label class="text-xxs {{ $game->winner == 2 ? 'text-green-500 font-bold' : 'text-red-500'  }}">
                                         {{ $game->visit_points }}
-                                </label>
+                                    </label>
                                     <br>
-                                <label class=" rounded-full">
-                                    {{ $game->local_points }}</label>
-                            </span>
-                        @else
-                            <img src="{{ Storage::url($game->visit_team->logo) }}"
-                                class="h-[30px] w-[30px] rounded-full mx-4" >
-                            <img src="{{ Storage::url($game->local_team->logo) }}"
-                                class="h-[30px] w-[30px] rounded-full mx-4">
-                        @endif
+                                    <label class="text-xxs {{ $game->winner == 1 ? 'text-green-500 font-bold' : 'text-red-500'  }}">
+                                        {{ $game->local_points }}
+                                    </label>
+                                @else
+                                    <img src="{{ Storage::url($game->visit_team->logo) }}" class="w-4 h-4 rounded-full">
+                                    @if($round_has_games_played)
+                                        <br>
+                                    @endif
+                                    <img src="{{ Storage::url($game->local_team->logo) }}" class="w-4 h-4 rounded-full">
+                                @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2">AC</div>
+        </div>
+</div>
+{{-- Ancho mayor a 640px --}}
+<div class="justify-center  hidden sm:block">
+    <div class="w-full grid grid-cols-12 border">
+        <div class="col-span-2 flex items-center text-center font-bold ">{{ __('Name') }}</div>
+        <div class="col-span-9">
+            <div class="flex flex-row gap-2 justify-between items-center border">
+                @foreach ($round_games as $game)
+                    <div class="col-span-1 gap-2">
+                            @if ($game->local_points || $game->visit_points)
+                                <img src="{{ Storage::url($game->visit_team->logo) }}"
+                                    class="w-8 h-8 rounded-full border-solid  shadow-xl
+                                    {{ $game->visit_points > $game->local_points ? 'shadow-green-500 w-35 h-35' : '' }} ">
 
+                                <img src="{{ Storage::url($game->local_team->logo) }}"
+                                    class="w-8 h-8 rounded-full border-solid  shadow-xl
+                                    {{ $game->local_points > $game->visit_points ? 'shadow-green-500 w-35 h-35' : '' }} ">
 
+                                <label class="text-xxs {{ $game->winner == 2 ? 'text-green-500 font-bold' : 'text-red-500'  }}">
+                                    {{ $game->visit_points }}
+                                </label>
+                                <br>
+                                <label class="text-xxs {{ $game->winner == 1 ? 'text-green-500 font-bold' : 'text-red-500'  }}">
+                                    {{ $game->local_points }}
+                                </label>
+                            @else
+                                <img src="{{ Storage::url($game->visit_team->logo) }}" class="w-8 h-8 rounded-full">
+                                @if($round_has_games_played)
+                                    <br>
+                                @endif
+                                <img src="{{ Storage::url($game->local_team->logo) }}" class="w-8 h-8 rounded-full">
+                            @endif
                     </div>
                 @endforeach
             </div>
         </div>
-
-        <div class="w-auto col-span-1 border border-blue-900 flex items-center justify-center uppercase">{{ __('Hits') }}</div>
-        @if(env('PRINT_ACUMULATED_BY_ROUND',false))
-            <div class="w-auto col-span-1 border border-blue-900 flex items-center justify-center">ACUMULADO</div>
-        @endif
+        <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2">AC</div>
     </div>
 </div>

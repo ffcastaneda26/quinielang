@@ -24,4 +24,7 @@ body {
     background-color:var(--fondo-azul);
     color: #F3F4F6;
 }
+.text-xxs {
+    font-size: 0.65rem;
+}
 
