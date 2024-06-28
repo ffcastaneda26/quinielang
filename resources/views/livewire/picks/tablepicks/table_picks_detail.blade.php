@@ -1,6 +1,6 @@
 <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
     <div class="w-full grid grid-cols-12 border">
-        <div class="col-span-2 flex items-center text-center font-bold text-xxs ">{{ $user->name }}</div>
+        <div class="col-span-2 flex items-center text-center font-bold text-xxs ">{{ $user->alias }}</div>
         <div class="col-span-9">
             <div class="flex flex-row gap-2 justify-between items-center border">
                 @foreach ($user->picks as $pick)
@@ -36,7 +36,7 @@
 
 <div class="justify-center  hidden sm:block">
     <div class="w-full grid grid-cols-12 border">
-        <div class="col-span-2 flex items-center text-start ">{{ $user->name }}</div>
+        <div class="col-span-2 flex items-center text-start ">{{ $user->alias }}</div>
         <div class="col-span-9">
             <div class="flex flex-row gap-2 justify-between items-center border">
                 @foreach ($user->picks as $pick)
