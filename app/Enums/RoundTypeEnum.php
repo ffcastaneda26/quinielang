@@ -12,6 +12,8 @@ enum RoundTypeEnum: string implements HasLabel,HasColor,HasIcon
     case Regular = 'Regular';
     case Divisional = 'Divisional';
     case Conference = 'Conference';
+    case Wildcard = 'Wildcard';
+    case Superbowl = 'Superbowl';
 
 
     public function getLabel(): ?string
@@ -21,13 +23,16 @@ enum RoundTypeEnum: string implements HasLabel,HasColor,HasIcon
                 self::Regular => 'Regular',
                 self::Divisional => 'Divisional',
                 self::Conference => 'Conference',
+                self::Wildcard => 'Wildcard',
+                self::Superbowl => 'Superbowl',
            };
         }
         return match ($this) {
             self::Regular => 'Regular',
             self::Divisional => 'Divisional',
             self::Conference => 'Conferencia',
-
+            self::Wildcard => 'Wildcard',
+            self::Superbowl => 'Superbowl',
         };
     }
 
@@ -37,6 +42,9 @@ enum RoundTypeEnum: string implements HasLabel,HasColor,HasIcon
             self::Regular => 'warning',
             self::Divisional => 'secundary',
             self::Conference => 'success',
+            self::Wildcard => 'info',
+            self::Superbowl => 'success',
+
         };
     }
 
@@ -45,7 +53,10 @@ enum RoundTypeEnum: string implements HasLabel,HasColor,HasIcon
         return match ($this) {
             self::Regular => 'heroicon-m-shield-exclamation',
             self::Divisional => 'heroicon-m-clock',
-            self::Conference => 'heroicon-m-trophy',
+            self::Conference => 'heroicon-m-chart-pie',
+            self::Wildcard => 'heroicon-m-academic-cap',
+            self::Superbowl => 'heroicon-m-trophy',
+
         };
     }
 }

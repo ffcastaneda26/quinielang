@@ -44,7 +44,9 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return $this->isAdmin();
+
+            return $this->hasRole('Admin');
+            // return $this->isAdmin();
         }
 
         return false;
@@ -89,6 +91,11 @@ class User extends Authenticatable implements FilamentUser
     public function picks(): HasMany
     {
         return $this->hasMany(Pick::class);
+    }
+
+    public function survivors(): HasMany
+    {
+        return $this->hasMany(Survivor::class);
     }
 
     public function picks_game($game_id): HasMany

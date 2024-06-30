@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 use App\Classes\Configuration;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
+use Filament\Forms\Components\Toggle;
 use Illuminate\Support\ServiceProvider;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
-use Illuminate\Support\Facades\App;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,16 @@ class AppServiceProvider extends ServiceProvider
                 ])
                 ->circular();
                 // ->outsidePanelPlacement(Placement::TopRight);
+        });
+
+        Toggle::configureUsing(function (Toggle $toggle): void {
+            $toggle
+            ->translateLabel()
+            ->inline(false)
+            ->onIcon('heroicon-m-check-circle')
+            ->offIcon('heroicon-m-x-circle')
+            ->onColor('success')
+            ->offColor('danger');
         });
 
         // App::singleton(Configuration::class, function () {

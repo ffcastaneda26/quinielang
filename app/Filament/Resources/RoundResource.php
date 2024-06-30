@@ -69,9 +69,6 @@ class RoundResource extends Resource
                 Forms\Components\Select::make('type')
                     ->options(RoundTypeEnum::class)
                     ->translateLabel(),
-                // Forms\Components\Select::make('season_id')
-                //     ->relationship('season', 'name')
-                //     ->required(),
             ]);
     }
 
@@ -99,6 +96,8 @@ class RoundResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->translateLabel()
+                    ->searchable()
+                    ->sortable()
                     ->badge(),
 
                 // Tables\Columns\TextColumn::make('season.name')

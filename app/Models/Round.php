@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\DB;
 
 class Round extends Model
@@ -34,6 +35,34 @@ class Round extends Model
     public function positions(): HasMany
     {
         return $this->hasMany(Position::class);
+    }
+    public function local_teams(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Team::class,
+            Game::class,
+            'round_id', // FK  que une tabla mas grande a intermedia (Rounds --< Games)
+            'id', // Llave tabla final (teams)
+            'id', // Llave tabla mas grande (Rounds)
+            'local_team_id' // Llave de tabla intermedia (Games)
+        );
+    }
+
+    public function visit_teams(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Team::class,
+            Game::class,
+            'round_id', // FK  que une tabla mas grande a intermedia (Rounds --< Games)
+            'id', // Llave tabla final (teams)
+            'id', // Llave tabla mas grande (Rounds)
+            'visit_team_id' // Llave de tabla intermedia (Games)
+        );
+    }
+
+    public function survivors(): HasMany
+    {
+        return $this->hasMany(Survivor::class);
     }
     public function season(): BelongsTo
     {
