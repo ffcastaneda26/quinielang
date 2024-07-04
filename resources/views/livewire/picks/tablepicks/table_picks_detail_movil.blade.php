@@ -1,5 +1,6 @@
 <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
     <div class="w-full grid grid-cols-12 border">
+
         <div class="col-span-2 flex items-center text-center font-bold text-xxs ">{{ $user->alias }}</div>
         <div class="col-span-9">
             <div class="flex flex-row gap-2 justify-between items-center border">
@@ -22,6 +23,9 @@
                 @endforeach
             </div>
         </div>
+
+        <div class="col-span-1 flex items-center justify-center font-bold text-xxs ">{{ $user->positions->first()->hits }}</div>
+
 
     </div>
 </div>
