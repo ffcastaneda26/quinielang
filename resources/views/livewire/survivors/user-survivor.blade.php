@@ -3,16 +3,20 @@
         <div class="grid grid-cols-5">
             <div class="col-span-1">{{ $round->id }}</div>
             <div class="col-span-1">
-                <img src="{{ Storage::url($user_survivor_current->team->logo) }}" class="h-[30px] w-[30px] rounded-full mr-2">
-                <span class="text-xxs">{{ $user_survivor_current->team->name }}</span>
+                @if($user_survivor_current)
+                    <img src="{{ Storage::url($user_survivor_current->team->logo) }}" class="h-[30px] w-[30px] rounded-full mr-2">
+                    <span class="text-xxs">{{ $user_survivor_current->team->name }}</span>
+                @endif
             </div>
             <div class="col-span-1">
                 @if($user_survivor_current)
                     @if($round_has_games_played)
-                        @if($user_survivor_current->survive)
-                            <img src="{{ asset('images/afirmativo.png') }}" class="h-[15px] w-[15px]">
-                        @else
-                            <img src="{{ asset('images/negativo.png') }}" class="h-[15px] w-[15px]">
+                        @if($user_survivor_current)
+                            @if($user_survivor_current->survive)
+                                <img src="{{ asset('images/afirmativo.png') }}" class="h-[15px] w-[15px]">
+                            @else
+                                <img src="{{ asset('images/negativo.png') }}" class="h-[15px] w-[15px]">
+                            @endif
                         @endif
                     @endif
                 @endif
@@ -35,7 +39,9 @@
                                                  class="text-xxs sm:text-sm"
                             class="text-xxs sm:text-sm">
                         @if($round_has_games_played)
-                            <option value="">{{ $user_survivor_current->team->name }}</option>
+                            @if($user_survivor_current)
+                                <option value="">{{ $user_survivor_current->team->name }}</option>
+                            @endif
                         @else
                             <option class="bg-red-500" value="">NO SELECCION</option>
                             @foreach ($teams as $team)

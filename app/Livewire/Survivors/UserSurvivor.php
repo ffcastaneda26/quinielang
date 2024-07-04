@@ -19,6 +19,7 @@ class UserSurvivor extends Component
     public $survivor;
     public $current_round;
     public $round_has_games_played;
+    public $minutesBefore;
 
     public function mount()
     {
@@ -45,12 +46,12 @@ class UserSurvivor extends Component
     }
     private function read_teams()
     {
-        $minutesBeforePicks = 5;
+        $minutesBefore = 5;
 
         $previus_survivors = Auth::user()->survivors()->select('team_id')->get()->toArray();
 
         $locales = $this->round->local_teams()->select('teams.id', 'name','logo')
-            ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBeforePicks))
+            ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBefore))
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
             ->whereDoesntHave('survivors')
@@ -63,7 +64,7 @@ class UserSurvivor extends Component
             ->get();
 
         $visitas = $this->round->visit_teams()->select('teams.id', 'name')
-            ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBeforePicks))
+            ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBefore))
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
             ->whereDoesntHave('survivors')
