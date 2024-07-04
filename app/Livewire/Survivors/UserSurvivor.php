@@ -18,7 +18,7 @@ class UserSurvivor extends Component
     public $user_survivor_current;
     public $survivor;
     public $current_round;
-    public $round_has_games_played;
+    public $round_has_games_to_block_survivors=false;
     public $minutesBefore;
 
     public function mount()
@@ -27,7 +27,7 @@ class UserSurvivor extends Component
         $this->read_teams();
         $round_instance = new Round();
         $this->current_round = $round_instance->read_current_round();
-        $this->round_has_games_played = $this->round->has_games_played();
+        $this->round_has_games_to_block_survivors = $this->round->has_games_to_block_survivors($this->minutesBefore);
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\RoundTypeEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -115,5 +116,20 @@ class Round extends Model
             $query->whereNotNull('local_points');
             $query->whereNotNull('visit_points');
         })->count();
+    }
+
+    public function has_games_to_block_survivors($minutesBefore=5)
+    {
+        $records = UserSurvivor::where('round_id',$this->id)
+                                ->whereHas('team',function($query) use($minutesBefore) {
+                                    $query->whereHas('local_games',function($query) use($minutesBefore) {
+                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore));
+                                                })
+                                          ->orWhereHas('visit_games',function($query) use($minutesBefore){
+                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore));
+                                                });
+                                    })
+                                ->get();
+        return  $records->count();
     }
 }
