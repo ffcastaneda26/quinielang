@@ -63,6 +63,5 @@ class Position extends Model
         $record = $this->where('user_id',$user_id)
                         ->where('round_id',$round_id)
                         ->first();
-        dd($record);
     }
 }
