@@ -15,6 +15,7 @@ class Configuration extends Model
         'website_url',
         'email',
         'minuts_before_picks',
+        'minuts_before_survivors',
         'allow_ties',
         'create_mssing_picks',
         'assig_role_to_user',

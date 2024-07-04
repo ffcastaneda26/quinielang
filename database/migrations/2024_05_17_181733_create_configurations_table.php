@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('website_url',100)->nullable()->comment('Url');
             $table->string('email')->nullable()->comment('Correo');
             $table->integer('minuts_before_picks')->default(5)->comment('Minutos antes para pronóstico');
+            $table->integer('minuts_before_survivors')->default(5)->comment('Minutos antes para survivors');
             $table->boolean('allow_ties')->default(0)->comment('¿Permitir empate?');
             $table->boolean('create_mssing_picks')->default(0)->comment('¿Crear pronósticos faltantes?');
             $table->boolean('assig_role_to_user')->default(1)->comment('¿Asignar Rol al registrarse?');
             $table->boolean('require_points_in_picks')->default(0)->comment('¿Solicitar puntos en pronósticos?');
             $table->string('language',2)->nullable()->default('es')->comment('Idioma');
-            $table->boolean('Active')->default(1)->comment('¿Activa?');
+            $table->boolean('active')->default(1)->comment('¿Activa?');
             $table->string('image')->nullable()->default(null)->comment('Image');
         });
     }

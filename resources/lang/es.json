@@ -52,6 +52,7 @@
     "Website name": "Nombre Sitio",
     "Website url":"URL Sitio",
     "Minuts before picks":"Umbral Pronóstico",
+    "Minuts before survivors": "Umbral Survivor",
     "Allow ties":"¿Permite Empates?",
     "Create mssing picks":"¿Crear Pronósticos Faltantes",
     "Assig role to user":"¿Asignar Rol a Usuario al Registrarse?",

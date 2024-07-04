@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ConfigurationResource\Pages;
 use App\Filament\Resources\ConfigurationResource\RelationManagers;
+use Filament\Forms\Components\Section;
 
 class ConfigurationResource extends Resource
 {
@@ -56,55 +57,44 @@ class ConfigurationResource extends Resource
             ->schema([
                 Group::make()
                     ->schema([
-                        TextInput::make('website_name')
-                            ->required()
-                            ->translateLabel()
-                            ->maxLength(100),
-                        TextInput::make('website_url')
-                            ->translateLabel()
-                            ->maxLength(100),
-                        TextInput::make('email')
-                            ->translateLabel()
-                            ->email()
-                            ->maxLength(255),
-                        TextInput::make('minuts_before_picks')
-                            ->required()
-                            ->translateLabel()
-                            ->numeric()
-                            ->default(5),
-
-
-                    ])->columns(2),
+                        Section::make()
+                            ->schema([
+                                TextInput::make('website_name')
+                                    ->required()
+                                    ->translateLabel()
+                                    ->maxLength(100),
+                                TextInput::make('website_url')
+                                    ->translateLabel()
+                                    ->maxLength(100),
+                            ])->columns(2),
+                        Section::make()
+                            ->schema([
+                                TextInput::make('email')
+                                ->translateLabel()
+                                ->email()
+                                ->maxLength(255),
+                            TextInput::make('minuts_before_picks')
+                                ->required()
+                                ->translateLabel()
+                                ->numeric()
+                                ->default(5),
+                            TextInput::make('minuts_before_survivors')
+                                ->required()
+                                ->translateLabel()
+                                ->numeric()
+                                ->default(5),
+                            ])->columns(3),
+                    ])->columns(3),
                 Group::make()
                     ->schema([
-                        Toggle::make('assig_role_to_user')
-                            ->translateLabel()
-                            ->inline(false)
-                            ->onIcon('heroicon-m-check-circle')
-                            ->offIcon('heroicon-m-x-circle')
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('require_points_in_picks')
-                            ->translateLabel()
-                            ->inline(false)
-                            ->onIcon('heroicon-m-check-circle')
-                            ->offIcon('heroicon-m-x-circle')
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('allow_ties')
-                            ->translateLabel()
-                            ->inline(false)
-                            ->onIcon('heroicon-m-check-circle')
-                            ->offIcon('heroicon-m-x-circle')
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('create_mssing_picks')
-                            ->translateLabel()
-                            ->inline(false)
-                            ->onIcon('heroicon-m-check-circle')
-                            ->offIcon('heroicon-m-x-circle')
-                            ->onColor('success')
-                            ->offColor('danger'),
+                        Section::make()
+                        ->schema([
+                            Toggle::make('assig_role_to_user'),
+                            Toggle::make('require_points_in_picks'),
+                            Toggle::make('allow_ties'),
+                        ])->columns(3),
+
+                        Toggle::make('create_mssing_picks'),
                         Radio::make('language')
                             ->options([
                                 'es' => __('Spanish'),
@@ -113,14 +103,8 @@ class ConfigurationResource extends Resource
                             ->inline()
                             ->translateLabel()
                             ->default('es'),
-                        Toggle::make('active')
-                            ->translateLabel()
-                            ->inline()
-                            ->onIcon('heroicon-m-check-circle')
-                            ->offIcon('heroicon-m-x-circle')
-                            ->onColor('success')
-                            ->offColor('danger'),
-                    ])->columns(2),
+                        Toggle::make('active'),
+                    ])->columns(3),
                 FileUpload::make('image')
                     ->translateLabel()
                     ->directory('configuration')
