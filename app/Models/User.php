@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser
-
 {
     use HasApiTokens;
     use HasFactory;
@@ -44,9 +43,7 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-
             return $this->hasRole('Admin');
-            // return $this->isAdmin();
         }
 
         return false;
@@ -95,17 +92,17 @@ class User extends Authenticatable implements FilamentUser
 
     public function survivors(): HasMany
     {
-        return $this->hasMany(Survivor::class);
+        return $this->hasMany(UserSurvivor::class);
     }
 
     public function picks_game($game_id): HasMany
     {
-        return $this->hasMany(Pick::class)->where('game_id',$game_id);
+        return $this->hasMany(Pick::class)->where('game_id', $game_id);
     }
 
     public function pick_game($game_id): HasMany
     {
-        return $this->hasMany(Pick::class)->where('game_id',$game_id)->first();
+        return $this->hasMany(Pick::class)->where('game_id', $game_id)->first();
     }
 
     public function positions(): HasMany
@@ -115,30 +112,33 @@ class User extends Authenticatable implements FilamentUser
 
     public function positions_round($round_id)
     {
-        if($round_id == 1){
-            dd($this->positions()->where('round_id',$round_id)->first());
+        if ($round_id == 1) {
+            dd($this->positions()->where('round_id', $round_id)->first());
         }
 
-        return $this->positions()->where('round_id',$round_id)->first();
+        return $this->positions()->where('round_id', $round_id)->first();
     }
 
     public function generalPosition(): HasOne
     {
-       return $this->hasOne(GeneralPosition::class);
+        return $this->hasOne(GeneralPosition::class);
     }
 
-    public function game_pick($game_id){
-        return $this->picks()->where('game_id',$game_id)->first();
+    public function game_pick($game_id)
+    {
+        return $this->picks()->where('game_id', $game_id)->first();
     }
     // Tiene registro de posición en la jornada
-    public function has_position_record_round($round_id){
-        return $this->positions->where('round_id',$round_id)->count();
-     }
+    public function has_position_record_round($round_id)
+    {
+        return $this->positions->where('round_id', $round_id)->count();
+    }
 
-     // Filtros con Scope
-     public function scopeActive($query,$active=true){
-        $query->where('active',$active);
-     }
+    // Filtros con Scope
+    public function scopeActive($query, $active = true)
+    {
+        $query->where('active', $active);
+    }
 
 
 }

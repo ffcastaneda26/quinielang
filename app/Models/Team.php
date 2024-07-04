@@ -38,9 +38,9 @@ class Team extends Model
         return $this->belongsTo(Division::class);
     }
 
-
     public function survivors(): HasMany
     {
-        return $this->hasMany(Survivor::class);
+        return $this->hasMany(UserSurvivor::class);
     }
+
 }

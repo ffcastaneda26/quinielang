@@ -1,8 +1,12 @@
 {
-    
+    "Last Game": "Último Juego",
+    "Not Found Records": "No se encontraron registros",
+    "Delete": "Borrar",
+    "Select": "Seleccionar",
     "Accumulated": "Acumulado",
     "Hits": "Aciertos",
     "Picks Table": "Tabla de Pronósticos",
+    "Round Positions": "Posiciones Jornada",
     "Visit points": "Puntos Visita",
     "Local points": "Puntos Local",
     "Admin Panel": "Panel Administrativo",

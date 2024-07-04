@@ -20,6 +20,13 @@
             </x-responsive-nav-link>
         @endif
 
+        @if (Route::has('user-survivors'))
+            <x-responsive-nav-link href="{{ route('user-survivors') }}">
+                Survivors
+            </x-responsive-nav-link>
+        @endif
+
+
         @if (Route::has('positions-general'))
             <x-responsive-nav-link href="{{ route('positions-general') }}">
                 Posiciones Generales
@@ -32,6 +39,7 @@
                 <label for="picks_review_nav" class="my-fondo-header">Resultados por Jornada</label>
             </my-responsive-nav-link>
         @endif
+
 
     </div>
 @endauth

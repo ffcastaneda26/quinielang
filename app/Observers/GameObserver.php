@@ -53,6 +53,9 @@ class GameObserver
             //$position_instance->create_missing_positions();
             // Asigna las posiciones: Por Jornada y Generales
             $gameProcess->update_positions_round($game->round_id);
+            // Calificar los Survivors
+
+            $gameProcess->qualify_survivors($game);
         }
 
     }

@@ -62,7 +62,7 @@ class Round extends Model
 
     public function survivors(): HasMany
     {
-        return $this->hasMany(Survivor::class);
+        return $this->hasMany(UserSurvivor::class);
     }
     public function season(): BelongsTo
     {

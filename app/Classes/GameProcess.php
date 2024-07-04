@@ -11,6 +11,7 @@ use App\Models\Round;
 use App\Models\Position;
 
 use App\Models\GeneralPosition;
+use App\Models\UserSurvivor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
@@ -158,7 +159,7 @@ class GameProcess
         if ($picks_to_positions->count()) {
             foreach ($picks_to_positions as $pick_to_position) {
                 $user = User::findOrFail($pick_to_position->user_id);
-                 $this->update_position_round_user($user,$round_id, $pick_to_position);
+                $this->update_position_round_user($user, $round_id, $pick_to_position);
             }
         }
     }
@@ -258,22 +259,23 @@ class GameProcess
 
     }
 
-    private function update_general_positions(){
+    private function update_general_positions()
+    {
         try {
             $sum_positions = $this->sum_positions();
 
-            if(!$sum_positions->count()){
+            if (!$sum_positions->count()) {
                 return;
             }
 
             $position = 0;
-            foreach($sum_positions as $sum_position){
+            foreach ($sum_positions as $sum_position) {
                 $position++;
-                $general_position = GeneralPosition::where('user_id',$sum_position->user_id)->first();
-                if(!$general_position){
-                    $this->create_general_position_record($sum_position,$position);
-                }else{
-                    $this->update_general_position_record($general_position,$sum_position,$position);
+                $general_position = GeneralPosition::where('user_id', $sum_position->user_id)->first();
+                if (!$general_position) {
+                    $this->create_general_position_record($sum_position, $position);
+                } else {
+                    $this->update_general_position_record($general_position, $sum_position, $position);
                 }
             }
         } catch (Exception $e) {
@@ -282,14 +284,15 @@ class GameProcess
         }
     }
     // Crea registro en tabla de Posiciones Generales
-    private function create_general_position_record($data,$position){
+    private function create_general_position_record($data, $position)
+    {
         try {
             GeneralPosition::create([
-                'user_id'       => $data->user_id,
-                'hits'          => $data->hits,
-                'hits_breaker'  => $data->hits_last_game,
-                'total_error'   => $data->total_error,
-                'position'      => $position
+                'user_id' => $data->user_id,
+                'hits' => $data->hits,
+                'hits_breaker' => $data->hits_last_game,
+                'total_error' => $data->total_error,
+                'position' => $position
             ]);
         } catch (Exception $e) {
             Log::error($e);
@@ -301,16 +304,17 @@ class GameProcess
         }
     }
     // Actualiza registro en tabla de posiciones generales
-    private function update_general_position_record(GeneralPosition $record,$data,$position){
+    private function update_general_position_record(GeneralPosition $record, $data, $position)
+    {
         try {
-            $record->hits           = $data->hits;
-            $record->hits_breaker   = $data->hits_last_game;
-            $record->total_error    = $data->total_error;
-            $record->position       = $position;
+            $record->hits = $data->hits;
+            $record->hits_breaker = $data->hits_last_game;
+            $record->total_error = $data->total_error;
+            $record->position = $position;
             $record->save();
         } catch (Exception $e) {
             Log::error($e);
-            dd('Error: en update_general_position_record' , $e->getMessage());
+            dd('Error: en update_general_position_record', $e->getMessage());
         }
 
     }
@@ -323,15 +327,33 @@ class GameProcess
                             SUM(hits) as hits,
                             SUM(hit_last_game) as hits_last_game,
                             SUM(dif_total_points) as total_error')
-                        ->groupBy('user_id')
-                        ->orderByDesc('hits')
-                        ->orderByDesc('hits_last_game')
-                        ->orderBy('total_error')
-                        ->get();
+                ->groupBy('user_id')
+                ->orderByDesc('hits')
+                ->orderByDesc('hits_last_game')
+                ->orderBy('total_error')
+                ->get();
             return $sum_positions;
         } catch (Exception $e) {
             Log::error($e);
-            dd('Error en sum_positions : ' , $e->getMessage() , ' Avise al Administrador');
+            dd('Error en sum_positions : ', $e->getMessage(), ' Avise al Administrador');
         }
+    }
+
+    public function qualify_survivors(Game $game)
+    {
+        try {
+            $team_winner_id = $game->winner == 1 ? $game->local_team_id : $game->visit_team_id;
+            UserSurvivor::join('rounds', 'rounds.id', '=', 'user_survivors.round_id')
+                ->update([
+                    'user_survivors.survive' => DB::raw("'CASE WHEN user_survivors.team_id =" . $team_winner_id . "THEN 1 ELSE 0 END'")
+                ]);
+        } catch (Exception $e) {
+            Log::error($e);
+            dd('Error en qualify_survivors : ' . $e->getMessage() . ' Avise al Administrador');
+        } catch (Throwable $t) {
+            dd('Error en qualify_survivors : ' . $t->getMessage() . ' Avise al Administrador');
+            Log::error($t);
+        }
+
     }
 }

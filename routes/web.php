@@ -14,9 +14,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Picks\TablePicks\TablePicks;
+use App\Livewire\Positions\ByRound;
+use App\Livewire\RoundTeams;
+use App\Livewire\Survivors\UserSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
 use App\Models\Team;
 use Carbon\Carbon;
+
+Route::get('equipo-survivors/{team}',function(Team $team){
+    dd($team->survivors()->get());
+
+});
+
 
 Route::get('juegos_jornada',function(){
     $roundId = 1; // Replace with the actual round ID
@@ -69,6 +78,7 @@ Route::get('equipos/{round}', function (Round $round) {
             ->where('games.game_date','>',Carbon::now()->subMinutes($minutesBeforePicks))
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
+                  ->whereDoesntHave('survivors')
     ->get();
 
     $visitas = $round->visit_teams()->select('teams.id','name')
@@ -120,6 +130,8 @@ Route::middleware([
     })->name('dashboard');
     Route::get('picks', Picks::class)->name('picks');
     Route::get('table-picks', TablePicks::class)->name('table-picks');
+    Route::get('positions-by-round',ByRound::class)->name('positions-by-round');
+    Route::get('user-survivors',UserSurvivors::class)->name('user-survivors');
 
 });
 
