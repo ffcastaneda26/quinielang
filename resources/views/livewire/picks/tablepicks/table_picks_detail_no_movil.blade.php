@@ -10,7 +10,10 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-span-1 flex items-center justify-center font-bold text-xxs ">{{ $user->positions->first()->hits }}</div>
+        @if ($user->positions->first())
+            <div class="col-span-1 flex items-center justify-center font-bold text-xxs ">
+                {{ $user->positions->first()->hits }}</div>
+        @endif
 
     </div>
 </div>
