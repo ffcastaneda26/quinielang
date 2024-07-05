@@ -1,11 +1,10 @@
 <div wire:wire:poll.15000ms>
     <div class="container mx-auto  bg-gray-100 rounded-md px-4 py-0 my-1">
         <div class="grid grid-cols-5">
-            <div class="col-span-1 w-0.5">{{ $round->id }}</div>
+            <div class="col-span-1 w-0.5 text-xxs text-center">{{ $round->id }}</div>
             {{-- Si tiene "survivor" pone logo de equipo --}}
             <div class="col-span-1">
                 @if ($user_survivor_current)
-
                         <img src="{{ Storage::url($user_survivor_current->team->logo) }}"
                             class="h-[30px] w-[30px] rounded-full mr-2">
                         {{-- <span class="text-xxs">{{ $user_survivor_current->team->name }}</span> --}}
@@ -26,10 +25,10 @@
             </div>
 
             {{-- Si tiene "survivor" pone botón, pero lo oculta (hidden) si ya no se puede editar --}}
-            <div class="col-span-1">
+            <div class="col-span-1 text-center">
                 @if ($user_survivor_current)
                     <x-button wire:click="delete_survivor({{ $user_survivor_current }})"
-                        class="bg-red-500 text-xxs w-2 h-0 text-white font-bold {{ $round_has_games_to_block_survivors ? 'hidden' : '' }}"
+                        class="bg-red-500 text-xxs  text-white font-bold text-center {{ $round_has_games_to_block_survivors ? 'hidden' : '' }}"
                         title="{{ __('Delete') }}">
                         X
                     </x-button>
@@ -48,7 +47,7 @@
                     @if ($user_survivor_current)
                         <option value="">{{ $user_survivor_current->team->name }}</option>
                     @else
-                        <option class="bg-red-500" value="">NO SELECCION</option>
+                        <option class="bg-red-500" value="">Ninguno</option>
                     @endif
                     @foreach ($teams as $team)
                         @if(!$team->has_user_survivor_round($round->id))
