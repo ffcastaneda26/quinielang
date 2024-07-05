@@ -1,7 +1,6 @@
-<div wire:poll.15s>
+<div wire:wire:poll.15000ms>
     <div class="container mx-auto  bg-gray-100 rounded-md px-4 py-1 my-1">
         <div class="grid grid-cols-5">
-
             <div class="col-span-1">{{ $round->id }}</div>
             {{-- Si tiene "survivor" pone logo de equipo --}}
             <div class="col-span-1">
@@ -34,9 +33,11 @@
             </div>
 
             <div class="col-span-1">
+
                 <select wire:model="team_id"
                         wire:change="update_team_survivor({{ $round->id }})"
-                        wire:click="$refresh"
+                        wire:click="update_team_survivor({{ $round->id }})"
+                        user-select:none
                         class="text-xxs sm:text-sm" class="text-xxs sm:text-sm"
                         {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}
                         >
@@ -46,9 +47,11 @@
                         <option class="bg-red-500" value="">NO SELECCION</option>
                     @endif
                     @foreach ($teams as $team)
-                        <option value="{{ $team->id }}">
-                            {{ $team->name }}
-                        </option>
+                        @if(!$team->has_user_survivor_round($round->id))
+                            <option value="{{ $team->id }}">
+                                {{ $team->name }}
+                            </option>
+                        @endif
                     @endforeach
 
                 </select>

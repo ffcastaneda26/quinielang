@@ -123,13 +123,16 @@ class Round extends Model
         $records = UserSurvivor::where('round_id',$this->id)
                                 ->whereHas('team',function($query) use($minutesBefore) {
                                     $query->whereHas('local_games',function($query) use($minutesBefore) {
-                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore));
+                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore))
+                                                            ->where('round_id',$this->id);
                                                 })
                                           ->orWhereHas('visit_games',function($query) use($minutesBefore){
-                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore));
+                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore))
+                                                          ->where('round_id',$this->id);
                                                 });
                                     })
                                 ->get();
+
         return  $records->count();
     }
 }

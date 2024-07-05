@@ -11,7 +11,6 @@ class UserSurvivors extends Component
     public $rounds;
 
     public $minutesBefore = 5;
-
     public function mount()
     {
         $this->minutesBefore = Configuration::first()->minuts_before_survivors;
@@ -21,5 +20,4 @@ class UserSurvivors extends Component
         $this->rounds = Round::orderby('id')->get();
         return view('livewire..survivors.user-survivors');
     }
-
 }

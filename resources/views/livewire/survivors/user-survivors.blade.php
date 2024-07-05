@@ -13,7 +13,8 @@
             </div>
 
             @foreach ($rounds as $round)
-                @livewire('survivors.user-survivor',['round' => $round,'minutesBefore' => $minutesBefore],
+                @livewire('survivors.user-survivor',['round' => $round,
+                                                     'minutesBefore' => $minutesBefore],
                                                     key('round_' . $round->id))
             @endforeach
         </div>
