@@ -60,7 +60,7 @@ trait FuncionesGenerales
     // Lee jornadas
     public function read_rounds()
     {
-        return $this->rounds = Round::orderby('id')->get();
+        return $this->rounds = Round::whereHas('games')->orderby('id')->get();
     }
 
     // Selecciona los juegos de la jornada
