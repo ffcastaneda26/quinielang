@@ -1,14 +1,14 @@
 <div wire:wire:poll.15000ms>
-    <div class="container mx-auto  bg-gray-100 rounded-md px-4 py-1 my-1">
+    <div class="container mx-auto  bg-gray-100 rounded-md px-4 py-0 my-1">
         <div class="grid grid-cols-5">
-            <div class="col-span-1">{{ $round->id }}</div>
+            <div class="col-span-1 w-0.5">{{ $round->id }}</div>
             {{-- Si tiene "survivor" pone logo de equipo --}}
             <div class="col-span-1">
                 @if ($user_survivor_current)
 
                         <img src="{{ Storage::url($user_survivor_current->team->logo) }}"
                             class="h-[30px] w-[30px] rounded-full mr-2">
-                        <span class="text-xxs">{{ $user_survivor_current->team->name }}</span>
+                        {{-- <span class="text-xxs">{{ $user_survivor_current->team->name }}</span> --}}
 
                 @endif
             </div>
@@ -37,13 +37,13 @@
             </div>
 
             <div class="col-span-1">
-
                 <select wire:model="team_id"
                         wire:change="update_team_survivor({{ $round->id }})"
                         wire:click="update_team_survivor({{ $round->id }})"
                         user-select:none
                         class="text-xxs sm:text-sm" class="text-xxs sm:text-sm"
                         {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}
+                        style="padding: 2px 5px; line-height: 1.2; font-size: 0.8rem;"
                         >
                     @if ($user_survivor_current)
                         <option value="">{{ $user_survivor_current->team->name }}</option>
