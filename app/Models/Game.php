@@ -122,5 +122,8 @@ class Game extends Model
         return $this->picks->where('user_id', $user->id)->first();
     }
 
+    public function was_played(){
+        return !is_null($this->local_points) && !is_null($this->visit_points);
+    }
 
 }

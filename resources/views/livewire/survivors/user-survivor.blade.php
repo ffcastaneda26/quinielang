@@ -5,18 +5,22 @@
             {{-- Si tiene "survivor" pone logo de equipo --}}
             <div class="col-span-1">
                 @if ($user_survivor_current)
-                    <img src="{{ Storage::url($user_survivor_current->team->logo) }}"
-                        class="h-[30px] w-[30px] rounded-full mr-2">
-                    <span class="text-xxs">{{ $user_survivor_current->team->name }}</span>
+
+                        <img src="{{ Storage::url($user_survivor_current->team->logo) }}"
+                            class="h-[30px] w-[30px] rounded-full mr-2">
+                        <span class="text-xxs">{{ $user_survivor_current->team->name }}</span>
+
                 @endif
             </div>
             {{-- Si tiene "survivor" y lo ACERTÓ  pone palomita o tacha --}}
             <div class="col-span-1">
                 @if ($user_survivor_current)
-                    @if ($user_survivor_current->survive)
-                        <img src="{{ asset('images/afirmativo.png') }}" class="h-[15px] w-[15px]">
-                    @else
-                        <img src="{{ asset('images/negativo.png') }}" class="h-[15px] w-[15px]">
+                    @if($game_played)
+                        @if ($user_survivor_current->survive)
+                            <img src="{{ asset('images/afirmativo.png') }}" class="h-[15px] w-[15px]">
+                        @else
+                            <img src="{{ asset('images/negativo.png') }}" class="h-[15px] w-[15px]">
+                        @endif
                     @endif
                 @endif
             </div>

@@ -19,6 +19,7 @@ class UserSurvivor extends Component
     public $current_round;
     public $round_has_games_to_block_survivors=false;
     public $minutesBefore;
+    public $game_played = false;
 
     public function mount()
     {
@@ -35,10 +36,22 @@ class UserSurvivor extends Component
 
     public function team_survivor()
     {
-        $this->reset('user_survivor_current');
+        $this->reset('user_survivor_current','game_played');
         $this->user_survivor_current = SurvivorUser::where('round_id', $this->round->id)
             ->where('user_id', Auth::user()->id)
             ->first();
+
+        if($this->user_survivor_current){
+            $team =$this->user_survivor_current->team;
+            $game = $team->local_games()->where('round_id',$this->round->id)->first();
+            if(!$game){
+                $game = $team->visit_games()->where('round_id',$this->round->id)->first();
+            }
+            $this->game_played = $game->was_played();
+
+        }
+
+
     }
     private function read_teams()
     {
