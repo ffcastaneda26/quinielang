@@ -51,7 +51,7 @@ class TeamSeeder extends Seeder
             (35, 'Nacional', 'Nacional', 'Nac', 'teams/nacional.png', 'teams/nacional.png', 2),
             (36, 'San Francisco', 'TBD', 'TBD', 'teams/nflplayofflogo.png', 'teams/nflplayofflogo.png', 2),
             (37, 'Kansas City', 'TBD', 'TBD', 'teams/nflplayofflogo.png', 'teams/nflplayofflogo.png', 2),
-            (38, 'TBD', 'TBD', 'TBD', 'teams/nflplayofflogo.png', 'teams/nflplayofflogo.png', 2);",
+            (38, 'TBD', 'TBD', 'TBD', 'teams/nflplayofflogo.png', 'teams/nflplayofflogo.png', 2)";
         DB::update($sql);
     }
 }
