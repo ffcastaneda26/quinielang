@@ -4,7 +4,7 @@
         <div class="col-span-9">
             <div class="flex flex-row gap-2 justify-between items-center border">
                 @foreach ($rounds as $round)
-                    <div class="col-span-1 gap-2 text-xxs">
+                    <div class="col-span-1 gap-2 text-sm">
                         {{  $round->id }}
                     </div>
                 @endforeach
