@@ -1,19 +1,28 @@
 <?php
 
-use App\Models\Round;
-use App\Livewire\Picks;
-use App\Livewire\SelectRound;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Picks\TablePicks\TablePicks;
-use App\Livewire\Positions\ByRound;
-use App\Livewire\Survivors\UserSurvivors;
-use App\Livewire\Survivors\Table\TableSurvivors;
-use App\Models\Configuration as ModelsConfiguration;
+use Carbon\Carbon;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Round;
+use App\Livewire\Picks;
 use App\Models\UserSurvivor;
-use Carbon\Carbon;
+use App\Livewire\SelectRound;
+use App\Livewire\Positions\ByRound;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Livewire\Survivors\UserSurvivors;
+use App\Livewire\Picks\TablePicks\TablePicks;
+use App\Livewire\Survivors\Table\TableSurvivors;
+use App\Models\Configuration as ModelsConfiguration;
+
+Route::get('optimize-clear',function(){
+    if(Auth::user()){
+        Artisan::call('optimize:clear');
+    }else{
+        return 'Sorry You Not Authorized To This Command';
+    }
+})->middleware('auth');
 
 Route::get('jornada-survivor/{round}',function(Round $round){
     $minutesBefore = 5;
