@@ -18,6 +18,6 @@ class UserSurvivors extends Component
     public function render()
     {
         $this->rounds = Round::wherehas('games')->orderby('id')->get();
-        return view('livewire..survivors.user-survivors');
+        return view('livewire.survivors.user-survivors');
     }
 }

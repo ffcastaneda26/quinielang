@@ -1,4 +1,5 @@
 {
+    "Table Survivors": "Tabla Survivors",
     "Last Game": "Último Juego",
     "Not Found Records": "No se encontraron registros",
     "Delete": "Borrar",
@@ -62,7 +63,7 @@
     "Spanish": "Español",
     "English": "Inglés",
     "Image": "Imagen",
-    "Dashboard": "Panel Inicial",
+    "Dashboard": "Inicio",
     "Current Round": "Jornada Actual",
     "Creating Role Paritipant": "Creando Rol Participante",
     "Creating Role Admin": "Creando Rol Admin",

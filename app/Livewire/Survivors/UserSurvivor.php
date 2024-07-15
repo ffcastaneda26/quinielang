@@ -59,9 +59,6 @@ class UserSurvivor extends Component
         $this->team_survivor();
 
         $minutesBefore = $this->minutesBefore;
-
-        // $previus_survivors = Auth::user()->survivors()->select('team_id')->get()->toArray();
-        // $previus_survivors = [];
         $locales = $this->round->local_teams()
             ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBefore))
             ->whereNull('games.local_points')
@@ -74,7 +71,6 @@ class UserSurvivor extends Component
                     ->where('user_id',Auth::user()->id)
                     ->where('survivor_id',$this->survivor->id);
             })
-            // ->whereNotIn('teams.id', $previus_survivors)
             ->get();
 
         $visitas = $this->round->visit_teams()
@@ -89,7 +85,6 @@ class UserSurvivor extends Component
                     ->where('user_id',Auth::user()->id)
                     ->where('survivor_id',$this->survivor->id);
             })
-            // ->whereNotIn('teams.id', $previus_survivors)
             ->get();
 
         $this->teams = $locales->merge($visitas);

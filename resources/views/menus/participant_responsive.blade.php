@@ -26,6 +26,11 @@
             </x-responsive-nav-link>
         @endif
 
+        @if (Route::has('table-survivors'))
+            <x-responsive-nav-link href="{{ route('table-survivors') }}">
+                 <label class="text-xxs"> {{ __('Table Survivors') }}</label>
+            </x-responsive-nav-link>
+        @endif
 
         @if (Route::has('positions-general'))
             <x-responsive-nav-link href="{{ route('positions-general') }}">

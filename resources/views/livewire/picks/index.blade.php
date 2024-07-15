@@ -14,5 +14,5 @@
                 key($game->id))
             </div>
         @endforeach
-    </div>l
+    </div>
 </div>

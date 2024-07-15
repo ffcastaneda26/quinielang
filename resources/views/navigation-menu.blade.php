@@ -16,12 +16,6 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @role('Admin')
-                    <x-nav-link id="picks_nav" href="/admin">
-                        <label for="picks_nav" class="my-fondo-header">{{ __('Admin Panel') }}</label>
-                    </x-nav-link>
-                    @endrole
-                    
                     @role('Participante')
                         @include('menus.participant')
                     @endrole
@@ -118,6 +112,13 @@
                                 {{ __('Manage Account') }}
                             </div>
 
+
+                            @role('Admin')
+                                <x-dropdown-link id="picks_nav" href="/admin">
+                                    <label for="picks_nav" class="my-fondo-header">{{ __('Admin Panel') }}</label>
+                                </x-dropdown-link>
+                            @endrole
+
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
@@ -193,6 +194,13 @@
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                @role('Admin')
+                    <x-responsive-nav-link href="{{ url('/admin') }}" :active="request()->routeIs('/admin')">
+                        {{ __('Admin Panel') }}
+                    </x-responsive-nav-link>
+
+                @endrole
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">

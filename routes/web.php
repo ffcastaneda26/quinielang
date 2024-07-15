@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Picks\TablePicks\TablePicks;
 use App\Livewire\Positions\ByRound;
 use App\Livewire\Survivors\UserSurvivors;
+use App\Livewire\Survivors\Table\TableSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
 use App\Models\Team;
 use App\Models\User;
@@ -89,7 +90,7 @@ Route::middleware([
     Route::get('table-picks', TablePicks::class)->name('table-picks');
     Route::get('positions-by-round',ByRound::class)->name('positions-by-round');
     Route::get('user-survivors',UserSurvivors::class)->name('user-survivors');
-
+    Route::get('table-survivors',TableSurvivors::class)->name('table-survivors');
 });
 
 Route::get('current_round', SelectRound::class);
