@@ -28,7 +28,7 @@
 
         @if (Route::has('table-survivors'))
             <x-responsive-nav-link href="{{ route('table-survivors') }}">
-                 <label class="text-xxs"> {{ __('Table Survivors') }}</label>
+                {{ __('Table Survivors') }}
             </x-responsive-nav-link>
         @endif
 

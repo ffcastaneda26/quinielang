@@ -26,7 +26,7 @@
 
     @if (Route::has('user-survivors'))
         <x-nav-link id="table-survivors" href="{{ route('table-survivors') }}" :active="request()->routeIs('table-survivors')">
-            <label for="table-survivors" class="text-xxs"> {{ __('Table Survivors') }}</label>
+            <label for="table-survivors"> {{ __('Table Survivors') }}</label>
         </x-nav-link>
     @endif
 
