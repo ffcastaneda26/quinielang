@@ -92,15 +92,11 @@ class UserResource extends Resource
                 ])->columns(2),
 
                 Group::make()->schema([
-                    // Select::make('roles')->multiple()->relationship('roles', 'name'),
 
                     CheckboxList::make('roles')
                         ->relationship(titleAttribute: 'name')
                         ->searchable(),
-                    // CheckboxList::make('permissions')
-                    //         ->label('Permisos')
-                    //          ->relationship(titleAttribute: 'name')
-                    //         ->searchable(),
+      
                     Select::make('permissions')
                         ->label('Permisos')
                         ->multiple()
@@ -117,8 +113,8 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->translateLabel()->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->translateLabel()->searchable()->sortable(),
-                Tables\Columns\IconColumn::make('active')->translateLabel()->boolean(),
-                Tables\Columns\TextColumn::make('roles.name')->label('Roles'),
+                Tables\Columns\TextColumn::make('username')->translateLabel()->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('alias')->translateLabel()->searchable()->sortable(),
             ])
             ->filters([])
             ->actions([
