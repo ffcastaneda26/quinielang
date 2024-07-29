@@ -118,6 +118,11 @@ class Round extends Model
         })->count();
     }
 
+    /**
+     * Summary of has_games_to_block_survivors
+     * @param mixed $minutesBefore
+     * @return int Survivos que el partido aun no comienza
+     */
     public function has_games_to_block_survivors($minutesBefore=5)
     {
         $records = UserSurvivor::where('round_id',$this->id)
