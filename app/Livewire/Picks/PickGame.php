@@ -65,11 +65,14 @@ class PickGame extends Component
         if(!$this->pick_user){
             $this->pick_user = $this->create_pick_user_game($this->game,Auth::user());
         }
-        $this->winner = $this->pick_user->winner;
-        $this->pick_user_winner = $this->pick_user->winner;
-        $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
-        $this->visit_points =  $this->pick_user->visit_points;
-        $this->local_points =  $this->pick_user->local_points;
+        if($this->pick_user){
+            $this->winner = $this->pick_user->winner;
+            $this->pick_user_winner = $this->pick_user->winner;
+            $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
+            $this->visit_points =  $this->pick_user->visit_points;
+            $this->local_points =  $this->pick_user->local_points;
+        }
+
 
     }
 

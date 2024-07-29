@@ -61,6 +61,9 @@ class UserResource extends Resource
                 Group::make()->schema([
                     Section::make('Generales')->schema([
                         TextInput::make('name')->required(),
+                        TextInput::make('username')
+                            ->required()
+                            ->unique(ignoreRecord: true),
                         TextInput::make('alias')
                             ->required()
                             ->unique(ignoreRecord: true),
@@ -76,12 +79,12 @@ class UserResource extends Resource
                             ->required(fn(string $context): bool => $context === 'create'),
                         Section::make('')->schema([
                             Toggle::make('active')
-                            ->translateLabel()
-                            ->inline(false)
-                            ->onIcon('heroicon-m-check-circle')
-                            ->offIcon('heroicon-m-x-circle')
-                            ->onColor('success')
-                            ->offColor('danger'),
+                                ->translateLabel()
+                                ->inline(false)
+                                ->onIcon('heroicon-m-check-circle')
+                                ->offIcon('heroicon-m-x-circle')
+                                ->onColor('success')
+                                ->offColor('danger'),
                         ])->columns(2),
 
                     ])->columnSpanFull(),

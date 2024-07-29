@@ -30,11 +30,17 @@ class DatabaseSeeder extends Seeder
             'seasons',
             'rounds',
             'games',
+            'picks',
+            'general_positions',
+            'positions',
+            'survivors',
+            'user_survivors',
         ]);
 
         $this->call(ConfigurationSeeder::class);
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(UserAdminTableSeeder::class);
+        $this->call(ParticipantesSeeder::class);
         $this->call(LeagueSeeder::class);
         $this->call(ConferenceSeeder::class);
         $this->call(DivisionSeeder::class);

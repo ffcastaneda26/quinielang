@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserAdminTableSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class UserAdminTableSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('users')->truncate();
+
         User::create([
             "name"      => "Administrador General",
             "email"     => "admin@quinielang.com",
@@ -20,6 +23,5 @@ class UserAdminTableSeeder extends Seeder
             "alias"     => "Admin",
             "active"    => 1
         ])->assignRole('Admin');
-
     }
 }
