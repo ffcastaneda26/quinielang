@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Survivors\UserSurvivors;
 use App\Livewire\Picks\TablePicks\TablePicks;
+use App\Livewire\Positions\PositionGeneral;
 use App\Livewire\Survivors\Table\TableSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
 
@@ -100,6 +101,7 @@ Route::middleware([
     Route::get('positions-by-round',ByRound::class)->name('positions-by-round');
     Route::get('user-survivors',UserSurvivors::class)->name('user-survivors');
     Route::get('table-survivors',TableSurvivors::class)->name('table-survivors');
+    Route::get('position-general',PositionGeneral::class)->name('position-general');
 });
 
 Route::get('current_round', SelectRound::class);

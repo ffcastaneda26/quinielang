@@ -11,6 +11,7 @@
             <label for="table-picks"> {{ __('Picks Table') }}</label>
         </x-nav-link>
     @endif
+
     @if (Route::has('positions-by-round'))
         <x-nav-link id="positions-by-round" href="{{ route('positions-by-round') }}" :active="request()->routeIs('positions-by-round')">
             <label for="positions-by-round"> {{ __('Round Positions') }}</label>
@@ -24,10 +25,16 @@
         </x-nav-link>
     @endif
 
-    @if (Route::has('user-survivors'))
+    @if (Route::has('table-survivors'))
         <x-nav-link id="table-survivors" href="{{ route('table-survivors') }}" :active="request()->routeIs('table-survivors')">
             <label for="table-survivors"> {{ __('Table Survivors') }}</label>
         </x-nav-link>
     @endif
+    @if (Route::has('position-general'))
+        <x-nav-link id="position-general" href="{{ route('position-general') }}" :active="request()->routeIs('position-general')">
+            <label for="position-general"> {{ __('General Positions') }}</label>
+        </x-nav-link>
+    @endif
+   
 
 @endauth

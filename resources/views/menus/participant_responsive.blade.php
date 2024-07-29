@@ -32,9 +32,9 @@
             </x-responsive-nav-link>
         @endif
 
-        @if (Route::has('positions-general'))
-            <x-responsive-nav-link href="{{ route('positions-general') }}">
-                Posiciones Generales
+        @if (Route::has('position-general'))
+            <x-responsive-nav-link href="{{ route('position-general') }}">
+                {{ __('General Positions') }}
             </x-responsive-nav-link>
         @endif
 
