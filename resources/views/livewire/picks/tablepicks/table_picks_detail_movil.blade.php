@@ -1,9 +1,9 @@
 <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
     <div class="w-full grid grid-cols-12 border">
 
-        <div class="col-span-2 flex items-center text-center font-bold text-xxs ">{{ $user->alias }}</div>
+        <div class="col-span-2 flex items-center text-center border font-bold text-xxs bg-white text-black">{{ $user->alias }}</div>
         <div class="col-span-9">
-            <div class="flex flex-row gap-2 justify-between items-center border">
+            <div class="flex flex-row gap-2 justify-between items-center border bg-white text-black">
                 @foreach ($user->picks->sortBy('game.game_date') as $pick)
                     <div class="col-span-1 gap-2">
                         @if ($pick->game->allow_pick())
@@ -24,9 +24,11 @@
             </div>
         </div>
 
-        @if($user->positions->first())
-            <div class="col-span-1 flex items-center justify-center font-bold text-xxs ">{{ $user->positions->first()->hits }}</div>
-        @endif
+        
+        <div class="col-span-1 flex items-center border justify-center font-bold text-xxs bg-white text-black">
+            {{ $user->positions->first() ? $user->positions->first()->hits : ''}}
+        </div>
+        
 
     </div>
 </div>

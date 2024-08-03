@@ -1,10 +1,10 @@
 <div class="justify-center  hidden sm:block">
     <div class="w-full grid grid-cols-12 border">
-        <div class="col-span-2 flex items-center text-center font-bold ">{{ __('Name') }}</div>
-        <div class="col-span-9">
-            <div class="flex flex-row gap-2 justify-between items-center border">
+        <div class="col-span-2 flex items-center border text-center font-bold bg-white text-black">{{ __('Name') }}</div>
+        <div class="col-span-9 bg-white text-black">
+            <div class="flex flex-row gap-2 justify-between items-center border bg-white text-black">
                 @foreach ($round_games as $game)
-                    <div class="col-span-1 gap-2">
+                    <div class="col-span-1 gap-2 bg-white">
                             @if ($game->local_points || $game->visit_points)
                                 <img src="{{ Storage::url($game->visit_team->logo) }}"
                                     class="w-8 h-8 rounded-full border-solid  shadow-xl
@@ -33,6 +33,6 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2">AC</div>
+        <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2 bg-white text-black">AC</div>
     </div>
 </div>

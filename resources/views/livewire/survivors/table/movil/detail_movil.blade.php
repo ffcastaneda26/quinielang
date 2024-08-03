@@ -11,7 +11,6 @@
                         @if ($user_survivor)
                             <img src="{{ Storage::url($user_survivor->team->logo) }}"
                                 class="w-2 h-2 rounded-full {{ $user_survivor->survive ? 'shadow-xl shadow-green-500' : 'grayscale' }}">
-                            {{-- <label class="text-xs">{{ $user_survivor->round_id }}</label> --}}
                         @else
                             <div class="w-2 h-2 border-2 border-black"></div>
                         @endif
