@@ -1,41 +1,6 @@
-<style>
-    .marquee-container {
-        height: 30px;
-        overflow: hidden;
-        line-height: 30px;
-
-        .marquee {
-            top: 20%;
-            left: 100%;
-            width: 100%;
-            overflow: hidden;
-            position: absolute;
-            white-space: nowrap;
-            animation: marquee 30s linear infinite;
-        }
-
-        .marquee2 {
-            animation-delay: 15s;
-        }
-
-        b {
-            padding-left: 10px;
-        }
-    }
-
-    @keyframes marquee {
-        0% {
-            left: 100%;
-        }
-
-        100% {
-            left: -100%
-        }
-    }
-
-</style>
+<link rel="stylesheet" href="{{ asset('css/marquee.css') }}">
 <div
-    class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
+    class="p-6 lg:p-8 bg-white text-black">
 
     <div class="position-relative marquee-container d-none d-sm-block">
         <div class="marquee d-flex justify-content-around">
@@ -43,13 +8,13 @@
         </div>
     </div>
 
-    <div class="bg-gray-200 text-black grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
+    <div class="bg-gray-100 text-black grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
 
         {{-- ¿Como se Juega? --}}
         <div>
             <div class="flex items-center">
                 <img src="{{ asset('images/comojugar.png') }}" class="w-24">
-                <h2 class="ms-3 text-2xl font-semibold text-gray-900 dark:text-white">
+                <h2 class="ms-3 text-2xl font-semibold text-black ">
                     ¿Cómo se juega?
                 </h2>
             </div>
@@ -61,12 +26,11 @@
                         al Ganador.</li>
                     <li>En el último partido de cada Jornada se pronostica Puntos Local y Puntos Visita (Partido
                         Desempate PD).</li>
-                    <li>La Selección de Local/Visita del Partido Desempate cambia automaticamente después de guardar el
-                        pronostico de la jornada.</li>
-                    <li>Cada pronostico puede ser modificado hasta 5 minutos antes de la hora de inicio del partido.
-                    </li>
+                    <li>La Selección de Local/Visita del Partido Desempate cambia automáticamente después de guardar el
+                        pronóstico de la jornada.</li>
+                    <li>Cada pronóstico puede ser modificado hasta 5 minutos antes de la hora de inicio del partido.</li>
                     <li>Los pronósticos que han sido bloqueados para modificación simultáneamente se hacen visibles para
-                        el resto de los participantes en "Tabla Pronosticos".</li>
+                        el resto de los participantes en "Tabla Pronósticos".</li>
                     <li>Gana quien más puntos obtengan al final de cada Jornada y/o toda la temporada (Acumulado).</li>
                 </ul>
             </div>
@@ -78,14 +42,14 @@
             <div class="flex items-center">
                 <img src="{{ asset('images/puntuaciones.png') }}" class="w-12">
                 <div>
-                    <h3 class="ms-3 text-2xl font-semibold text-black dark:text-white">
+                    <h3 class="ms-3 text-2xl font-semibold text-black ">
                         Puntuaciones
                     </h3>
                 </div>
             </div>
             <div>
-                <p class="mt-4 text-md font-semibold text-gray-900">
-                    Cada Partido donde se acierta al ganador genera puntos de la siguiente manera
+                <p class="mt-4 text-md font-semibold text-black">
+                    Cada Partido donde se acierta al ganador genera puntos de la siguiente manera:
                 </p>
             </div>
 
@@ -95,9 +59,12 @@
                 <li>1 Punto. Partidos Playoff Ronda Comodines/Wildcard (6 Partidos).</li>
                 <li>1 Punto. Partidos Playoff Ronda Divisional (4 Partidos).</li>
                 <li>2 Puntos. Partidos Final de Conferencia NFC y AFC (2 Partidos).</li>
-                <li>3 Puntos. Super Bowl (1 Partido).Las puntuaciones aplican tanto en Jornada como Acumulado.</li>
+                <li>3 Puntos. Super Bowl (1 Partido).
+                    <br>
+                    Las puntuaciones aplican tanto en Jornada como Acumulado.
+                </li>
             </ul>
-            <p class="ms-3 mt-2 text-md font-semibold text-gray-900">
+            <p class="ms-3 mt-2 text-md font-semibold text-black">
                 Las puntuaciones aplican tanto en Jornada como Acumulado.
             </p>
 
@@ -108,7 +75,7 @@
         <div>
             <div class="flex items-center gap-4">
                 <img src="{{ asset('images/premiaciones.jpg') }}" class="w-12">
-                <h2 class="ms-3 text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
                     Premiaciones.
                 </h2>
             </div>
@@ -116,14 +83,8 @@
             <p class="mt-4 text-black text-sm leading-relaxed">
             <ul class="list-disc">
                 <li>Un Ganador por cada Jornada. (18 Temporada Regular + 1 de Playoffs J19).</li>
-                <li> 1°, 2° y 3° Lugar en el Acumulado de Toda la Temporada incluyendo Super Bowl.Un Ganador de Duelos.
-                    A partir de la semana 4 basado en la tabla del acumulado se enfrentaran en duelo directo 1vs2, 3vs4,
-                    5vs6 y asi sucesivamente, el duelo lo gana quien quede mejor posicionado en la tabla de la Jornada
-                    en disputa. En las subsecuentes Jornadas el orden de los duelos será: 1)Menor numero de duelos
-                    perdidos y 2)Mejor lugar en el Acumulado. Los participantes son eliminados cuando pierden 3 duelos y
-                    el Ganador es aquel que pierda menos duelos antes de que el resto esté eliminado. (Para evitar
-                    descanso, en algunas Jornadas se enfrentarán rivales con diferente numero de duelos ganados e
-                    inclusive el mejor posicionado de los eliminados vs el más bajo de los participantes activos) .</li>
+                <li>1°, 2° y 3° Lugar en el Acumulado de Toda la Temporada incluyendo Super Bowl.</li>
+                <li>Survivor</li>
             </ul>
             </p>
         </div>
@@ -132,7 +93,7 @@
         <div>
             <div class="flex items-center">
                 <img src="{{ asset('images/rip.png') }}" alt="Desempate" class="w-12">
-                <h2 class="ms-3 text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
                     Criterios de Desempate en Jornada.
                 </h2>
             </div>
@@ -143,7 +104,7 @@
                 <li>2. Acierto en el Partido desempate lleva ventaja sobre los que no.</li>
                 <li>3. Menor Error Total del Partido Desempate. (Error Total = Error en Puntos Local + Error en Puntos
                     Visita).</li>
-                <li>4. Menor Error en alguno de los 2 pronosticos Puntos Local o Puntos Visita.</li>
+                <li>4. Menor Error en alguno de los 2 pronósticos Puntos Local o Puntos Visita.</li>
                 <li>5. Menor Error en los puntos pronosticados al Ganador del Partido.</li>
                 <li>6. Menor Error en el total de puntos del partido. (Local + Visita).</li>
                 <li>7. Volado Virtual o división de premio entre empatados.</li>
@@ -155,7 +116,7 @@
         <div>
             <div class="flex items-center">
                 <img src="{{ asset('images/calavera.png') }}" alt="Desempate" class="w-12">
-                <h2 class="ms-3 text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
                     Criterios de Desempate del Acumulado.
                 </h2>
             </div>
@@ -168,10 +129,10 @@
                     J2+J3...J19)
                     <br>
                     (Los primeros 3 criterios serán mostrados y calculados por sistema, de seguir en empate el orden
-                    será desplegado alfabeticamente y calculados manualmente al finalizar la Temporada).
+                    será desplegado alfabéticamente y calculados manualmente al finalizar la Temporada).
                 </li>
                 <li>4. Se aplican las reglas 2-6 de los criterios de Jornada empezando por el Superbowl, despues el
-                    último de la semana 18, de seguir en empate se continua con la 17 y asi sucesivamente hasta la
+                    último de la semana 18, de seguir en empate se continúa con la 17 y asi sucesivamente hasta la
                     semana 1.</li>
                 <li>5.Volado Virtual o división de premio(s) entre empatados.</li>
             </ul>
@@ -182,7 +143,7 @@
         <div>
             <div class="flex items-center">
                 <img src="{{ asset('images/notas_comentarios.png') }}" class="w-12">
-                <h2 class="ms-3 text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
                     Notas
                 </h2>
             </div>
