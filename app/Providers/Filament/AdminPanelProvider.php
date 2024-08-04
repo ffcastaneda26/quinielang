@@ -54,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
             ->userMenuItems([
                 MenuItem::make()
                     ->label('Operación')
-                    ->url('dashboard')
+                    ->url('/dashboard')
                     ->icon('heroicon-o-home'),
                 ])
             ->unsavedChangesAlerts()

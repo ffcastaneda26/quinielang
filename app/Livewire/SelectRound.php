@@ -12,10 +12,10 @@ class SelectRound extends Component
     use FuncionesGenerales;
     public $round_selected;
     public function mount(){
-        $this->read_rounds();
+        $this->rounds = Round::where('id','<=',env('MAX_ROUND_TO_PICKS',19))->get();
         $round = new Round();
         $this->current_round = $round->read_current_round();
-       
+
     }
 
     public function render()

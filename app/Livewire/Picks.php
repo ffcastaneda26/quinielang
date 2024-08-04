@@ -18,7 +18,7 @@ class Picks extends Component
     public function mount()
     {
         $this->configuration = Configuration::first();
-        $this->rounds = $this->read_rounds();
+        $this->rounds = Round::where('id','<=',env('MAX_ROUND_TO_PICKS',19))->get();
         $round = new Round();
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;

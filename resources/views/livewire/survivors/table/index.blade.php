@@ -4,7 +4,7 @@
             <table class="w-full border">
                 @if ($loop->index == 0)
                     <thead>
-                        <tr class="text-center font-bold">
+                        <tr class="text-center font-bold text-xxs text-white">
                             <td colspan="{{ $rounds->count() + 1 }}" align="center">
                                 <img src="{{ asset('images/survivor_no_seleccionado.png') }}"
                                     class="w-4 rounded-full grayscale">
@@ -12,16 +12,16 @@
                             </td>
                         </tr>
                         <tr class="text-center font-bold bg-black text-white">
-                            <th style="width: 5%;">{{ __('Name') }}</th>
+                            <th style="width: 5%;" class="text-xxs"{{ __('Name') }}</th>
                             @foreach ($rounds as $round)
-                                <th class="text-center text-sm">{{ $round->id }}</th>
+                                <th class="text-center text-xxs md:text-sm ">{{ $round->id }}</th>
                             @endforeach
                         </tr>
                     </thead>
                 @endif
                 <tbody>
                     <tr class="border-black">
-                        <td style="width: 5%;" class="text-start truncate">{{ $user->alias }}</td>
+                        <td style="width: 5%;" class="text-start truncate bg-white text-black text-xxs">{{ $user->alias }}</td>
                         @foreach ($rounds as $round)
                             <td class="text-center border border-black equal-width" align="center">
                                 @php

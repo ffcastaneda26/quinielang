@@ -5,21 +5,22 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use App\Models\Team;
 use Filament\Tables;
+use App\Models\Division;
 use Filament\Forms\Form;
+use App\Models\Conference;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TeamResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TeamResource\RelationManagers;
-use App\Models\Conference;
-use App\Models\Division;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
 
 class TeamResource extends Resource
 {
@@ -55,7 +56,7 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
-                Section::make()
+                Group::make()
                     ->schema([
                         TextInput::make('name')
                             ->translateLabel()
@@ -69,38 +70,42 @@ class TeamResource extends Resource
                             ->translateLabel()
                             ->required()
                             ->maxLength(3),
-                    ])->columns(3),
-
+                    ]),
                 // TODO:: Agregar la liga para que seleccione las divisiones
-                // Select::make('conference_id')
-                //     ->label('Conference')
-                //     ->reactive()
-                //     ->required()
-                //     ->options(Conference::all()->pluck('name', 'id')->toArray())
-                //     ->afterStateUpdated(fn(callable $set) => $set('division_id', null))
-                //     ->searchable(),
-                // Select::make('division_id')
-                //     ->translateLabel()
-                //     ->required()
-                //     ->options(function (callable $get) {
-                //         $conference = Conference::find($get('conference_id'));
-                //         if (!$conference) {
-                //             return;
-                //         }
-                //         return $conference->divisions->pluck('name', 'id');
-                //     }),
+                Group::make()
+                    ->schema(
+                        [
+                            Section::make()
+                                ->schema(
+                                    [
+                                        Select::make('conference_id')
+                                            ->label('Conference')
+                                            ->reactive()
+                                            ->required()
+                                            ->options(Conference::all()->pluck('name', 'id')->toArray())
+                                            ->afterStateUpdated(fn(callable $set) => $set('division_id', null))
+                                            ->searchable(),
+                                        Select::make('division_id')
+                                            ->translateLabel()
+                                            ->required()
+                                            ->options(function (callable $get) {
+                                                $conference = Conference::find($get('conference_id'));
+                                                if (!$conference) {
+                                                    return;
+                                                }
+                                                return $conference->divisions->pluck('name', 'id');
+                                            }),
+                                        FileUpload::make('logo')
+                                            ->translateLabel()
+                                            ->directory('teams')
+                                            ->preserveFilenames()
+                                            ->columnSpanFull()
+                                    ]
+                                )->columns(2),
 
-                // Select::make('division_id')
-                //     ->relationship('division', 'name')
-                //     ->required(),
-                FileUpload::make('logo')
-                    ->translateLabel()
-                    ->directory('teams')
-                    ->preserveFilenames(),
-                FileUpload::make('logo_gris')
-                    ->translateLabel()
-                    ->directory('teams')
-                    ->preserveFilenames()
+
+                        ]
+                    ),
             ]);
     }
 

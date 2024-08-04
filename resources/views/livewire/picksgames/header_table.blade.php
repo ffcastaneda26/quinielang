@@ -1,4 +1,4 @@
-<div class="w-full bg-gray-800 text-white text-center font-bold ">
+<div class="w-full bg-black text-white text-center font-bold text-xxs">
     <div class="grid grid-cols-8">
         <div class="col-span-1 text-right">{{ __('Date') }}</div>
         <div class="col-span-2 text-right">{{ __('Visit') }}</div>
