@@ -59,7 +59,8 @@ class UserResource extends Resource
     {
 
         return parent::getEloquentQuery()
-                ->orderby('last_login','desc');
+                ->orderby(env('FIELD_TO_ORDER_USERS','name'),env('ORDER_TO_SHOW_USERS','asc'))
+                ->orderby('name','asc');
 
     }
     public static function form(Form $form): Form
