@@ -25,20 +25,27 @@ Route::get('optimize-clear',function(){
     }
 })->middleware('auth');
 
-Route::get('jornada-survivor/{round}',function(Round $round){
-    $minutesBefore = 5;
-    $records = UserSurvivor::where('round_id',$round->id)
-                            ->whereHas('team',function($query) use($round,$minutesBefore) {
-                                $query->whereHas('local_games',function($query) use($minutesBefore) {
-                                                $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore));
-                                            })
-                                    ->orWhereHas('visit_games',function($query) use($minutesBefore){
-                                        $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore));
-                                    });
-                                })
-                            ->get();
-    echo  $records->count() ? ' Ya no se puede seleccionar ' : 'Aún se puede seleccionar';
+Route::get('revisa-survivors',function(){
+    $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
+        ->withCount(['survivors as total_survivors' => function ($query) {
+        $query->where('survive', 1);
+    }])
+    ->orderBy('total_survivors', 'desc')
+    ->orderBy('alias', 'asc')
+    ->get();
 
+    echo '<table border=1><thead><th>Pos</th><th>Nombre</th><th>Survivors</th></thead>';
+
+    $pos=1;
+    foreach($users as $user){
+        echo '<tr>';
+        echo '<td>'. $pos++ . '</td>';
+        echo '<td>'. $user->name . '</td>';
+        echo '<td>'. $user->total_survivors . '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+    // dd($users);
 });
 
 Route::get('equipos-survivor-jornada/{round}', function (Round $round) {
