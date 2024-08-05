@@ -25,10 +25,14 @@ class PermissionResource extends Resource
 
     protected static ?int $navigationSort = 3;
     // Se mueve a una navegación dentro de la página principal
-    protected static ?string $cluster = Security::class;
+    // protected static ?string $cluster = Security::class;
 
     // Se abrirá hasta que se abra Roles
     // protected static ?string $navigationParentItem = 'Roles';
+    public static function getNavigationGroup(): string
+    {
+        return __('Security');
+    }
 
     public static function getNavigationLabel(): string
     {

@@ -28,7 +28,7 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $cluster = Security::class;
+    // protected static ?string $cluster = Security::class;
     public static function getNavigationLabel(): string
     {
         return __('Users');
@@ -50,10 +50,18 @@ class UserResource extends Resource
     {
         return static::getModel()::count();
     }
-    // public static function getNavigationGroup(): string
-    // {
-    //     return __('Security');
-    // }
+    public static function getNavigationGroup(): string
+    {
+        return __('Security');
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+
+        return parent::getEloquentQuery()
+                ->orderby('last_login','desc');
+
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -96,7 +104,7 @@ class UserResource extends Resource
                     CheckboxList::make('roles')
                         ->relationship(titleAttribute: 'name')
                         ->searchable(),
-      
+
                     Select::make('permissions')
                         ->label('Permisos')
                         ->multiple()
@@ -115,6 +123,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')->translateLabel()->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('username')->translateLabel()->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('alias')->translateLabel()->searchable()->sortable(),
+                Tables\columns\TextColumn::make('last_login')->translateLabel()->date('d/M/Y h:i a'),
             ])
             ->filters([])
             ->actions([

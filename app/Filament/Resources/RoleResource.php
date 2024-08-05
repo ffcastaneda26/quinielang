@@ -29,8 +29,11 @@ class RoleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
     protected static ?int $navigationSort = 2;
-    protected static ?string $cluster = Security::class;
-
+    // protected static ?string $cluster = Security::class;
+    public static function getNavigationGroup(): string
+    {
+        return __('Security');
+    }
 
     public static function getNavigationLabel(): string
     {
