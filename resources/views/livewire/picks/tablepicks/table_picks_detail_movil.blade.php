@@ -7,7 +7,7 @@
                 @foreach ($user->picks->sortBy('game.game_date') as $pick)
                     <div class="col-span-1 gap-2">
                         @if ($pick->game->allow_pick())
-                            <img src="{{ asset('images/' . env('IMG_TO_YET_PICK_GAME', 'reloj.jpg')) }}"
+                            <img src="{{ asset('images/' . env('IMG_TO_YET_PICK_GAME', 'reloj.png')) }}"
                                 class="w-4 h-4 rounded-full">
                         @else
                             <div class="text-xxs">
@@ -24,11 +24,11 @@
             </div>
         </div>
 
-        
+
         <div class="col-span-1 flex items-center border justify-center font-bold text-xxs bg-white text-black">
             {{ $user->positions->first() ? $user->positions->first()->hits : ''}}
         </div>
-        
+
 
     </div>
 </div>

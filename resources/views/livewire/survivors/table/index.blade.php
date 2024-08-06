@@ -1,6 +1,6 @@
 <div class="container mx-auto mt-5">
         @foreach ($users as $user)
-            <table class="w-full border">
+            <table class="w-full">
                 @if ($loop->index == 0)
                     <thead>
                         <tr class="text-center text-xxs bg-white text-black">
@@ -33,8 +33,8 @@
                                             class="w-4 rounded-full {{ $user_survivor->survive ? 'shadow-xl shadow-green-500' : 'grayscale' }}"
                                             style="margin: 0 auto;">
                                     @else
-                                        <img src="{{ asset('images/reloj.jpg') }}"
-                                            class="w-4 rounded-full {{ $user_survivor->survive ? 'shadow-xl shadow-green-500' : 'grayscale' }}"
+                                        <img src="{{ asset('images/reloj.png') }}"
+                                            class="w-4 rounded-full"
                                             style="margin: 0 auto;">
                                     @endif
                                 @else
