@@ -13,7 +13,7 @@
         {{-- ¿Como se Juega? --}}
         <div>
             <div class="flex items-center">
-                <img src="{{ asset('images/comojugar.png') }}" class="w-24">
+                <img src="{{ asset('images/comojugar.png') }}" class="w-12">
                 <h2 class="ms-3 text-2xl font-semibold text-black ">
                     ¿Cómo se juega?
                 </h2>
@@ -74,7 +74,7 @@
         {{-- Premiaciones --}}
         <div>
             <div class="flex items-center gap-4">
-                <img src="{{ asset('images/premiaciones.jpg') }}" class="w-12">
+                <img src="{{ asset('images/premiaciones.png') }}" class="w-12">
                 <h2 class="ms-3 text-xl font-semibold text-black ">
                     Premiaciones.
                 </h2>
@@ -92,7 +92,7 @@
         {{-- Desempate Jornada --}}
         <div>
             <div class="flex items-center">
-                <img src="{{ asset('images/rip.png') }}" alt="Desempate" class="w-12">
+                <img src="{{ asset('images/criterios_desempate_jornada.png') }}" alt="Desempate" class="w-12">
                 <h2 class="ms-3 text-xl font-semibold text-black ">
                     Criterios de Desempate en Jornada.
                 </h2>
@@ -115,7 +115,7 @@
         {{-- Desempate Acumulado --}}
         <div>
             <div class="flex items-center">
-                <img src="{{ asset('images/calavera.png') }}" alt="Desempate" class="w-12">
+                <img src="{{ asset('images/criterios_desempate_acumulado.png') }}" alt="Desempate" class="w-12">
                 <h2 class="ms-3 text-xl font-semibold text-black ">
                     Criterios de Desempate del Acumulado.
                 </h2>
