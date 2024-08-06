@@ -1,6 +1,6 @@
 <div>
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="text-center uppercase mt-2 text-white">
+            <div class="text-center uppercase mt-2 text-black dark:text-white">
                 <p>{{ __('Round') }}</p>
             </div>
             <div class="d-flex justify-content-center text-center mb-2">
