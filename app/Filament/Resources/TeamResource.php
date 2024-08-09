@@ -129,8 +129,7 @@ class TeamResource extends Resource
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
-                ImageColumn::make('logo'),
-                ImageColumn::make('logo_gris'),
+                ImageColumn::make('logo')
 
             ])
             ->filters([

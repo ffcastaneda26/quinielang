@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserSurvivorResource\Pages;
 use App\Filament\Resources\UserSurvivorResource\RelationManagers;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 
 class UserSurvivorResource extends Resource
@@ -94,14 +95,17 @@ class UserSurvivorResource extends Resource
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
+                ImageColumn::make('team.logo')
+                    ->rounded()
+                    ->label('Logo'),
                 TextColumn::make('team.name')
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
                 IconColumn::make('survive')
                 ->label('¿Sobrevivió?')
-                ->searchable()
-                ->boolean(),
+                ->boolean()
+                ->alignCenter(),
             ])
             ->filters([
                 SelectFilter::make('user_id')
