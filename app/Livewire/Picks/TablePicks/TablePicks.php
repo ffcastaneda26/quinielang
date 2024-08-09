@@ -50,7 +50,7 @@ class TablePicks extends Component
                 },
                 'generalPosition',
             ])
-            ->orderBy('name')
+            ->orderBy('alias')
             ->paginate($this->pagination);
 
         return $users;
