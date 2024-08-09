@@ -345,7 +345,7 @@ class GameProcess
             $team_winner_id = $game->winner == 1 ? $game->local_team_id : $game->visit_team_id;
             UserSurvivor::join('rounds', 'rounds.id', '=', 'user_survivors.round_id')
                 ->update([
-                    'user_survivors.survive' => DB::raw("'CASE WHEN user_survivors.team_id =" . $team_winner_id . "THEN 1 ELSE 0 END'")
+                    'user_survivors.survive' => DB::raw('CASE WHEN user_survivors.team_id=' . $team_winner_id . ' THEN 1 ELSE 0 END')
                 ]);
         } catch (Exception $e) {
             Log::error($e);

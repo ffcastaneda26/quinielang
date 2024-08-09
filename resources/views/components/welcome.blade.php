@@ -9,7 +9,6 @@
     </div>
 
     <div class="bg-gray-100 text-black grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
-
         {{-- ¿Como se Juega? --}}
         <div>
             <div class="flex items-center">
@@ -59,10 +58,7 @@
                 <li>1 Punto. Partidos Playoff Ronda Comodines/Wildcard (6 Partidos).</li>
                 <li>1 Punto. Partidos Playoff Ronda Divisional (4 Partidos).</li>
                 <li>2 Puntos. Partidos Final de Conferencia NFC y AFC (2 Partidos).</li>
-                <li>3 Puntos. Super Bowl (1 Partido).
-                    <br>
-                    Las puntuaciones aplican tanto en Jornada como Acumulado.
-                </li>
+                <li>3 Puntos. Super Bowl (1 Partido)</li>
             </ul>
             <p class="ms-3 mt-2 text-md font-semibold text-black">
                 Las puntuaciones aplican tanto en Jornada como Acumulado.
@@ -167,6 +163,83 @@
                         class="underline font-extrabold">Webmaster</a>.
                 </p>
             </div>
+
+        </div>
+        {{-- Cómo se juega el Survivor --}}
+        <div>
+            <div class="flex items-center">
+                <img src="{{ asset('images/como_se_juega_survivor.png') }}" class="w-12">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
+                    ¿Cómo se juega el Survivor?
+                </h2>
+            </div>
+
+            <p class="mt-4 ml-5 text-black text-sm leading-relaxed">
+                <ul class="list-disc">
+                    <li>
+                        En la sección de "Survivor" cada Partitipante seleccionará un equipo por Jornada (No se puede repetir equipo en toda la temporada).
+                    </li>
+                    <li>Si tu equipo seleccionado gana, "sobrevives" la Jornada y continuas con vida para la siguiente.</li>
+                    <li>Si tu equipo seleccionado empata o pierde, no hiciste selección en la Jornada o duplicaste un equipo entonces quedas eliminado del premio Survivor y continuas participando como Zombie.</li>
+                    <li>Cada Jornada los equipos estarán disponibles para selección cuando se cumplan los siguientes requisitos:</li>
+                    <li>
+                        <ul>
+                            <li>a) El equipo tenga partido en la Jornada (No esté de descanso)</li>
+                            <li>b) El Equipo No esté seleccionado en otra Jornada (anterior o futura)</li>
+                            <li>c) El Partido no haya iniciado o esté a 5 minutos de iniciar.</li>
+                            <li>d) La Jornada siga siendo editable.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+
+            <div class="flex items-center">
+                <p class="mt-4 ml-50 font-bold italic">
+                    *Los pronosticos survivor de cada Jornada se hacen simultaneamente visibles y no editables para todos los participantes cuando el primer partido de la Jornada en donde algún participante tenga equipo seleccionado esté a 5 minutos de iniciar.
+                </p>
+            </div>
+
+        </div>
+
+        {{-- Cómo se gana el Survivor --}}
+        <div>
+            <div class="flex items-center">
+                <img src="{{ asset('images/como_se_gana_survivor.png') }}" class="w-12">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
+                    ¿Cómo se Gana en el Survivor?
+                </h2>
+            </div>
+
+            <p class="mt-4 ml-5 text-black text-sm leading-relaxed">
+                <p>La competencia contempla que habrá al menos 2 premios y existen diferentes escenarios:</p>
+                <ul class="list-disc">
+                    <li>a) Ganador Survivor Único, si al terminar una Jornada existe un sólo sobreviviente se declara ganador Survivor y el resto participan por el premio de Zombies (2do Lugar). La ganancia del Survivor irá incrementando  cada jornada que siga como sobreviviente, el restante de la bolsa es para zombies (2do Lugar).</li>
+                    <li>b) Ganadores Multi Survivor, si al termino de la Temporada Regular hay 2+ Sobrevivientes estos serán ganadores, el desempate se juega en playoffs y no hay premiación de Zombies.</li>
+                    <li>c) Sin Ganador Survivor, si al término de una Jornada no hay sobrevivente todos los participantes compiten como Zombies. (Esto sucede cuando la jornada inicia con 2+ Sobrevivientes y termina sin sobrevivientes)</li>
+                </ul>
+            </p>
+
+            <div class="flex items-center mt-4">
+                <img src="{{ asset('images/zombies.png') }}" class="w-12">
+                <h2 class="ms-3 text-xl font-semibold text-black ">
+                    ¿Qué son los Zombies y cuando ganan?
+                </h2>
+            </div>
+            <p class="flex items-center  mt-4 ml-5 text-black text-sm">
+                <ul class="list-disc">
+                    <li>Zombies son los participantes eliminados del Survivor, estos seguirán participando por el resto de la temporada y a la espera de que no haya Survivors Multiples para obtener premio.</li>
+                    <li>Cada Jornada donde se acierta Ganador genera un punto, el Zombie con más puntos es el ganador y en caso de empate se siguen los siguientes criterios</li>
+                    <div class="flex justify-end">
+                        <ul style="list-style-type:decimal" class="ml-96">
+                            <li>Participante que duró más Jornadas como sobreviviente.</li>
+                            <li>Racha de victoria más larga después de hacerse zombie. (2da derrota)</li>
+                            <li>Más equipos seleccionados Visitantes</li>
+                        </ul>
+                    </div>
+                </ul>
+            </p>
+
+
 
         </div>
     </div>
