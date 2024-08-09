@@ -12,7 +12,9 @@
                     @foreach ($rounds as $round)
                         <th class="text-center text-xxs md:text-sm ">{{ $round->id }}</th>
                     @endforeach
-                    <th style="width: 3%;" class="text-xxs">Total</th>
+                    <th style="width: 3%;" style="font-size: 4px">
+                        {{ $rounds->count() > 3 ? 'Tot' : 'T' }}
+                    </th>
                 </tr>
             </thead>
     </table>
@@ -28,12 +30,12 @@
                             @endphp
                             @if ($user_survivor)
                                 @if ($round->has_games_to_block_survivors())
-                                    <img src="{{ Storage::url($user_survivor->team->logo) }}" class="w-4 sm:w-24 rounded-full {{ $user_survivor->survive ? 'shadow-xl shadow-green-500' : 'grayscale' }}" style="margin: 0 auto;">
+                                    <img src="{{ Storage::url($user_survivor->team->logo) }}" class="w-4 sm:w- rounded-full {{ $user_survivor->survive ? 'shadow-xl shadow-green-500' : 'grayscale' }}" style="margin: 0 auto;">
                                 @else
-                                    <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w-24 rounded-full" style="margin: 0 auto;">
+                                    <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w- rounded-full" style="margin: 0 auto;">
                                 @endif
                             @else
-                                <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="w-4 sm:w-24 rounded-full grayscale" style="margin: 0 auto;">
+                                <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="w-4 sm:w- rounded-full grayscale" style="margin: 0 auto;">
                             @endif
                         </td>
                     @endforeach
