@@ -43,19 +43,6 @@ class GameResource extends Resource
         return __('Catalogs');
     }
 
-    // public static function getEloquentQuery(): Builder
-    // {
-    //     $round = Round::where('active', 1)->first();
-    //     if ($round) {
-    //         return parent::getEloquentQuery()
-    //             ->where('round_id', $round->id)
-    //             ->orderBy('game_date', 'ASC');
-    //     }
-    //     return parent::getEloquentQuery()
-    //         ->where('round_id', Round::first()->id)
-    //         ->orderBy('game_date', 'ASC');
-    // }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -162,14 +149,9 @@ class GameResource extends Resource
                 // Tables\Filters\SelectFilter::make('round_id')
                 //     ->label(__('Round'))
                 //     ->relationship('round', 'id')
-            ], layout: FiltersLayout::AboveContent)
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ])
             ->paginated(false);
     }
