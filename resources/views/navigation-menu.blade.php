@@ -115,7 +115,7 @@
 
                             @role('Admin')
                                 <x-dropdown-link id="picks_nav" href="/admin">
-                                    <label for="picks_nav" class="my-fondo-header">{{ __('Admin Panel') }}</label>
+                                    <label for="picks_nav">{{ __('Admin Panel') }}</label>
                                 </x-dropdown-link>
                             @endrole
 
