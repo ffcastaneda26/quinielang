@@ -5,11 +5,11 @@
             <table class="w-full border-collapse">
                 <thead>
                     <tr class="text-xxs sm:text-md text-center font-bold bg-black text-white border border-white">
-                        <th class="px-4 w-10 uppercase">Pos</th>
-                        <th class="px-4 w-70 uppercase">{{ __('Name') }}</th>
-                        <th class="px-4 w-70 uppercase">{{ __('Hits') }}</th>
-                        <th class="px-4 w-70 uppercase">{{ __('MNFs') }}</th>
-                        <th class="px-4 w-10 uppercase">{{ __('Total Error') }}</th>
+                        <th class="px-4 w-10 uppercase border border-white">Pos</th>
+                        <th class="px-4 w-70 uppercase border border-white">{{ __('Name') }}</th>
+                        <th class="px-4 w-70 uppercase border border-white">{{ __('Hits') }}</th>
+                        <th class="px-4 w-70 uppercase border border-white">{{ __('MNFs') }}</th>
+                        <th class="px-4 w-10 uppercase border border-white">{{ __('Total Error') }}</th>
                     </tr>
                 </thead>
                 <tbody>
