@@ -113,10 +113,6 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
-                // TextColumn::make('division.conference.name')
-                //     ->sortable(),
-                // TextColumn::make('division.name')
-                //     ->sortable(),
                 TextColumn::make('name')
                     ->translateLabel()
                     ->sortable()
@@ -137,11 +133,6 @@ class TeamResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

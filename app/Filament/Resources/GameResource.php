@@ -133,22 +133,18 @@ class GameResource extends Resource
                     ->date('D d M y H:i')
                     ->label(__('Game date')),
                 Tables\Columns\TextColumn::make('winner')
+                    ->label('Ganador')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         '1' => 'success',
                         '2' => 'danger'
                     })
-                    ->description(function (Tables\Columns\TextColumn $column): ?string {
-                        $state = $column->getState();
-                        return $state == 1 ? 'Local' : __('Visit');
-                    }, 'above')
-                    ->translateLabel()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        '1' => 'Local',
+                        '2' => 'Visita'
+                    }),
             ])
-            // ->defaultPaginationPageOption(16)
             ->filters([
-                // Tables\Filters\SelectFilter::make('round_id')
-                //     ->label(__('Round'))
-                //     ->relationship('round', 'id')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

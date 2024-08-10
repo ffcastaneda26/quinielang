@@ -1,10 +1,10 @@
 
-<div class="container w-full mx-auto flex flex-col items-center mt-4">
+<div class="container w-full mx-auto flex flex-col items-center mt-4 bg-white text-black">
     @if ($records->count())
-        <div class="w-1/2">
+        {{-- <div class="w-1/2"> --}}
             <table class="w-full border-collapse">
                 <thead>
-                    <tr class="text-xxs sm:text-xs bg-gray-800 text-white text-center font-bold">
+                    <tr class="text-xxs sm:text-md text-center font-bold bg-black text-white border border-white">
                         <th class="px-4 w-10 uppercase">Pos</th>
                         <th class="px-4 w-70 uppercase">{{ __('Name') }}</th>
                         <th class="px-4 w-70 uppercase">{{ __('Hits') }}</th>
@@ -14,20 +14,20 @@
                 </thead>
                 <tbody>
                     @foreach ($records as $record)
-                        <tr class="border-bottom">
-                            <td class="text-xxs sm:text-xs px-4 text-center">{{ $record->position }}</td>
+                        <tr class="text-xxs sm:text-md text-center font-bold">
+                            <td class="text-xxs sm:text-xs px-4 text-center border border-black">{{ $record->position }}</td>
                             <td
-                                class="text-xxs sm:text-xs px-4 uppercase text-left {{ env('SHOW_NAME_POSITION_BY_ROUND', false) ? 'text-xxs' : '' }}">
+                                class="border border-black text-xxs sm:text-xs px-4 uppercase text-left {{ env('SHOW_NAME_POSITION_BY_ROUND', false) ? 'text-xxs' : '' }}">
                                 {{ env('SHOW_NAME_GENERAL_POSITIONS', false) ? $record->user->name : $record->user->alias }}
                             </td>
-                            <td class="text-xxs sm:text-xs px-4 text-center">{{ $record->hits }}</td>
-                            <td class="text-xxs sm:text-xs px-4 text-center">{{ $record->hits_breaker }}</td>
-                            <td class="text-xxs sm:text-xs px-4 text-center">{{ $record->total_error }}</td>
+                            <td class="border border-black text-xxs sm:text-xs px-4 text-center">{{ $record->hits }}</td>
+                            <td class="border border-black text-xxs sm:text-xs px-4 text-center">{{ $record->hits_breaker }}</td>
+                            <td class="border border-black text-xxs sm:text-xs px-4 text-center">{{ $record->total_error }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        {{-- </div> --}}
     @else
         <div class="w-1/2 overflow-x-auto">
             <div class="text-center bg-red-500 font-bold">
