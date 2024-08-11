@@ -1,57 +1,40 @@
-<div class="container w-full mx-auto flex flex-col items-center mt-4">
+<div class="container w-full mx-auto flex flex-col items-center mt-4 bg-black text-white">
     <div class="w-full flex flex-col items-center">
         @livewire('select-round')
     </div>
-    {{-- <div class="w-auto flex flex-col items-center">
-        @include('livewire.positions.round.header_table')
 
-        <div class="row">
-            @if ($records->count())
-            <div class="flex flex-row w-full jutify-between gap-40 mt-4">
-                @foreach ($records as $record)
-                    <div>{{ $record->position }}</div>
-                    <div>{{ $record->user->name }}</div>
-                    <div>{{$record->hits}}</div>
-                    <div>{{ $record->hit_last_game }}</div>
-                @endforeach
-
-            </div>
-
-            @else
-            <div class="flex flex-row w-full text-center bg-red-500 mt-10">
-                {{ __('Not Found Records') }}
-            </div>
-            @endif
-        </div>
-    </div> --}}
     @if ($records->count())
-        <div class="w-1/2 overflow-x-auto">
+        <div class="w-full overflow-x-auto">
             <table class="w-full border-collapse">
                 <thead>
-                    <tr class="bg-gray-800 text-white text-center font-bold">
-                        <th class="px-4 w-10 uppercase">Pos</th>
-                        <th class="px-4 w-70 uppercase">{{ __('Name') }}</th>
-                        <th class="px-4 w-10 uppercase">{{ __('Hits') }}</th>
-                        <th class="px-4 w-10 uppercase">{{ __('Last Game') }}</th>
+                    <tr class="text-center font-bold  bg-black text-white">
+                        <th class="px-4 w-10 uppercase text-xs sm:text-sm border border-white">Pos</th>
+                        <th class="px-4 w-70 uppercase text-xs sm:text-sm border border-white">{{ __('Name') }}</th>
+                        <th class="px-4 w-10 uppercase text-xs sm:text-sm border border-white">{{ __('Hits') }}</th>
+                        @if($show_mnf_column)
+                            <th class="px-4 w-10 uppercase text-xs sm:text-sm border border-white">MNF</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($records as $record)
-                        <tr class="border-bottom">
-                            <td class="px-4 text-center">{{ $record->position }}</td>
-                            <td class="px-4 uppercase text-left {{ env('SHOW_NAME_POSITION_BY_ROUND',false) ? 'text-xxs' : '' }}">
+                        <tr class="text-center font-bold"></tr>
+                            <td class="bg-white text-black border border-black text-xs sm:text-sm px-4 text-center">{{ $record->position }}</td>
+                            <td class="bg-white text-black border  border-black text-xs sm:text-sm px-4 uppercase text-left {{ env('SHOW_NAME_POSITION_BY_ROUND',false) ? 'text-xxs' : '' }}">
                                 {{ env('SHOW_NAME_POSITION_BY_ROUND',false)  ? $record->user->name : $record->user->alias}}
                             </td>
-                            <td class="px-4 text-center">{{ $record->hits }}</td>
-                            <td class="px-4 text-center">
-                                <div class="flex flex-row justify-center justify-items-center">
-                                    @if ($record->hit_last_game)
-                                        <img src="{{ asset('images/afirmativo.png') }}" class="w-4 h-4">
-                                    @else
-                                        <img src="{{ asset('images/negativo.png') }}" class="w-4 h-4">
-                                    @endif
-                                </div>
-                            </td>
+                            <td class="bg-white text-black border border-black text-xs sm:text-sm px-4 text-center">{{ $record->hits }}</td>
+                            @if($show_mnf_column)
+                                <td class="bg-white text-black border border-black text-xs sm:text-sm px-4 text-center">
+                                    <div class="flex flex-row justify-center justify-items-center">
+                                        @if ($record->hit_last_game)
+                                            <img src="{{ asset('images/afirmativo.png') }}" class="w-4 h-4">
+                                        @else
+                                            <img src="{{ asset('images/negativo.png') }}" class="w-4 h-4">
+                                        @endif
+                                    </div>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

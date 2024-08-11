@@ -1,5 +1,5 @@
 @auth
-    <div class="flex flex-row justify-between text-xxs">
+    <div class="flex flex-row justify-between text-xxs gap-4 sm:gap-6 grow-0">
         @if (Route::has('picks'))
             <x-nav-link id="picks_nav" href="{{ route('picks') }}" :active="request()->routeIs('picks')">
                 <label for="picks_nav">{{ __('Picks') }}</label>

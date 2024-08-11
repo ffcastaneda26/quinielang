@@ -11,7 +11,11 @@ class ByRound extends Component
 {
     use AuthorizesRequests;
     use FuncionesGenerales;
+
+    public $show_mnf_column= false;
+
     protected $listeners = ['read_round_games'];
+
     public function mount()
     {
         $this->rounds = $this->read_rounds();
@@ -23,6 +27,7 @@ class ByRound extends Component
     }
     public function render()
     {
+        $this->show_mnf_column =$this->current_round->get_last_game_round()->has_result();
         return view('livewire.positions.round.index',[
             'records' => $this->read_data()
         ]);

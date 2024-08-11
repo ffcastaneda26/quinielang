@@ -1,9 +1,9 @@
 <div>
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="text-center uppercase mt-2 text-black dark:text-white">
+            <div class="text-center uppercase mt-2  text-white">
                 <p>{{ __('Round') }}</p>
             </div>
-            <div class="d-flex justify-content-center text-center mb-2">
+            <div class="d-flex justify-content-center text-center mb-2 text-black bg-white dark:text-white sm:bg-black">
                 <select class="w-auto"
                         wire:model="round_selected"
                         wire:change="round_select">
