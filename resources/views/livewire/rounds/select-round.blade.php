@@ -1,10 +1,10 @@
 <div>
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-            <div class="text-center uppercase mt-2  text-white">
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden dark:text-white">
+            <div class="text-center uppercase mt-2 dark:text-white">
                 <p>{{ __('Round') }}</p>
             </div>
-            <div class="d-flex justify-content-center text-center mb-2 text-black bg-white dark:text-white sm:bg-black">
-                <select class="w-auto"
+            <div class="d-flex justify-content-center text-center mb-2">
+                <select class="w-auto text-black"
                         wire:model="round_selected"
                         wire:change="round_select">
                     @foreach ($rounds as $round)
@@ -14,7 +14,7 @@
             </div>
     </div>
 
-    <div class="justify-center  hidden sm:block">
+    <div class="justify-center  hidden sm:block dark:text-white ">
             <div class="text-center uppercase">
                 <p>{{ __('Rounds') }}</p>
             </div>
@@ -24,7 +24,6 @@
                         class="cursor-pointer inline-flex items-center px-1 py-1
                                         bg-white
                                         text-black
-                                        border border-black
                                         rounded-full
                                         font-bold text-xs
                                 {{ $current_round->id == $round->id ? 'bg-yellow-300' : '' }}
