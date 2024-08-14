@@ -936,6 +936,10 @@
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header class="grid grid-cols-2 items-center gap-2  lg:grid-cols-3">
                     <div class="flex lg:justify-center lg:col-start-2">
+                        <img src="{{ asset('images/quiniela_life_02.png') }}" width="180px">
+                    </div>
+
+                    <div class="flex lg:justify-center lg:col-start-2">
                         <p style="font-size: 36px">QUINIELA 2024</p>
                     </div>
 

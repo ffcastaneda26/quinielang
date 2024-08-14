@@ -50,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
 
             ->breadcrumbs(false)
             ->font('Poppins')
-            ->favicon(asset('images/nfl.png'))
+            ->favicon(asset('images/quiniela_01.png'))
             ->userMenuItems([
                 MenuItem::make()
                     ->label('Operación')
