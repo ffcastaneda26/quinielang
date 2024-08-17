@@ -35,7 +35,9 @@ class Round extends Model
 
     public function positions(): HasMany
     {
-        return $this->hasMany(Position::class)->orderBy('hits','desc');
+        return $this->hasMany(Position::class)
+                ->orderBy('hits','desc')
+                ->orderby('position','asc');
     }
     public function local_teams(): HasManyThrough
     {

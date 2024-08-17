@@ -232,6 +232,7 @@ class GameProcess
             ->orderby('dif_winner_points')
             ->orderby('dif_victory')
             ->orderby('created_at')
+            ->where('round_id',$round_id)
             ->get();
 
         $i = 1;
@@ -249,6 +250,7 @@ class GameProcess
             $sql .= "SET position=NULL ";
             $sql .= " WHERE round_id=" . $round_id;
             DB::update($sql);
+    
         } catch (Exception $e) {
             Log::error($e);
             dd('Error en update_positions_to_null : ' . $e->getMessage() . ' Avise al Administrador');

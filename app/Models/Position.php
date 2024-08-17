@@ -43,10 +43,8 @@ class Position extends Model
         $users = User::role(env('ROLE_PARTICIPANT','Participante'))
             ->select('id')
             ->get();
-            foreach($rounds as $round){
+        foreach($rounds as $round){
             foreach($users as $user){
-
-
                 if(!$user->has_position_record_round($round->id)){
                     Position::create([
                         'round_id' => $round->id,

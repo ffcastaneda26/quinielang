@@ -49,8 +49,8 @@ class GameObserver
                 $gameProcess->update_tie_breaker($game);
             }
             // Posiciones x Jornada
-            // $position_instance = new Position();
-            //$position_instance->create_missing_positions();
+            $position_instance = new Position();
+            $position_instance->create_missing_positions();
             // Asigna las posiciones: Por Jornada y Generales
             $gameProcess->update_positions_round($game->round_id);
             // Calificar los Survivors
