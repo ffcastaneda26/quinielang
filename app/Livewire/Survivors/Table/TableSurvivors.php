@@ -16,6 +16,8 @@ class TableSurvivors extends Component
 
     public function mount()
     {
+        $round = new Round();
+        $this->current_round = $round->read_current_round();
         $this->rounds = Round::wherehas('games')->orderby('id')->get();
         $this->survivor = Survivor::where('active', 1)->first();
     }
