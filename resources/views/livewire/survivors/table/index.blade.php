@@ -35,7 +35,7 @@
                                     <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w- rounded-full" style="margin: 0 auto;">
                                 @endif
                             @else
-                                <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="w-4 sm:w- rounded-full grayscale" style="margin: 0 auto;">
+                                <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w- rounded-full grayscale" style="margin: 0 auto;">
                             @endif
                         </td>
                     @endforeach

@@ -65,6 +65,11 @@ class Round extends Model
     {
         return $this->hasMany(UserSurvivor::class);
     }
+
+    public function survivors_team($team_id){
+        return $this->survivors->where('team_id',$team_id);
+    }
+
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);

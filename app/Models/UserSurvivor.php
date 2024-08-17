@@ -38,4 +38,8 @@ class UserSurvivor extends Model
         return $this->belongsTo(Survivor::class);
     }
 
+    public function qualify($win=0){
+        $this->survive = $win;
+        $this->save();
+    }
 }

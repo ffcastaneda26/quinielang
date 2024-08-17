@@ -341,12 +341,30 @@ class GameProcess
 
     public function qualify_survivors(Game $game)
     {
+
+
         try {
-            $team_winner_id = $game->winner == 1 ? $game->local_team_id : $game->visit_team_id;
-            UserSurvivor::join('rounds', 'rounds.id', '=', 'user_survivors.round_id')
-                ->update([
-                    'user_survivors.survive' => DB::raw('CASE WHEN user_survivors.team_id=' . $team_winner_id . ' THEN 1 ELSE 0 END')
-                ]);
+            $team_winning_id = $game->winner == 1 ? $game->local_team_id : $game->visit_team_id;
+            $team_losing_id = $game->winner  == 2 ? $game->local_team_id : $game->visit_team_id;
+              $round = $game->round()->first();
+            $survivors = $round->survivors_team($team_losing_id);
+
+            // $survivors =$round->survivors->where('team_id','=',$team_losing_id)->get();
+
+            if($round->survivors->count()){
+                foreach($survivors as $survivor){
+                    $survivor->qualify(0);
+                }
+            }
+
+            $survivors = $round->survivors_team($team_winning_id);
+
+            if($round->survivors->count()){
+                foreach($survivors as $survivor){
+                    $survivor->qualify(1);
+                }
+            }
+
         } catch (Exception $e) {
             Log::error($e);
             dd('Error en qualify_survivors : ' . $e->getMessage() . ' Avise al Administrador');
