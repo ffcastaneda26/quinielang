@@ -35,7 +35,7 @@
                                         <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
                                     @endif
                                 @else
-                                    @if($round->id < $current_round->id)
+                                    @if($round->has_games_to_block_survivors() )
                                         <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="w-4 sm:w-8 rounded-full grayscale" style="margin: 0 auto;">
                                     @else
                                         <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
