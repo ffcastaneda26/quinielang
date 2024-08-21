@@ -36,7 +36,7 @@ WHERE us.id = pic.user_id
   AND us.id = 2
   AND ga.round_id = 1
   AND ga.id = 16
-ORDER BY ga.game_day,ga.game_time;
+ORDER BY ga.game_date;
 
 
 -----------
@@ -59,7 +59,7 @@ WHERE us.id = pic.user_id
   AND us.id = 2
   AND ga.round_id = 1
   AND ga.id = 16
-ORDER BY ga.game_day,ga.game_time;
+ORDER BY ga.game_date;
 
 --
 SELECT ga.id AS 'Juego Id',
