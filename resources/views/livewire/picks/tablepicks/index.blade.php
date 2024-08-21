@@ -36,10 +36,12 @@
                             @endif
                     </div>
                 @endforeach
+
             </div>
         </div>
         <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2 bg-white text-black">AC</div>
     </div>
+
 
     {{-- @include('livewire.picks.tablepicks.table_picks_detail') --}}
     {{-- Pronósticos por Usuario --}}
@@ -86,6 +88,8 @@
 
         </div>
     @endforeach
-
+    <div class="flex justify-end">
+        {{ $users->links() }}
+    </div>
 
 </div>
