@@ -51,19 +51,28 @@
             <div class="col-span-9">
                 <div class="flex flex-row gap-2 justify-between items-center border bg-white text-black">
                     @foreach ($user->picks->sortBy('game.game_date') as $pick)
-                        <div class="col-span-1 gap-2">
+                        {{-- <div class="col-span-1 gap-2 justify-center items-center"> --}}
+                        <div class="col-span-1 flex items-center border justify-center font-bold text-xxs bg-white text-black sm:text-sm md:text-lg lg:text-2xl">
                             @if ($pick->game->allow_pick())
                                 <img src="{{ asset('images/' . env('IMG_TO_YET_PICK_GAME', 'reloj.png')) }}"
                                     class="w-4 rounded-full">
                             @else
-                                <div class="text-xxs sm:text-sm md:text-lg lg:text-2xl">
-                                     <img src="{{ Storage::url($pick->winner == 1 ? $pick->game->local_team->logo
-                                                                                 : $pick->game->visit_team->logo) }}"
-                                        class="w-4 md:w-16 rounded-full border-solid border-black
-                                        {{ $pick->winner == $pick->game->winner ? 'shadow-xl shadow-green-500 border-green-500 bg-green-500' : 'grayscale' }} ">
-                                    {{-- @if ($pick->game->id_game_tie_breaker() )
-                                        {{ $visit_points . '-' . $local_points }}
-                                    @endif --}}
+                                <div class="flex flex-col justify-center items-center border text-xxs sm:text-sm md:text-lg lg:text-2xl">
+                                    <div class="flex justify-center items-center">
+                                        {{-- <img src="{{ Storage::url($pick->winner == 1 ? $pick->game->local_team->logo
+                                                                                    : $pick->game->visit_team->logo) }}"
+                                            class="w-8 md:w-16 rounded-full shadow-xl
+                                            {{ $pick->winner == $pick->game->winner ? 'shadow-green-500 w-35 h-35' : 'grayscale' }} "> --}}
+                                            <img src="{{ Storage::url($pick->winner == 1 ? $pick->game->local_team->logo : $pick->game->visit_team->logo) }}"
+                                                class="w-4 sm:w-16 rounded-full outline-double {{ $pick->winner == $pick->game->winner ? 'border-4 border-green-500 shadow-md' : 'border-4 border-red-500 shadow-md' }}"
+                                            >
+                                    </div>
+                                     @if($pick->winner == $pick->game->winner)
+                                        <div class="flex flex-col justify-center items-centertext-center">
+                                            <img src="{{ asset('images/afirmativo.png') }}"
+                                            class="w-1">
+                                        </div>
+                                    @endif
                                 </div>
                             @endif
                         </div>
