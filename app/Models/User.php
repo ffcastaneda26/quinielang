@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Excellsus\Traits\UserTrait;
+use App\Observers\UserObserver;
 use Filament\Panel;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -85,7 +86,11 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-
+    protected static function boot()
+    {
+        parent::boot();
+        static::observe(UserObserver::class);
+    }
 
     public function picks(): HasMany
     {
