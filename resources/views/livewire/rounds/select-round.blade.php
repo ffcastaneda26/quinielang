@@ -26,8 +26,8 @@
                                         text-black
                                         rounded-full
                                         font-bold text-xs
-                                {{ $current_round->id == $round->id ? 'bg-yellow-300' : '' }}
-                                {{ $selected_round->id == $round->id ? 'bg-green-400' : '' }}"
+                                {{ $current_round->id == $round->id ? 'bg-green-300' : '' }}
+                                {{ $selected_round->id == $round->id ? 'bg-yellow-400' : '' }}"
                         title="{{ $round->id }} {{ $current_round->id == $round->id ? __('Current Round') : '' }}">
                         {{ $round->id }}
                     </button>
