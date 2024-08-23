@@ -80,3 +80,11 @@ WHERE us.id = pic.user_id
   AND us.id = 2
   AND ga.round_id = 1
 ORDER BY ga.game_date;
+
+
+-- Posiciones x Jornada
+SELECT us.alias
+FROM users us,positions pxj
+WHERE us.id = pxj.user_id
+  AND us.alias LIKE '%%'
+ORDER BY us.alias

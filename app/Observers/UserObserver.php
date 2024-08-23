@@ -27,7 +27,8 @@ class UserObserver
             }
         }
 
-        if($user->generalPosition->count()){
+
+        if ($user->generalPosition) {
             $user->generalPosition->delete();
         }
 
