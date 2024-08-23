@@ -1,4 +1,7 @@
 <div class="container mt-5">
+        <div class="mt-4 p-5 w-full flex justify-center text-xl border bg-white text-black">
+            {{ __('Survivors Table') }}
+        </div>
         <table class="w-full">
                 <thead>
                     <tr class="text-center text-xxs bg-white text-black sm:bg-black sm:text-white sm:text-sm">
@@ -30,15 +33,24 @@
                                 @endphp
                                 @if ($user_survivor)
                                     @if ($round->has_games_to_block_survivors())
-                                        <img src="{{ Storage::url($user_survivor->team->logo) }}" class="w-4 sm:w-8 rounded-full {{ $user_survivor->survive ? 'shadow-xl shadow-green-500' : 'grayscale' }}" style="margin: 0 auto;">
-                                    @else
-                                        <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
+                                        <div class="flex flex-col gap-1 justify-center items-center">
+                                                <img src="{{ Storage::url($user_survivor->team->logo) }}"
+                                                    class="w-4 h-4 sm:w-8 sm:h-9 rounded-full shadow-lg  {{ $user_survivor->survive ? 'shadow-green-500' : 'grayscale' }}"
+                                                >
+                                                <img src="{{ asset('images/afirmativo.png') }}" 
+                                                    class="w-1 sm:w-4 rounded-full  {{ $user_survivor->survive ? 'block' : 'hidden'  }}">
+                                        </div>
+                                  @else
+                                        <img src="{{ asset('images/reloj.png') }}" 
+                                            class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
                                     @endif
                                 @else
                                     @if($round->has_games_to_block_survivors() )
-                                        <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="w-4 sm:w-8 rounded-full grayscale" style="margin: 0 auto;">
+                                        <img src="{{ asset('images/survivor_no_seleccionado.png') }}" 
+                                            class="w-4 sm:w-8 rounded-full grayscale" style="margin: 0 auto;">
                                     @else
-                                        <img src="{{ asset('images/reloj.png') }}" class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
+                                        <img src="{{ asset('images/reloj.png') }}" 
+                                            class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
                                     @endif
                                 @endif
                             </td>

@@ -1,4 +1,5 @@
 <div class="w-full grid grid-cols-12 border bg-white text-black">
+    
     <div class="col-span-2 flex items-center text-center border font-bold text-xxs bg-white text-black sm:text-sm md:text-lg lg:text-2xl">{{ __('Name') }}</div>
     <div class="col-span-9 bg-white text-black">
         <div class="flex flex-row gap-1 justify-between items-center border bg-white text-black">
