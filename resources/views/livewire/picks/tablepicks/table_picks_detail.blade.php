@@ -5,7 +5,6 @@
         <div class="col-span-9">
             <div class="flex flex-row gap-1 justify-between items-center border bg-white text-black">
                 @foreach ($user->picks->sortBy('game.game_date') as $pick)
-                    {{-- <div class="col-span-1 gap-2 justify-center items-center"> --}}
                     <div class="col-span-1 flex items-center border justify-center font-bold ">
                         @if ($pick->game->allow_pick())
                             <img src="{{ asset('images/' . env('IMG_TO_YET_PICK_GAME', 'reloj.png')) }}"
