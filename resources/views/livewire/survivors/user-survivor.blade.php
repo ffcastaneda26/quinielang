@@ -1,18 +1,16 @@
 <div wire:wire:poll.15000ms>
     <div class="container mx-auto  bg-gray-100 rounded-md px-4 py-0 my-1">
-        <div class="grid grid-cols-5">
-            <div class="col-span-1 w-0.5 text-xxs text-center">{{ $round->id }}</div>
-            {{-- Si tiene "survivor" pone logo de equipo --}}
-            <div class="col-span-1">
+        <div class="grid grid-cols-5 text-xxs sm:text-lg">
+            <div class="col-span-1 text-left">{{ $round->id }}</div>
+            <div class="col-span-1 text-center">
                 @if ($user_survivor_current)
                         <img src="{{ Storage::url($user_survivor_current->team->logo) }}"
                             class="h-[30px] w-[30px] rounded-full mr-2">
-                        {{-- <span class="text-xxs">{{ $user_survivor_current->team->name }}</span> --}}
-
+                @else
+                    &nbsp;
                 @endif
             </div>
-            {{-- Si tiene "survivor" y lo ACERTÓ  pone palomita o tacha --}}
-            <div class="col-span-1">
+            <div class="col-span-1 text-center">
                 @if ($user_survivor_current)
                     @if($game_played)
                         @if ($user_survivor_current->survive)
@@ -21,44 +19,47 @@
                             <img src="{{ asset('images/negativo.png') }}" class="h-[15px] w-[15px]">
                         @endif
                     @endif
+                @else
+                    <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="h-[15px] w-[15px]">
                 @endif
             </div>
-
-            {{-- Si tiene "survivor" pone botón, pero lo oculta (hidden) si ya no se puede editar --}}
             <div class="col-span-1 text-center">
                 @if ($user_survivor_current)
                     <x-button wire:click="delete_survivor({{ $user_survivor_current }})"
-                        class="bg-red-500 text-xxs  text-white font-bold text-center {{ $round_has_games_to_block_survivors ? 'hidden' : '' }}"
+                        class="w-12 {{ $round_has_games_to_block_survivors ? 'hidden' : '' }}"
                         title="{{ __('Delete') }}">
-                        X
+                        <img src="{{ asset('images/negativo.png') }}" class="p-0">
                     </x-button>
+                @else
+                    &nbsp;
                 @endif
             </div>
-
-            <div class="col-span-1">
-                <select wire:model="team_id"
-                        wire:change="update_team_survivor({{ $round->id }})"
-                        wire:click="update_team_survivor({{ $round->id }})"
-                        user-select:none
-                        class="text-xxs sm:text-sm" class="text-xxs sm:text-sm"
-                        {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}
-                        style="padding: 2px 5px; line-height: 1.2; font-size: 0.8rem;"
-                        >
-                    @if ($user_survivor_current)
-                        <option value="">{{ $user_survivor_current->team->name }}</option>
-                    @else
-                        <option class="bg-red-500" value="">Ninguno</option>
+            <div class="col-span-1 text-center">
+                    <select wire:model="team_id"
+                    wire:change="update_team_survivor({{ $round->id }})"
+                    wire:click="update_team_survivor({{ $round->id }})"
+                    user-select:none
+                    class="text-xxs sm:text-sm" class="text-xxs sm:text-sm"
+                    {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}>
+                @if ($user_survivor_current)
+                    <option value="">{{ $user_survivor_current->team->name }}</option>
+                @else
+                    <option class="bg-red-500" value="">Ninguno</option>
+                @endif
+                @foreach ($teams as $team)
+                    @if(!$team->has_user_survivor_round($round->id))
+                        <option value="{{ $team->id }}">
+                            {{ $team->name }}
+                        </option>
                     @endif
-                    @foreach ($teams as $team)
-                        @if(!$team->has_user_survivor_round($round->id))
-                            <option value="{{ $team->id }}">
-                                {{ $team->name }}
-                            </option>
-                        @endif
-                    @endforeach
+                @endforeach
 
-                </select>
+            </select>
+
+
+
             </div>
+
 
         </div>
     </div>
