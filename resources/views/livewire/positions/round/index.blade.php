@@ -13,6 +13,7 @@
                         <th class="px-4 w-10 uppercase text-xs sm:text-sm border border-white">{{ __('Hits') }}</th>
                         @if($show_mnf_column)
                             <th class="px-4 w-10 uppercase text-xs sm:text-sm border border-white">MNF</th>
+
                         @endif
                     </tr>
                 </thead>
