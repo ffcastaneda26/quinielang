@@ -18,6 +18,11 @@
             </x-nav-link>
         @endif
 
+        @if (Route::has('position-general'))
+            <x-nav-link id="position-general" href="{{ route('position-general') }}" :active="request()->routeIs('position-general')">
+                <label for="position-general"> {{ __('General Positions') }}</label>
+            </x-nav-link>
+        @endif
 
         @if (Route::has('user-survivors'))
             <x-nav-link id="user-survivors" href="{{ route('user-survivors') }}" :active="request()->routeIs('user-survivors')">
@@ -30,11 +35,7 @@
                 <label for="table-survivors"> {{ __('Table Survivors') }}</label>
             </x-nav-link>
         @endif
-        @if (Route::has('position-general'))
-            <x-nav-link id="position-general" href="{{ route('position-general') }}" :active="request()->routeIs('position-general')">
-                <label for="position-general"> {{ __('General Positions') }}</label>
-            </x-nav-link>
-        @endif
+
     </div>
 
 @endauth

@@ -1,4 +1,4 @@
-<div class="container w-full mx-auto flex flex-col items-center">
+<div  wire:poll class="container w-full mx-auto flex flex-col items-center">
     <div class="w-full flex flex-col items-center">
         @livewire('select-round')
     </div>
@@ -14,5 +14,7 @@
                 key($game->id))
             </div>
         @endforeach
+
     </div>
+
 </div>

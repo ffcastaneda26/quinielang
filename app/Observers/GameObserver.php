@@ -8,24 +8,15 @@ use App\Models\Position;
 
 class GameObserver
 {
-    /**
-     * Handle the Game "created" event.
-     */
-    // public function created(Game $game): void
-    // {
-    //     if ($game->local_points && $game->visit_points) {
-    //         $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
-    //     }else{
-    //         $game->winner = null;
-    //     }
-    // }
-
     public function updating(Game $game): void
     {
         if ($game->isDirty('local_points') || $game->isDirty('visit_points')) {
-            $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
+            if($game->local_points == $game->visit_points){
+                $game->winner = 0;
+            }else{
+                $game->winner = $game->local_points > $game->visit_points ? 1 : 2;
+            }
         }
-
     }
 
     /**

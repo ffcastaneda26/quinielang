@@ -72,13 +72,13 @@ class GameResource extends Resource
                                     ->required(fn(Get $get): bool => filled($get('local_points')))
                                     ->minValue(0)
                                     ->maxValue(999)
-                                    ->notIn([1])
-                                    ->different('local_points')
-                                    ->translateLabel()
                                     ->validationAttribute('Puntos de Visita')
-                                    ->validationMessages([
-                                        'different' => 'No se permiten empates',
-                                    ]),
+                                    ->notIn([1])
+                                    ->translateLabel(),
+                                    // ->different('local_points')
+                                    // ->validationMessages([
+                                    //     'different' => 'No se permiten empates',
+                                    // ]),
 
                             ])->columns(2),
                         Section::make()
@@ -93,13 +93,13 @@ class GameResource extends Resource
                                     ->required(fn(Get $get): bool => filled($get('visit_points')))
                                     ->minValue(0)
                                     ->maxValue(999)
-                                    ->different('visit_points')
                                     ->notIn([1])
                                     ->translateLabel()
-                                    ->validationAttribute('Puntos de Local')
-                                    ->validationMessages([
-                                        'different' => 'No se permiten empates'
-                                    ]),
+                                    ->validationAttribute('Puntos de Local'),
+                                    // ->different('visit_points')
+                                    // ->validationMessages([
+                                    //     'different' => 'No se permiten empates'
+                                    // ]),
                             ])->columns(2),
 
                     ]),
@@ -136,10 +136,12 @@ class GameResource extends Resource
                     ->label('Ganador')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
+                        '0' => 'primary',
                         '1' => 'success',
                         '2' => 'danger'
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
+                        '0' => 'Empate',
                         '1' => 'Local',
                         '2' => 'Visita'
                     }),

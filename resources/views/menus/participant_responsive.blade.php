@@ -20,6 +20,12 @@
             </x-responsive-nav-link>
         @endif
 
+        @if (Route::has('position-general'))
+            <x-responsive-nav-link href="{{ route('position-general') }}">
+                {{ __('General Positions') }}
+            </x-responsive-nav-link>
+        @endif
+
         @if (Route::has('user-survivors'))
             <x-responsive-nav-link href="{{ route('user-survivors') }}">
                 Survivors
@@ -30,19 +36,6 @@
             <x-responsive-nav-link href="{{ route('table-survivors') }}">
                 {{ __('Table Survivors') }}
             </x-responsive-nav-link>
-        @endif
-
-        @if (Route::has('position-general'))
-            <x-responsive-nav-link href="{{ route('position-general') }}">
-                {{ __('General Positions') }}
-            </x-responsive-nav-link>
-        @endif
-
-        @if (Route::has('picks-review'))
-            <my-responsive-nav-link id="picks_review_nav" href="{{ route('picks-review') }}"
-                :active="request() - > routeIs('picks-review')">
-                <label for="picks_review_nav">Resultados por Jornada</label>
-            </my-responsive-nav-link>
         @endif
 
 

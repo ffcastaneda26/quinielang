@@ -50,11 +50,9 @@ class Position extends Model
                         'round_id' => $round->id,
                         'user_id' => $user->id,
                     ]);
-                    dd('Ya debe haber en la tabla de posiciones algo');
                 }
             }
         }
-        dd('Revisa por favor');
     }
 
     public function user_position_round($user_id,$round_id){
