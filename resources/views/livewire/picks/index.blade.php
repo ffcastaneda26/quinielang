@@ -1,8 +1,11 @@
-<div  wire:poll class="container w-full mx-auto flex flex-col items-center">
+<div  wire:poll class="container w-full mx-auto flex flex-col items-center ">
+    <div class="flex flex-row justify-center dark:text-white mt-2">
+       PRONÓSTICOS
+    </div>
     <div class="w-full flex flex-col items-center">
         @livewire('select-round')
     </div>
-    A VER DE QUE SE TRATA
+
     <div class="w-auto flex flex-col items-center">
         @include('livewire.picksgames.header_table')
 

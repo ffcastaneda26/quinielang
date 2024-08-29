@@ -1,5 +1,5 @@
 <div class="container w-full mx-auto flex flex-col items-center mt-2 bg-black text-white">
-    <div class="mt-2 p-2 w-full flex justify-center text-sml text-black dark:text-white">
+    <div class="mt-2 p-2 w-full flex justify-center">
         POSICIONES X JORNADA
     </div>
     <div class="w-full flex flex-col items-center">

@@ -1,5 +1,8 @@
 
 <div class="container w-full mx-auto flex flex-col items-center mt-4 bg-white text-black">
+    <div class="flex flex-row justify-center mt-2 uppercase">
+        {{ __('General Positions Table') }}
+    </div>
     @if ($records->count())
         {{-- <div class="w-1/2"> --}}
             <table class="w-full border-collapse">

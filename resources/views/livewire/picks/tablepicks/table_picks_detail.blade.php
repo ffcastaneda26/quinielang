@@ -18,9 +18,15 @@
                                 </div>
 
                                 @if($pick->winner == $pick->game->winner)
-                                    <div class="flex flex-col justify-center items-centertext-center">
+                                    <div class="flex flex-col justify-center items-center text-center">
                                         <img src="{{ asset('images/afirmativo.png') }}"
                                         class="w-1">
+                                    </div>
+                                @endif
+                                @if($pick->game->visit_points && $pick->game->local_points && $pick->game->is_last_game())
+                                    <div class="flex flex-col justify-center items-center text-center">
+                                        <p style="font-size: 0.5rem">
+                                            {{ $pick->game->visit_points . '-' . $pick->game->local_points }}</p>
                                     </div>
                                 @endif
                             </div>
