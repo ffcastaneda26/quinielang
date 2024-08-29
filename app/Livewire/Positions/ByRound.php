@@ -13,6 +13,9 @@ class ByRound extends Component
     use FuncionesGenerales;
 
     public $show_mnf_column= false;
+    public $last_game_round;
+
+
 
     protected $listeners = ['read_round_games'];
 
@@ -27,7 +30,8 @@ class ByRound extends Component
     }
     public function render()
     {
-        $this->show_mnf_column =$this->current_round->get_last_game_round()->has_result();
+        $this->last_game_round = $this->selected_round->get_last_game_round();
+        $this->show_mnf_column = !$this->last_game_round->allow_pick();
         return view('livewire.positions.round.index',[
             'records' => $this->read_data()
         ]);
