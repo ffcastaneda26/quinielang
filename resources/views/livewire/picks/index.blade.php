@@ -2,6 +2,7 @@
     <div class="w-full flex flex-col items-center">
         @livewire('select-round')
     </div>
+    A VER DE QUE SE TRATA
     <div class="w-auto flex flex-col items-center">
         @include('livewire.picksgames.header_table')
 

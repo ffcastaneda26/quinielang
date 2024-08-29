@@ -30,6 +30,7 @@ class ByRound extends Component
     }
     public function render()
     {
+
         $this->last_game_round = $this->selected_round->get_last_game_round();
         $this->show_mnf_column = !$this->last_game_round->allow_pick();
         return view('livewire.positions.round.index',[
