@@ -2,9 +2,6 @@
     &nbsp;
 </div>
 
-<div class="col-span-1 flex flex-col sm:flex-row items-center gap-4">
-    &nbsp;
-</div>
 
 <div>
     <input type='number'
@@ -21,7 +18,9 @@
 @error('visit_points')
     <span class="badge rounded-pill fondo-secundario">{{ $message }}</span>
 @enderror
-
+<div class="col-span-1 flex flex-col sm:flex-row items-center gap-4">
+    &nbsp;
+</div>
 {{-- Espacio entre marcadores --}}
 <div class="col-span-2">
     <div class="w-full text-center font-bold text-xxs {{ $allow_pick ? 'visible' : 'hidden' }}">
@@ -32,7 +31,9 @@
         </a>
     </div>
 </div>
-
+<div class="col-span-1 flex flex-col sm:flex-row items-center gap-4">
+    &nbsp;
+</div>
 {{-- Puntos locales --}}
 <div>
     <input type='number'
