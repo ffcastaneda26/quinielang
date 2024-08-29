@@ -12,7 +12,8 @@
             max=99
             class="{{ $errors->has('visit_points') ? 'border border-red-500 border-double' : '' }}
             {{ $allow_pick ? '' : 'bg-slate-200' }}"
-            {{ $allow_pick ? '' : 'disabled' }}
+            {{-- {{ $allow_pick ? '' : 'disabled' }} --}}
+            :disabled="!$allow_pick"
         />
 </div>
 @error('visit_points')
@@ -32,7 +33,7 @@
     </div>
 </div>
 <div class="col-span-1 flex flex-col sm:flex-row items-center gap-4">
-    &nbsp;
+    {{ $allow_pick }}
 </div>
 {{-- Puntos locales --}}
 <div>
@@ -44,7 +45,8 @@
             max=99
             class="{{ $errors->has('local_points') ? 'border border-red-500 border-double' : '' }}
             {{ $allow_pick ? '' : 'bg-slate-200' }}"
-            {{ $allow_pick ? '' : 'disabled' }}
+            {{-- {{ $allow_pick ? '' : 'disabled' }} --}}
+            :disabled="!$allow_pick"
         />
 </div>
 @error('local_points')

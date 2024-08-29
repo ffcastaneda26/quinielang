@@ -106,11 +106,12 @@ class Game extends Model
             return false;
         }
         date_default_timezone_set("America/Chihuahua");
+
         if(!$minuts_before_picks){
             $minuts_before_picks = Configuration::first()->minuts_before_picks;
         }
         // $configuration = Configuration::first();
-        return $this->game_date->subMinutes($minuts_before_picks) > Carbon::now()->subMinutes($minuts_before_picks);
+        return $this->game_date->subMinutes($minuts_before_picks) > now();
     }
 
     // Pronóstico del juegoy del usuario

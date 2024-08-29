@@ -55,11 +55,17 @@ class PickGame extends Component
      */
     public function prepare_data_to_view(){
 
+        $this->is_game_tie_breaker = $this->id_game_tie_breaker == $this->game->id;
+
         $this->game_month = $this->months_short_spanish[substr(date($this->game->game_date),5,2)-1];
         $this->allow_pick = $this->game->allow_pick($this->configuration->minuts_before_picks);
 
         $this->game_has_result = $this->game->has_result();
-        $this->is_game_tie_breaker = $this->id_game_tie_breaker == $this->game->id;
+
+        // if($this->game->id_game_tie_breaker()){
+        //     $texto = $this->allow_pick ? 'SI' : 'NO';
+        //     dd('Fecha del juego=' . $this->game->game_date , ' Pronosticar=' .$texto  );
+        // }
 
         $this->pick_user = $this->game->pick_user();
         if(!$this->pick_user){
@@ -78,7 +84,6 @@ class PickGame extends Component
 
     public function update_winner_game()
     {
-
         $this->pick_user = $this->game->pick_user();
         $this->pick_user->winner = $this->pick_user_winner;
         $this->pick_user->save();
@@ -86,6 +91,16 @@ class PickGame extends Component
     }
 
     public function update_points(){
+        $pick_user = $this->game->pick_user();
+        if(!$this->game->allow_pick()){
+            if($pick_user){
+                $pick_user->refresh();
+            }
+            return;
+        }
+
+        $this->game_month = $this->months_short_spanish[substr(date($this->game->game_date),5,2)-1];
+        $this->allow_pick = $this->game->allow_pick($this->configuration->minuts_before_picks);
 
         if( strlen( $this->local_points) > 1){
             $this->local_points = ltrim($this->local_points, "0");
@@ -116,7 +131,7 @@ class PickGame extends Component
             return;
         }
         // TODO:: Revisar si se cambió el partido de desempate hay que quitar los puntos al anterior
-        $pick_user = $this->game->pick_user();
+
         if($pick_user){
             $pick_user->visit_points = $this->visit_points;
             $pick_user->local_points = $this->local_points;
