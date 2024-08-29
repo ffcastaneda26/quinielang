@@ -37,7 +37,7 @@
                         wire:change="update_team_survivor({{ $round->id }})"
                         wire:click="update_team_survivor({{ $round->id }})"
                         user-select:none
-                        class="w-auto text-xxs sm:text-sm text-black dark:text-white"
+                        class="w-auto text-xxs sm:text-sm text-black dark:text-white dark:bg-black"
                         {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}>
                     @if ($user_survivor_current)
                         <option value="">{{ $user_survivor_current->team->name }}</option>
