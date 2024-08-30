@@ -5,7 +5,7 @@
 
 <div>
     <input type='number'
-            wire:model="visit_points"
+            wire:model.live="visit_points"
             wire:change="update_points"
             wire:blur="update_points"
             min=0
@@ -38,7 +38,7 @@
 {{-- Puntos locales --}}
 <div>
     <input type='number'
-            wire:model="local_points"
+            wire:model.live="local_points"
             wire:change="update_points"
             wire:blur="update_points"
             min=0

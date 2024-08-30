@@ -62,21 +62,21 @@ class PickGame extends Component
 
         $this->game_has_result = $this->game->has_result();
 
-        // if($this->game->id_game_tie_breaker()){
-        //     $texto = $this->allow_pick ? 'SI' : 'NO';
-        //     dd('Fecha del juego=' . $this->game->game_date , ' Pronosticar=' .$texto  );
-        // }
+
 
         $this->pick_user = $this->game->pick_user();
         if(!$this->pick_user){
             $this->pick_user = $this->create_pick_user_game($this->game,Auth::user());
         }
         if($this->pick_user){
+            $this->visit_points =  $this->pick_user->visit_points;
+            $this->local_points =  $this->pick_user->local_points;
+        }
+        if($this->pick_user && $this->pick_user->game->allow_pick()){
             $this->winner = $this->pick_user->winner;
             $this->pick_user_winner = $this->pick_user->winner;
             $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
-            $this->visit_points =  $this->pick_user->visit_points;
-            $this->local_points =  $this->pick_user->local_points;
+
         }
 
 

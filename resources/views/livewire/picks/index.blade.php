@@ -5,7 +5,13 @@
     <div class="w-full flex flex-col items-center">
         @livewire('select-round')
     </div>
+    <div class="flex flex-row justify-between gap-4 mb-2">
+        <x-button wire:click="update_picks('local')">LOCAL</x-button>
+        <x-button wire:click="update_picks('visit')">VISITA</x-button>
+        <x-button wire:click="update_picks('random')">RANDOM</x-button>
 
+
+    </div>
     <div class="w-auto flex flex-col items-center">
         @include('livewire.picksgames.header_table')
 

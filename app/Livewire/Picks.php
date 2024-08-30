@@ -40,4 +40,34 @@ class Picks extends Component
         return view('livewire.picks.index');
     }
 
+    public function update_picks($type='local'){
+        foreach($this->round_games as $game){
+            $pick_user = $game->pick_user();
+            if($game->allow_pick() && $pick_user){
+
+                if($type =='local'){
+                    $winner=1;
+                }
+                if($type=='visit'){
+                    $winner=2;
+                }
+                if($type=='random'){
+                    $winner = rand(1, 2);
+                }
+
+                if($game->is_last_game()){
+                    $local_points = $winner == 1 ? 2 : 0;
+                    $visit_points = $winner == 2 ? 2 : 0;
+                }else{
+                    $local_points = null;
+                    $visit_points = null;
+                }
+
+                $pick_user->winner = $winner;
+                $pick_user->local_points = $local_points;
+                $pick_user->visit_points = $visit_points;
+                $pick_user->save();
+            }
+        }
+    }
 }
