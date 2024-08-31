@@ -17,6 +17,11 @@ use App\Livewire\Positions\PositionGeneral;
 use App\Livewire\Survivors\Table\TableSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
 
+Route::get('juegos-pronosticables',function(){
+    $round = Round::findOrFail(19);
+    dd($round->hasAllowableGames());
+});
+
 Route::get('optimize-clear',function(){
     if(Auth::user()){
         Artisan::call('optimize:clear');

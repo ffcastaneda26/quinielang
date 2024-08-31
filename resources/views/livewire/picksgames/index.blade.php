@@ -31,6 +31,7 @@
             @if($is_game_tie_breaker)
                 @include('livewire.picksgames.picks_last_game')
             @endif
+
         </div>
     </div>
 </div>

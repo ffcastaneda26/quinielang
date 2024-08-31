@@ -111,7 +111,7 @@ class Game extends Model
             $minuts_before_picks = Configuration::first()->minuts_before_picks;
         }
         // $configuration = Configuration::first();
-        return $this->game_date->subMinutes($minuts_before_picks) > now();
+        return $this->game_date->subMinutes($minuts_before_picks) >= now();
     }
 
     // Pronóstico del juegoy del usuario

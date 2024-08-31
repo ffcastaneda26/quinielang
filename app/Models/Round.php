@@ -147,4 +147,29 @@ class Round extends Model
 
         return  $records->count();
     }
+
+    /**
+     * ¿Hay Juegos Pronosticables?
+     */
+
+     public function hasAllowableGames($minuts_before_picks = null)
+        {
+            date_default_timezone_set("America/Chihuahua");
+
+            if(!$minuts_before_picks){
+                $minuts_before_picks = Configuration::first()->minuts_before_picks;
+            }
+
+            $allowableGames = $this->games()
+                ->where('game_date', '>', now()->subMinutes($minuts_before_picks))
+                ->count();
+
+
+            return $allowableGames;
+
+            // if($allowableGames){
+            //     dd($allowableGames);
+            // }
+            // return false;
+        }
 }

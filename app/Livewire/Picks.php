@@ -13,6 +13,7 @@ class Picks extends Component
 {
     use AuthorizesRequests;
     use FuncionesGenerales;
+    public $allowUpdateMasive = false;
 
     protected $listeners = ['read_round_games'];
     public function mount()
@@ -37,6 +38,8 @@ class Picks extends Component
     */
     public function render()
     {
+        $this->allowUpdateMasive= $this->allowUpdateMasive();
+
         return view('livewire.picks.index');
     }
 
@@ -67,7 +70,14 @@ class Picks extends Component
                 $pick_user->local_points = $local_points;
                 $pick_user->visit_points = $visit_points;
                 $pick_user->save();
+                $this->dispatch('prepare_data_to_view',$game);
             }
         }
+    }
+
+    public function allowUpdateMasive(): bool
+    {
+        $round = $this->selected_round;
+        return $round->hasAllowableGames() > 0;
     }
 }
