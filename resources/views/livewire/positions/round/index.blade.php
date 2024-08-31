@@ -1,5 +1,5 @@
 <div class="container w-full mx-auto flex flex-col items-center mt-2 bg-black text-white">
-    <div class="mt-2 p-2 w-full flex justify-center">
+    <div class="w-full flex justify-center items-center">
         POSICIONES X JORNADA
     </div>
     <div class="w-full flex flex-col items-center">
@@ -42,10 +42,10 @@
                                         @if($last_game_round->pick_user($record->user))
                                             @if($last_game_round->pick_user($record->user)->winner == 1)
                                                 <img src="{{ Storage::url($last_game_round->local_team->logo) }}"
-                                                class="h-[25px] w-[25px] rounded-full shadow-md {{ $record->hit_last_game ? 'box-shadow: 120px 5px 50px 2px rgba(0, 128, 0, 0.5)' : 'grayscale' }}">
+                                                class="rounded-full {{ $record->hit_last_game ? 'h-[25px] w-[25px] shadow-md shadow-green-500' : 'h-[15px] w-[15px] grayscale' }}">
                                             @else
                                                 <img src="{{ Storage::url($last_game_round->visit_team->logo) }}"
-                                                class="h-[15px] w-[15px] rounded-full {{ $record->hit_last_game ? '' : 'grayscale' }}">
+                                                class="rounded-full {{ $record->hit_last_game ? 'h-[25px] w-[25px] shadow-md shadow-green-500' : 'h-[15px] w-[15px] grayscale' }}">
                                             @endif
                                         @else
                                             &nbsp;
