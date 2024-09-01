@@ -2,8 +2,8 @@
 
     <div class="container mx-auto  bg-white text-black dark:bg-black dark:text-white rounded-md px-4 py-0 my-1">
         <div class="grid grid-cols-5 text-xxs sm:text-lg">
-            <div class="col-span-1 flex justify-center items-center">{{ $round->id }}</div>
-            <div class="col-span-1 flex justify-center items-center">
+            <div class="col-span-1 flex justify-start items-center">{{ $round->id }}</div>
+            <div class="col-span-1 flex justify-start items-center">
                 @if ($user_survivor_current)
                         <img src="{{ Storage::url($user_survivor_current->team->logo) }}"
                             class="h-[30px] w-[30px] rounded-full mr-2">
@@ -11,7 +11,7 @@
                     &nbsp;
                 @endif
             </div>
-            <div class="col-span-1 flex justify-center items-center">
+            <div class="col-span-1 flex justify-start items-center">
                 @if ($user_survivor_current)
                     @if($game_played)
                         @if ($user_survivor_current->survive)
@@ -24,14 +24,11 @@
                         <img src="{{ asset('images/reloj.png') }}" class="h-[15px] w-[15px]">
                     @endif
                 @else
-                    {{-- <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="h-[15px] w-[15px]"> --}}
                     &nbsp;
                 @endif
             </div>
-                        {{-- class="{{ $round_has_games_to_block_survivors ? 'bg-gray-500 dark:bg-white dark:text-black' : 'bg-red-500 dark:text-white' }}" --}}
 
-            <div class="col-span-1 flex justify-center items-center">
-
+            <div class="col-span-1 flex justify-start items-center">
                 <x-button wire:click="delete_survivor({{ $user_survivor_current }})"
                             class="w-4 h-4 flex justify-center text-2xl font-extrabold
                             {{  $round_has_games_to_block_survivors ? 'bg-gray-500' : 'bg-red-500' }}
@@ -41,12 +38,13 @@
                 </x-button>
             </div>
 
-            <div class="col-span-1 flex justify-center items-center">
+            <div class="col-span-1 flex justify-end items-end">
                 <select wire:model="team_id"
                         wire:change="update_team_survivor({{ $round->id }})"
                         wire:click="update_team_survivor({{ $round->id }})"
                         user-select:none
-                        class="w-auto text-xxs sm:text-sm text-black dark:text-white dark:bg-black"
+                        style="width: 96px"
+                        class="text-xxs sm:text-sm text-black dark:text-white dark:bg-black"
                         {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}>
                     @if ($user_survivor_current)
                         <option value="">{{ $user_survivor_current->team->name }}</option>
