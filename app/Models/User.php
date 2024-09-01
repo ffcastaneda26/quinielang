@@ -137,6 +137,13 @@ class User extends Authenticatable implements FilamentUser
         return $this->positions->where('round_id', $round_id)->count();
     }
 
+    public function has_picks_round(Round $round): bool
+    {
+       return $this->picks()->wherehas('game', function ($query) use($round){
+                $query->where('round_id', $round->id);
+            })->exists();
+    }
+
     // Filtros con Scope
     public function scopeActive($query, $active = true)
     {

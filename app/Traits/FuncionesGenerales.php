@@ -99,14 +99,16 @@ trait FuncionesGenerales
         $games = Game::whereDoesntHave('picks', function (Builder $query) use ($user) {
                                         $query->where('user_id', $user->id);
                                     })
-        ->where('game_date', '>', $newDateTime)
-            ->where('round_id', '>=', $round->id)
-            ->whereNull('local_points')
-            ->whereNull('visit_points')
-            ->get();
+                    ->where('game_date', '>', $newDateTime)
+                        ->where('round_id', '>=', $round->id)
+                        ->whereNull('local_points')
+                        ->whereNull('visit_points')
+                        ->whereNull('winner')
+                        ->get();
 
         foreach ($games as $game) {
-            if ($game->allow_pick($this->configuration->minuts_before_picks)) {
+            $pick_user = $game->pick_user();
+            if (!$pick_user && $game->allow_pick()) {
                 $this->create_pick_user_game($game);
             }
         }
@@ -146,11 +148,12 @@ trait FuncionesGenerales
             return;
         }
 
-        if ($game->id_game_tie_breaker()) {
+        if ($game->is_last_game()) {
             $new_pick->local_points = $winner == 1 ? $winner_points : $loser_points;
             $new_pick->visit_points = $winner == 2 ? $winner_points : $loser_points;
             $new_pick->save();
         }
+
     }
 
     // Lee el nombre del mes corto

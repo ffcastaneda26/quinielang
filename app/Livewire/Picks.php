@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Configuration;
+use App\Models\Pick;
 use App\Models\Round;
 use Livewire\Component;
 use App\Traits\FuncionesGenerales;
@@ -24,9 +25,12 @@ class Picks extends Component
         $this->current_round = $round->read_current_round();
         $this->selected_round = $this->current_round;
 
-        if (Auth::user()->hasRole('Participante') && !Auth::user()->hasRole('Admin')) {
+
+        if (Auth::user()->hasRole('Participante')) {
             if ($this->configuration->create_mssing_picks) {
-                $this->create_missing_picks_to_user($this->current_round);
+                if(!Auth::user()->has_picks_round($this->selected_round)){
+                    $this->create_missing_picks_to_user($this->current_round);
+                }
             }
         }
         $this->read_round_games($this->selected_round);
