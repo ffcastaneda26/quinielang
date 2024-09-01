@@ -1,4 +1,5 @@
 <div wire:wire:poll.15000ms>
+
     <div class="container mx-auto  bg-white text-black dark:bg-black dark:text-white rounded-md px-4 py-0 my-1">
         <div class="grid grid-cols-5 text-xxs sm:text-lg">
             <div class="col-span-1 flex justify-center items-center">{{ $round->id }}</div>
@@ -16,18 +17,26 @@
                         @if ($user_survivor_current->survive)
                             <img src="{{ asset('images/afirmativo.png') }}" class="h-[15px] w-[15px]">
                         @else
+
                             <img src="{{ asset('images/negativo.png') }}" class="h-[15px] w-[15px]">
                         @endif
+                    @else
+                        <img src="{{ asset('images/reloj.png') }}" class="h-[15px] w-[15px]">
                     @endif
                 @else
-                    <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="h-[15px] w-[15px]">
+                    {{-- <img src="{{ asset('images/survivor_no_seleccionado.png') }}" class="h-[15px] w-[15px]"> --}}
+                    &nbsp;
                 @endif
             </div>
+                        {{-- class="{{ $round_has_games_to_block_survivors ? 'bg-gray-500 dark:bg-white dark:text-black' : 'bg-red-500 dark:text-white' }}" --}}
+
             <div class="col-span-1 flex justify-center items-center">
+
                 <x-button wire:click="delete_survivor({{ $user_survivor_current }})"
-                        class="{{ $round_has_games_to_block_survivors ? 'bg-gray-500 dark:bg-white dark:text-black' : 'bg-red-500 dark:text-white' }} w-4 h-4 flex justify-center text-2xl font-extrabold"
-                        title="{{ __('Delete') }}"
-                        :disabled="$round_has_games_to_block_survivors">
+                            class="w-4 h-4 flex justify-center text-2xl font-extrabold
+                            {{  $round_has_games_to_block_survivors ? 'bg-gray-500' : 'bg-red-500' }}
+                            {{  $round_has_games_to_block_survivors || !$user_survivor_current ? 'hidden': ''}}"
+                            title="{{ __('Delete') }}">
                     X
                 </x-button>
             </div>

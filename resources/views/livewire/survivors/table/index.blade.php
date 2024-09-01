@@ -37,20 +37,20 @@
                                                 <img src="{{ Storage::url($user_survivor->team->logo) }}"
                                                     class="w-4 h-4 sm:w-8 sm:h-9 rounded-full shadow-lg  {{ $user_survivor->survive ? 'shadow-green-500' : 'grayscale' }}"
                                                 >
-                                                <img src="{{ asset('images/afirmativo.png') }}" 
+                                                <img src="{{ asset('images/afirmativo.png') }}"
                                                     class="w-1 sm:w-4 rounded-full  {{ $user_survivor->survive ? 'block' : 'hidden'  }}">
                                         </div>
                                   @else
-                                        <img src="{{ asset('images/reloj.png') }}" 
-                                            class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
+                                        <img src="{{ asset('images/reloj.png') }}"
+                                            class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
                                     @endif
                                 @else
                                     @if($round->has_games_to_block_survivors() )
-                                        <img src="{{ asset('images/survivor_no_seleccionado.png') }}" 
-                                            class="w-4 sm:w-8 rounded-full grayscale" style="margin: 0 auto;">
+                                        <img src="{{ asset('images/survivor_no_seleccionado.png') }}"
+                                            class="w-4 sm:w-6 rounded-full grayscale" style="margin: 0 auto;">
                                     @else
-                                        <img src="{{ asset('images/reloj.png') }}" 
-                                            class="w-4 sm:w-8 rounded-full" style="margin: 0 auto;">
+                                        <img src="{{ asset('images/reloj.png') }}"
+                                            class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
                                     @endif
                                 @endif
                             </td>

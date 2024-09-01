@@ -1,7 +1,7 @@
 {{-- Pronósticos por Usuario --}}
 @foreach ($users as $user )
     <div class="w-full grid grid-cols-12 border bg-white">
-        <div class="col-span-2 flex items-center text-center border font-bold text-xxs bg-white text-black sm:text-sm md:text-lg lg:text-2xl">{{ $user->alias }}</div>
+        <div class="{{ $show_mnf_column ? 'col-span-1' : 'col-span-2'}} flex items-center text-center border bg-white text-black" style="font-size: {{ $show_mnf_column ? '0.45rem' : '0.75rem' }}">{{ $user->alias }}</div>
         <div class="col-span-9">
             <div class="flex flex-row gap-1 justify-between items-center border bg-white text-black">
                 @foreach ($user->picks->sortBy('game.game_date') as $pick)
@@ -23,12 +23,7 @@
                                         class="w-1">
                                     </div>
                                 @endif
-                                @if($pick->game->visit_points && $pick->game->local_points && $pick->game->is_last_game())
-                                    <div class="flex flex-col justify-center items-center text-center">
-                                        <p style="font-size: 0.5rem">
-                                            {{ $pick->game->visit_points . '-' . $pick->game->local_points }}</p>
-                                    </div>
-                                @endif
+
                             </div>
                         @endif
                     </div>
@@ -36,7 +31,13 @@
             </div>
         </div>
 
-        <div class="col-span-1 flex items-center border justify-center font-bold text-xxs bg-white text-black sm:text-sm md:text-lg lg:text-2xl">
+        @if($show_mnf_column )
+            <div class="col-span-1 flex items-center text-center font-bold justify-center bg-white text-black"  style="font-size: 0.5rem">
+                {{ $pick->visit_points . '-' . $pick->local_points }}
+           </div>
+        @endif
+
+        <div class="col-span-1 flex items-center border justify-center font-bold  bg-white text-black text-xs sm:text-sm md:text-lg lg:text-2xl">
             {{ $user->positions->first() ? $user->positions->first()->hits : ''}}
         </div>
 

@@ -13,6 +13,9 @@ class TablePicks extends Component
 {
     use WithPagination;
     use FuncionesGenerales;
+    public $show_mnf_column= false;
+    public $last_game_round;
+
     protected $listeners = ['read_round_games'];
 
     public function mount()
@@ -26,6 +29,8 @@ class TablePicks extends Component
     }
     public function render()
     {
+        $this->last_game_round = $this->selected_round->get_last_game_round();
+        $this->show_mnf_column = !$this->last_game_round->allow_pick();
         return view('livewire.picks.tablepicks.index',['users' => $this->read_users()]);
 
     }

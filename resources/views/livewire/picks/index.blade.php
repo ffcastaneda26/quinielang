@@ -12,17 +12,6 @@
             <x-button wire:click="update_picks('visit')">VISITA</x-button>
             <x-button wire:click="update_picks('random')">RANDOM</x-button>
         </div>
-        {{-- <div class="flex dark:text-white">
-            Ronda: {{ $selected_round->id  . ' Son un total de: '. $selected_round->hasAllowableGames()->count() . 'Partidos' }}
-            <br>
-            <ul>
-                @foreach ( $selected_round->hasAllowableGames() as $allowableGame)
-                    <li>{{ $allowableGame->id . '=' . $allowableGame->game_date}}</li>
-                @endforeach
-            </ul>
-
-
-        </div> --}}
     @endif
 
 

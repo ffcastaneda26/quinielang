@@ -1,26 +1,27 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Pick;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Round;
 use App\Livewire\Picks;
 use App\Models\UserSurvivor;
 use App\Livewire\SelectRound;
+use App\Traits\FuncionesGenerales;
+use Illuminate\Support\Facades\DB;
 use App\Livewire\Positions\ByRound;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Survivors\UserSurvivors;
-use App\Livewire\Picks\TablePicks\TablePicks;
 use App\Livewire\Positions\PositionGeneral;
+use App\Livewire\Picks\TablePicks\TablePicks;
 use App\Livewire\Survivors\Table\TableSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
+use PhpParser\Node\Stmt\TryCatch;
 
-Route::get('juegos-pronosticables',function(){
-    $round = Round::findOrFail(19);
-    dd($round->hasAllowableGames());
-});
+
 
 Route::get('optimize-clear',function(){
     if(Auth::user()){
