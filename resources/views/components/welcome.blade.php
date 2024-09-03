@@ -173,15 +173,16 @@
                     <li>
                         En la sección de <strong>"Survivor"</strong> cada Partitipante seleccionará un equipo por Jornada (No se puede repetir equipo en toda la Temporada Regular).
                     </li>
-                    <li>Si tu equipo seleccionado gana, "sobrevives" la Jornada y continúasparticipando como Zombie.</li>
-                    <li>Si no hiciste selección en la Jornada o duplicaste un equipo entonces quedas eliminado del premio Survivor y continúas participando como Zombie.</li>
+                    <li>Si tu equipo seleccionado gana, "sobrevives" la Jornada y continuas con vida para la siguiente</li>
+                    <li>Si tu equipo seleccionado empata o pierde quedas eliminado del premio Survivor y continuas participando como Zombie.</li>
+                    <li>Si no hiciste selección en la Jornada o duplicaste un equipo entonces quedas eliminado del premio Survivor y continuas participando como Zombie.</li>
                     <li>Cada Jornada los equipos estarán disponibles para selección cuando se cumplan los siguientes requisitos:</li>
-
+                        <ul style="list-style-type:decimal" class="ml-30">
                             <li>a) El equipo tenga partido en la Jornada (No esté de descanso)</li>
                             <li>b) El Equipo No esté seleccionado en otra Jornada (anterior o futura)</li>
                             <li>c) El Partido no haya iniciado o esté a 5 minutos de iniciar.</li>
                             <li>d) La Jornada siga siendo editable.</li>
-
+                        </ul>
                 </ul>
             </p>
 
