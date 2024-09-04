@@ -2,11 +2,11 @@
 <div
     class="p-6 lg:p-8 bg-white text-black">
 
-    <div class="position-relative marquee-container d-none d-sm-block">
+    {{-- <div class="position-relative marquee-container d-none d-sm-block">
         <div class="marquee d-flex justify-content-around">
             <span class="z-10 bg-yellow-500 text-black text-center py-2">LAS REGLAS ESTÁN EN REVISION</span>
         </div>
-    </div>
+    </div> --}}
 
     <div class="bg-gray-100 text-black grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
         {{-- ¿Como se Juega? --}}
@@ -22,7 +22,7 @@
             <div>
                 <ul class="list-disc">
                     <li>En la sección de "Pronósticos" Cada Participante selecciona entre Local y Visita pronosticando al Ganador.</li>
-                    <li>En el último partido de cada Jornada se debe pronosticar Puntos Local y Puntos Visita, este es el Partido Desempate y los criterios se listan en la sección de desempate.).</li>
+                    <li>En el último partido de cada Jornada se debe pronosticar Puntos Local y Puntos Visita, este es el Partido Desempate y los criterios se listan en la sección de desempate.</li>
                     <li>La Selección de Local/Visita del Partido Desempate cambia automáticamente después de guardar el
                         pronóstico de la jornada.</li>
                     <li>Cada pronóstico puede ser modificado hasta 5 minutos antes de la hora de inicio del partido.</li>
@@ -75,7 +75,7 @@
             <p class="mt-4 text-black text-sm leading-relaxed">
                 <ul class="list-disc">
                     <li>Un Ganador por cada Jornada. (18 Temporada Regular + 1 de Playoffs J19).</li>
-                    <li>1°, 2° y 3° Lugar en el Acumulado de Toda la Temporada incluyendo Super Bowl.</li>
+                    <li>1°, 2°, 3°, 4° y 5° Lugar en el Acumulado de Toda la Temporada incluyendo Super Bowl.</li>
                     <li>2 Ganadores de Survivor</li>
                 </ul>
             </p>
@@ -173,16 +173,19 @@
                     <li>
                         En la sección de <strong>"Survivor"</strong> cada Partitipante seleccionará un equipo por Jornada (No se puede repetir equipo en toda la Temporada Regular).
                     </li>
-                    <li>Si tu equipo seleccionado gana, "sobrevives" la Jornada y continuas con vida para la siguiente</li>
+                    <li>Si tu equipo seleccionado gana, "sobrevives" la Jornada y continuas con vida para la siguiente jornada.</li>
                     <li>Si tu equipo seleccionado empata o pierde quedas eliminado del premio Survivor y continuas participando como Zombie.</li>
                     <li>Si no hiciste selección en la Jornada o duplicaste un equipo entonces quedas eliminado del premio Survivor y continuas participando como Zombie.</li>
                     <li>Cada Jornada los equipos estarán disponibles para selección cuando se cumplan los siguientes requisitos:</li>
-                        <ul style="list-style-type:decimal" class="ml-30">
-                            <li>a) El equipo tenga partido en la Jornada (No esté de descanso)</li>
-                            <li>b) El Equipo No esté seleccionado en otra Jornada (anterior o futura)</li>
-                            <li>c) El Partido no haya iniciado o esté a 5 minutos de iniciar.</li>
-                            <li>d) La Jornada siga siendo editable.</li>
-                        </ul>
+                        <div class="flex justify-end">
+                            <ul style="list-style-type:decimal" class="mt-2">
+                                <li>El equipo tenga partido en la Jornada (No esté de descanso)</li>
+                                <li>El Equipo No esté seleccionado en otra Jornada (anterior o futura)</li>
+                                <li>El Partido no haya iniciado o esté a 5 minutos de iniciar.</li>
+                                <li>La Jornada siga siendo editable.</li>
+                            </ul>
+                        </div>
+
                 </ul>
             </p>
 
@@ -225,12 +228,14 @@
                     <li>
                         Cada Jornada donde se acierta Ganador es un punto, el Zombie con más puntos en toda la temporada Regular será el ganador, en caso de empate se jugará un torneo Survivor en Playoffs y de seguir empatados aplican los siguientes criterios:
                     </li>
+                    <div class="flex justify-end">
+                        <ul style="list-style-type:decimal" class="mt-2">
+                            <li>Más Jornadas como sobreviviente.</li>
+                            <li>Racha de victoria más larga después de hacerse zombie. (2da derrota)</li>
+                            <li>Más equipos seleccionados Visitantes</li>
+                        </ul>
 
-                    <ul style="list-style-type:decimal" class="ml-30">
-                        <li>Más Jornadas como sobreviviente.</li>
-                        <li>Racha de victoria más larga después de hacerse zombie. (2da derrota)</li>
-                        <li>Más equipos seleccionados Visitantes</li>
-                    </ul>
+                    </div>
 
                 </ul>
             </p>

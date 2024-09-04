@@ -43,6 +43,3 @@
 
     </div>
 @endforeach
-<div class="flex justify-end">
-    {{ $users->links() }}
-</div>

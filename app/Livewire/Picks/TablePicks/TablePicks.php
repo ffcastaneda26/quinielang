@@ -57,7 +57,7 @@ class TablePicks extends Component
                 'generalPosition',
             ])
             ->orderBy('alias')
-            ->paginate(30);
+            ->get();
 
         return $users;
     }
