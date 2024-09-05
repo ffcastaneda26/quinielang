@@ -40,18 +40,19 @@
                                                 <img src="{{ asset('images/afirmativo.png') }}"
                                                     class="w-1 sm:w-4 rounded-full  {{ $user_survivor->survive ? 'block' : 'hidden'  }}">
                                         </div>
-                                  @else
-                                        <img src="{{ asset('images/reloj.png') }}"
-                                            class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
-                                    @endif
-                                @else
-                                    @if($round->has_games_to_block_survivors() )
-                                        <img src="{{ asset('images/survivor_no_seleccionado.png') }}"
-                                            class="w-4 sm:w-6 rounded-full grayscale" style="margin: 0 auto;">
                                     @else
                                         <img src="{{ asset('images/reloj.png') }}"
                                             class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
                                     @endif
+                                @else
+
+                                        @if($round->has_games_to_block_survivors() || $round->id == 1)
+                                            <img src="{{ asset('images/survivor_no_seleccionado.png') }}"
+                                                class="w-4 sm:w-6 rounded-full grayscale" style="margin: 0 auto;">
+                                        @else
+                                            <img src="{{ asset('images/reloj.png') }}"
+                                                class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
+                                        @endif
                                 @endif
                             </td>
                         @endforeach
