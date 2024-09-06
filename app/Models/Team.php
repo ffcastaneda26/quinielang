@@ -57,4 +57,22 @@ class Team extends Model
         return $user_survivor_round->count() ? true : false;
     }
 
+    public function game_round(Round $round=null){
+        $game_round = null;
+        if(!$round){
+            $round_search = New Round();
+            $current_round = $round_search->read_current_round()->id;
+            $round = $round_search->$current_round;
+        }
+
+        $game_round =  $this->local_games()->where('round_id',$round->id)->first();
+        if($game_round){
+            return $game_round;
+        }
+        $game_round = $this->visit_games()->where('round_id',$round->id)->first();
+
+        return $game_round;
+
+    }
+
 }

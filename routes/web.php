@@ -21,6 +21,32 @@ use App\Livewire\Survivors\Table\TableSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
 use PhpParser\Node\Stmt\TryCatch;
 
+use function Laravel\Prompts\table;
+
+Route::get('show-zombies',function(){
+    $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
+        ->orderby('alias')
+        ->get();
+    echo '<table border="1">';
+    echo '<thead><th>No</th><th>Alias</th><th>Zombie</th></thead>';
+    $i=0;
+    foreach($users as $user){
+        $i++;
+        echo '<tr>';
+            echo '<td>' . $i . '</td>';
+            echo '<td>' . $user->alias . '</td>';
+            echo '<td>';
+            if($user->is_zombie()){
+                echo 'SI';
+            }else{
+                echo 'NO';
+            }
+            echo'</td>';
+        echo '</tr>';
+
+    }
+    echo'</table>';
+});
 
 
 Route::get('optimize-clear',function(){

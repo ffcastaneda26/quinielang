@@ -124,7 +124,7 @@ class Game extends Model
     }
 
     public function was_played(){
-        return !is_null($this->local_points) && !is_null($this->visit_points);
+        return !is_null($this->local_points) && !is_null($this->visit_points) && !is_null($this->winner);
     }
 
 }

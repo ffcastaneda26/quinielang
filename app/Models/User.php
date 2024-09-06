@@ -150,5 +150,35 @@ class User extends Authenticatable implements FilamentUser
         $query->where('active', $active);
     }
 
+    /**
+     * Determina si el usuario es Zoombie en los survivors
+     * 1) Si ya tiene "survivors" perdidos en jornadas pasadas a la actual
+     * 2) Si el partido del equipo que seleccionó en la jornada activa ya se jugó y perdió
+     * Params:
+     * $round: Jornada:
+     *      (a) Si no recibe jornada o es mayor a la actual asume la actual
+     */
+    public function is_zombie(Round $round): bool{
+        // Revisa si tiene survivors fallidos en jornada anterior a la indicada
+        $is_zombie = $this->survivors()->where('round_id','<',$round->id)
+                                        ->where('survive',0)
+                                        ->exists();
+        if($is_zombie){
+            return true;
+        }
+        // Si tiene survivor Y ya se jugó el partido en la jornada y no sobrevivió
+        $user_round_survivor = $this->survivors()->where('round_id',$round->id)->first();
+
+        if($user_round_survivor){
+            if($user_round_survivor->team->game_round($round)){
+                if($user_round_survivor->team->game_round($round)->was_played()){
+                    if($user_round_survivor->survive == 0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
 }
