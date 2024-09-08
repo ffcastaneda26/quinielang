@@ -37,10 +37,10 @@
                             </span>
                         </td>
                         @foreach ($rounds as $round)
-
                             <td style="width: 1rem;"  class="text-center border border-black  bg-white text-black" align="center">
                                 @php
-                                    $user_survivor = $user->survivors->firstWhere('round_id', $round->id);
+                                    unset($user_survivor);
+                                    $user_survivor = $user->survivors->where('round_id',$round->id)->first();
                                 @endphp
                                 @if ($user_survivor)
                                     @if ($has_games_to_block_survivors &&  $round->id <= $current_round->id  )

@@ -30,6 +30,7 @@ class TableSurvivors extends Component
     private function read_users()
     {
         return $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
+            ->with('survivors')
             ->withCount([
                 'survivors as total_survivors' => function ($query) {
                     $query->where('survive', 1);
@@ -38,5 +39,9 @@ class TableSurvivors extends Component
             ->orderBy('total_survivors', 'desc')
             ->orderBy('alias', 'asc')
             ->get();
+    }
+
+    public function scopeIsZoombie($query){
+        
     }
 }

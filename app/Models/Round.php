@@ -72,6 +72,10 @@ class Round extends Model
         return $this->survivors->where('team_id',$team_id);
     }
 
+    public function survivors_failed(){
+        return $this->survivors->where('survive',0);
+    }
+
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);
