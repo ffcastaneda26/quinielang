@@ -25,11 +25,12 @@
         {{-- Detalle: Survivor x Usuario --}}
         @foreach ($users as $user)
             @php
-                $is_zombie = $user->is_zombie($current_round)
+                $is_zombie = $user->is_zombie
             @endphp
             <table class="w-full">
                 <tbody>
                     <tr class="text-center font-bold bg-black text-white border-white text-xs sm:text-sm">
+                       
                         <td style="width: 4rem" class="text-start border {{ $is_zombie ? 'border-red-500' : 'border-black' }} bg-white text-black text-xxs sm:text-sm">
                             <div class="flex">
                                 {{ $user->alias }}
@@ -46,6 +47,7 @@
                                     $user_survivor = $user->survivors->where('round_id',$round->id)->first();
                                 @endphp
                                 @if ($user_survivor)
+                                
                                     @if ($has_games_to_block_survivors &&  $round->id <= $current_round->id  )
                                         <div class="flex flex-col gap-1 justify-center items-center">
                                             @if($user_survivor->team->game_round($round)->was_played())

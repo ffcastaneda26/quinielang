@@ -29,19 +29,29 @@ class TableSurvivors extends Component
 
     private function read_users()
     {
-        return $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
-            ->with('survivors')
-            ->withCount([
-                'survivors as total_survivors' => function ($query) {
-                    $query->where('survive', 1);
-                }
-            ])
-            ->orderBy('total_survivors', 'desc')
-            ->orderBy('alias', 'asc')
-            ->get();
+          return  User::role(env('ROLE_PARTICIPANT', 'Participante'))
+                        ->with('survivors')
+                        ->withCount([
+                            'survivors as total_survivors' => function ($query) {
+                                $query->where('survive', 1);
+                            }
+                        ])
+                        ->withCount([
+                            'survivors as failed_survivors' => function ($query) {
+                                $query->where('survive', 0);
+                            }
+                        ])
+                        ->selectRaw('users.*,
+                                    (SELECT CASE WHEN EXISTS (
+                                        SELECT * FROM user_survivors
+                                        WHERE user_survivors.user_id = users.id
+                                        AND user_survivors.survive = 0
+                                        -- Agregar condiciones adicionales si es necesario
+                                    ) THEN 1 ELSE 0 END) AS is_zombie')
+                        ->orderBy('total_survivors', 'desc')
+                        ->orderby('failed_survivors','asc')
+                        ->orderBy('users.alias', 'asc')
+                        ->get();
     }
 
-    public function scopeIsZoombie($query){
-        
-    }
 }

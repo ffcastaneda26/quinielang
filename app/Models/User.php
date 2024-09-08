@@ -159,9 +159,11 @@ class User extends Authenticatable implements FilamentUser
      *      (a) Si no recibe jornada o es mayor a la actual asume la actual
      */
     public function is_zombie(Round $round): bool{
-        // Revisa si tiene survivors fallidos en jornada anterior a la indicada
+        $active_survivor = Survivor::where('active',1)->first();
+
         $is_zombie = $this->survivors()->where('round_id','<',$round->id)
                                         ->where('survive',0)
+                                        ->where('survivor_id',$active_survivor->id)
                                         ->exists();
         if($is_zombie){
             return true;
