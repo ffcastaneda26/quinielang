@@ -31,10 +31,13 @@
                 <tbody>
                     <tr class="text-center font-bold bg-black text-white border-white text-xs sm:text-sm">
                         <td style="width: 4rem" class="text-start border {{ $is_zombie ? 'border-red-500' : 'border-black' }} bg-white text-black text-xxs sm:text-sm">
-                            {{ $user->alias }}
-                            <span class="{{ $is_zombie ? 'block' : 'hidden' }}">
-                                <img src="{{ asset('images/zombies.png') }}" alt="X" class="w-4">
-                            </span>
+                            <div class="flex">
+                                {{ $user->alias }}
+                                <span class="{{ $is_zombie ? 'block' : 'hidden' }}">
+                                    <img src="{{ asset('images/zombies.png') }}" alt="X" class="w-4">
+                                </span>
+                            </div>
+
                         </td>
                         @foreach ($rounds as $round)
                             <td style="width: 1rem;"  class="text-center border border-black  bg-white text-black" align="center">
