@@ -37,12 +37,13 @@
                             </span>
                         </td>
                         @foreach ($rounds as $round)
+
                             <td style="width: 1rem;"  class="text-center border border-black  bg-white text-black" align="center">
                                 @php
                                     $user_survivor = $user->survivors->firstWhere('round_id', $round->id);
                                 @endphp
                                 @if ($user_survivor)
-                                    @if ($round->has_games_to_block_survivors())
+                                    @if ($has_games_to_block_survivors &&  $round->id <= $current_round->id  )
                                         <div class="flex flex-col gap-1 justify-center items-center">
                                             @if($user_survivor->team->game_round($round)->was_played())
                                                 @if($user_survivor->survive)
@@ -68,13 +69,8 @@
                                             class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
                                     @endif
                                 @else
-                                        @if($round->has_games_to_block_survivors() || $round->id == 1)
-                                            <img src="{{ asset('images/survivor_no_seleccionado.png') }}"
-                                                class="w-4 sm:w-6 rounded-full grayscale" style="margin: 0 auto;">
-                                        @else
-                                            <img src="{{ asset('images/reloj.png') }}"
-                                                class="w-4 sm:w-6 rounded-full" style="margin: 0 auto;">
-                                        @endif
+                                    <img src="{{ asset('images/survivor_no_seleccionado.png') }}"
+                                    class="w-4 sm:w-6 rounded-full grayscale" style="margin: 0 auto;">
                                 @endif
                             </td>
                         @endforeach
