@@ -29,15 +29,16 @@
                 </thead>
                 <tbody>
                     @foreach ($records as $record)
-                        <tr class="text-center font-bold"></tr>
-                            <td class="bg-white text-black border border-black text-xxs sm:text-sm px-4 text-center">{{ $record->position }}</td>
-                            <td class="bg-white text-black border border-black text-xxs sm:text-sm px-4 uppercase text-left {{ env('SHOW_NAME_POSITION_BY_ROUND',false) ? 'text-xxs' : '' }}">
+                        <tr class="text-center text-black text-xxs sm:text-sm uppercase
+                            {{ $record->user_id == Auth::user()->id ? 'font-extrabold bg-gray-200' : ' bg-white' }}">
+                            <td class="border border-black px-4 text-center">{{ $record->position }}</td>
+                            <td class="border border-black text-left{{ env('SHOW_NAME_POSITION_BY_ROUND',false) ? 'text-xxs' : '' }}">
                                 {{ env('SHOW_NAME_POSITION_BY_ROUND',false)  ? $record->user->name : $record->user->alias}}
                             </td>
-                            <td class="bg-white text-black border border-black text-xs sm:text-sm px-4 text-center">{{ $record->hits }}</td>
+                            <td class="border border-black text-center">{{ $record->hits }}</td>
 
                             @if($show_mnf_column)
-                                <td class="bg-white text-black border border-black text-xs sm:text-sm px-4 text-center">
+                                <td class="border border-black px-4 text-center">
                                     <div class="flex flex-row justify-center items-center">
                                         @if($last_game_round->pick_user($record->user))
                                             @if($last_game_round->pick_user($record->user)->winner == 1)
@@ -53,14 +54,14 @@
                                     </div>
                                 </td>
 
-                                <td class="bg-white text-black border border-black text-xxs  text-center" style="font-size: 0.5rem">
+                                <td class="border border-black  text-center" style="font-size: 0.5rem">
                                     @if($last_game_round->pick_user($record->user))
                                         {{ $last_game_round->pick_user($record->user)->visit_points }}-{{ $last_game_round->pick_user($record->user)->local_points }}
                                     @else
                                         &nbsp;
                                     @endif
                                 </td>
-                                <td class="bg-white text-black border border-black text-xxs sm:text-sm px-4 text-center">
+                                <td class="border border-black sm:text-sm px-4 text-center">
                                     {{ $record->dif_total_points }}
                                 </td>
 

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Positions;
 
+use App\Models\Position;
 use App\Models\Round;
 use App\Traits\FuncionesGenerales;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -40,6 +41,10 @@ class ByRound extends Component
 
     private function read_data()
     {
-       return $this->selected_round->positions;
+        return Position::join('users', 'positions.user_id', '=', 'users.id')
+                    ->where('round_id',  $this->selected_round->id)
+                    ->orderby('hits','desc')
+                    ->orderBy('users.alias', 'asc')
+                    ->get();
     }
 }
