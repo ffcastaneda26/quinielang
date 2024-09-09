@@ -136,29 +136,20 @@ class Round extends Model
      */
     public function has_games_to_block_survivors($minutesBefore=5)
     {
-        // $records = UserSurvivor::where('round_id',$this->id)
-        //                         ->whereHas('team',function($query) use($minutesBefore) {
-        //                             $query->whereHas('local_games',function($query) use($minutesBefore) {
-        //                                             $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore))
-        //                                                     ->where('round_id',$this->id);
-        //                                         })
-        //                                   ->orWhereHas('visit_games',function($query) use($minutesBefore){
-        //                                             $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore))
-        //                                                   ->where('round_id',$this->id);
-        //                                         });
-        //                             })
-        //                         ->get();
+        $records = UserSurvivor::where('round_id',$this->id)
+                                ->whereHas('team',function($query) use($minutesBefore) {
+                                    $query->whereHas('local_games',function($query) use($minutesBefore) {
+                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore))
+                                                            ->where('round_id',$this->id);
+                                                })
+                                          ->orWhereHas('visit_games',function($query) use($minutesBefore){
+                                                    $query->where('game_date', '<', Carbon::now()->subMinutes($minutesBefore))
+                                                          ->where('round_id',$this->id);
+                                                });
+                                    })
+                                ->get();
+        return $records->count();
 
-        return $this->survivors()->with('team')
-                        ->whereHas('team', function ($query) {
-                            $query->whereHas('local_games', function ($query) {
-                                $query->where('game_date', '>', now()->subminutes(5));
-                            })
-                            ->orWhereHas('visit_games', function ($query) {
-                                    $query->where('game_date', '>', now()->subminutes(5));
-                                });
-                            })
-                        ->exists();
     }
 
     /**
