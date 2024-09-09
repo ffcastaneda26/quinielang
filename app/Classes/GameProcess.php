@@ -250,7 +250,7 @@ class GameProcess
             $sql .= "SET position=NULL ";
             $sql .= " WHERE round_id=" . $round_id;
             DB::update($sql);
-    
+
         } catch (Exception $e) {
             Log::error($e);
             dd('Error en update_positions_to_null : ' . $e->getMessage() . ' Avise al Administrador');
@@ -325,7 +325,8 @@ class GameProcess
     private function sum_positions()
     {
         try {
-            $sum_positions = Position::selectRaw('user_id,
+            $sum_positions = Position::join('users', 'positions.user_id', '=', 'users.id')
+                ->selectRaw('user_id,
                             SUM(hits) as hits,
                             SUM(hit_last_game) as hits_last_game,
                             SUM(dif_total_points) as total_error')
@@ -333,6 +334,7 @@ class GameProcess
                 ->orderByDesc('hits')
                 ->orderByDesc('hits_last_game')
                 ->orderBy('total_error')
+                ->orderBy('users.alias', 'asc')
                 ->get();
             return $sum_positions;
         } catch (Exception $e) {

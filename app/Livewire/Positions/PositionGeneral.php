@@ -11,9 +11,10 @@ class PositionGeneral extends Component
 
     public function render()
     {
-        $this->records = GeneralPosition::with('user')
-            ->orderBy('position')
-            ->get();
+        $this->records =  GeneralPosition::join('users', 'general_positions.user_id', '=', 'users.id')
+                ->orderby('position')
+                ->orderBy('users.alias')
+                ->get();
         return view('livewire.positions.general.general-position');
     }
 }

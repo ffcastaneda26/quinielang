@@ -7,17 +7,17 @@
         {{-- <div class="w-1/2"> --}}
             <table class="w-full border-collapse">
                 <thead>
-                    <tr class="text-xxs sm:text-md text-center font-bold bg-black text-white border border-white">
-                        <th class="px-4 w-10 uppercase border border-white">Pos</th>
-                        <th class="px-4 w-70 uppercase border border-white">{{ __('Name') }}</th>
-                        <th class="px-4 w-70 uppercase border border-white">{{ __('Hits') }}</th>
-                        <th class="px-4 w-70 uppercase border border-white">{{ __('MNFs') }}</th>
-                        <th class="px-4 w-10 uppercase border border-white">{{ __('Total Error') }}</th>
+                    <tr class="text-xxs sm:text-md text-center font-bold bg-black text-white border border-black">
+                        <th class="px-4 w-10 uppercase">Pos</th>
+                        <th class="px-4 w-70 uppercase">{{ __('Name') }}</th>
+                        <th class="px-4 w-70 uppercase">{{ __('Hits') }}</th>
+                        <th class="px-4 w-70 uppercase">{{ __('MNFs') }}</th>
+                        <th class="px-4 w-10 uppercase">{{ __('Total Error') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($records as $record)
-                        <tr class="text-xxs sm:text-md text-center font-bold">
+                        <tr class="text-xxs sm:text-md text-center {{ $record->user_id == Auth::user()->id ? 'font-extrabold bg-gray-200' : ' bg-white' }}">
                             <td class="text-xxs sm:text-xs px-4 text-center border border-black">{{ $record->position }}</td>
                             <td
                                 class="border border-black text-xxs sm:text-xs px-4 uppercase text-left {{ env('SHOW_NAME_POSITION_BY_ROUND', false) ? 'text-xxs' : '' }}">
