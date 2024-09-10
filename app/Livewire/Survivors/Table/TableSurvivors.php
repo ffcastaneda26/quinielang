@@ -13,14 +13,12 @@ class TableSurvivors extends Component
 {
     use FuncionesGenerales;
     public $rounds, $survivor;
-    public $has_games_to_block_survivors = false;
     public function mount()
     {
         $round = new Round();
         $this->current_round = $round->read_current_round();
         $this->rounds = Round::wherehas('games')->orderby('id')->get();
         $this->survivor = Survivor::where('active', 1)->first();
-        $this->has_games_to_block_survivors = $this->current_round->has_games_to_block_survivors();
     }
     public function render()
     {

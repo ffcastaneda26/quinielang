@@ -60,7 +60,7 @@ class UserSurvivor extends Component
 
         $minutesBefore = $this->minutesBefore;
         $locales = $this->round->local_teams()
-            ->where('games.game_date', '>', Carbon::now()->addMinutes($minutesBefore))
+            ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBefore))
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
             ->whereDoesntHave('survivors',function($query){
@@ -76,7 +76,7 @@ class UserSurvivor extends Component
 
 
         $visitas = $this->round->visit_teams()
-            ->where('games.game_date', '>', Carbon::now()->addMinutes($minutesBefore))
+            ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBefore))
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
             ->whereDoesntHave('survivors',function($query){
