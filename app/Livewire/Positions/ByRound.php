@@ -41,9 +41,14 @@ class ByRound extends Component
 
     private function read_data()
     {
+
         return Position::join('users', 'positions.user_id', '=', 'users.id')
                     ->where('round_id',  $this->selected_round->id)
                     ->orderby('hits','desc')
+                    ->orderby('hit_last_game','desc')
+                    ->orderby('dif_total_points')
+                    ->orderby('dif_local_points')
+                    ->orderby('dif_visit_points')
                     ->orderBy('users.alias', 'asc')
                     ->get();
     }

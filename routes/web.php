@@ -23,6 +23,11 @@ use PhpParser\Node\Stmt\TryCatch;
 
 use function Laravel\Prompts\table;
 
+Route::get('checa-hora/{round}',function(Round $round){
+    dd($round);
+    $fecha_juego = '2024-09-10 12:00:00';
+
+});
 Route::get('show-zombies',function(){
     $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
         ->orderby('alias')

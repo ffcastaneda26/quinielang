@@ -29,11 +29,13 @@
                 </thead>
                 <tbody>
                     @php
-                        
+
                     @endphp
                     @foreach ($records as $record)
                         <tr class="text-center text-black text-xxs sm:text-sm uppercase
-                            {{ $record->user_id == Auth::user()->id ? 'font-extrabold bg-gray-200' : ' bg-white' }}">
+                            @auth
+                                {{ $record->user_id == Auth::user()->id ? 'font-extrabold bg-gray-200' : ' bg-white' }}">
+                            @endauth
                             <td class="border border-black px-4 text-center">{{ $show_mnf_column ? $record->position : $loop->index + 1 }}</td>
                             <td class="border border-black text-left{{ env('SHOW_NAME_POSITION_BY_ROUND',false) ? 'text-xxs' : '' }}">
                                 {{ env('SHOW_NAME_POSITION_BY_ROUND',false)  ? $record->user->name : $record->user->alias}}

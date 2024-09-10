@@ -225,10 +225,10 @@ class GameProcess
         $this->update_positions_to_null($round_id);
 
         $positions = Position::orderbyDesc('hits')
+            ->orderbyDesc('hit_last_game')
             ->orderby('dif_total_points')
             ->orderby('dif_local_points')
             ->orderby('dif_visit_points')
-            ->orderbyDesc('hit_last_game')
             ->orderby('dif_winner_points')
             ->orderby('dif_victory')
             ->orderby('created_at')
