@@ -10,6 +10,9 @@
         <div class="bg-white text-black h-max flex flex-col text-center justify-center items-center">
             {{ __('Loading...') }}
         </div>
+        <div class="animate-spin flex flex-row justify-center items-center">
+            <img src="{{ asset('images/reloj.png') }}" class="h-4 w-4">
+        </div>
     </div>
 
     <div wire:loading.class="hidden">
