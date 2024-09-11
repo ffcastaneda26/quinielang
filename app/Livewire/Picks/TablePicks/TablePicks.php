@@ -22,19 +22,25 @@ class TablePicks extends Component
     {
         $round = new Round();
         $this->current_round = $round->read_current_round();
-        $this->selected_round = $this->current_round;
-        $this->read_round_games($this->selected_round);
-        $this->round_has_games_played = $this->selected_round->has_games_played();
+        $this->select_round( $this->current_round);
         $this->pagination = 30;
+        $this->rounds = Round::orderBy('id')->get();
+
     }
     public function render()
     {
-        $this->last_game_round = $this->selected_round->get_last_game_round();
-        $this->show_mnf_column = !$this->last_game_round->allow_pick();
         return view('livewire.picks.tablepicks.index',['users' => $this->read_users()]);
-
     }
 
+    public function select_roundx(Round $round)
+    {
+        $this->reset('selected_round','round_games');
+        $this->selected_round = $round;
+        $this->round_games = $this->selected_round->games;
+        $this->round_has_games_played = $this->selected_round->has_games_played();
+        $this->last_game_round = $this->selected_round->get_last_game_round();
+        $this->show_mnf_column = !$this->last_game_round->allow_pick();
+    }
     private function read_users()
     {
         $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))

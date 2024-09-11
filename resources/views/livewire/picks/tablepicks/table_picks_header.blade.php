@@ -47,5 +47,5 @@
            </div>
         </div>
     @endif
-    <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2 text-xxs bg-white text-black sm:text-sm md:text-lg lg:text-2xl">AC</div>
+    <div class="col-span-1 flex items-center text-center font-bold justify-center ml-2 text-xxs bg-white text-black" style="font-size: {{ $show_mnf_column ? '0.45rem' : '0.75rem' }}">AC</div>
 </div>
