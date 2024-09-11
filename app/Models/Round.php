@@ -154,6 +154,22 @@ class Round extends Model
 
     /**
      * ¿Hay Juegos Pronosticables?
+     *
+     * +------------------------+-----------+
+     * |Fecha Juego | Hora Juego| Hora Serv |
+     * +------------+-----------+-----------+
+     * | 2024-09-12 | 18:15:00  | 18:15:00  |
+     * +------------+-----------+-----------+
+     *
+     * +----------------------------------------------------------+
+     * | HORA DEL SERVIDOR (+/-) MINUTOS COMPARADO CON HORA JUEGO |
+     * +------------+---------------+----------------+------------+
+     * | Operación  | Hora Límite   | Pronosticable? | Jgo-Límite |
+     * +------------+----+----------+----------------+------------+
+     * | Restar     |   18:10:00    |   NO           |      >     |
+     * | Sumar      |   18:20:00    |   SI           |      <     |
+     * +------------+---------------+----------------+------------+
+     *
      */
 
      public function hasAllowableGames($minuts_before_picks = null)
@@ -167,13 +183,7 @@ class Round extends Model
             $allowableGames = $this->games()
                 ->where('game_date', '>', now()->subMinutes($minuts_before_picks))
                 ->count();
-
-
             return $allowableGames;
 
-            // if($allowableGames){
-            //     dd($allowableGames);
-            // }
-            // return false;
         }
 }

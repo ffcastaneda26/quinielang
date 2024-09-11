@@ -88,3 +88,15 @@ FROM users us,positions pxj
 WHERE us.id = pxj.user_id
   AND us.alias LIKE '%%'
 ORDER BY us.alias
+
+SELECT po.position,us.alias,po.hits,po.dif_total_points
+FROM users us,positions po
+WHERE us.id = po.user_id
+  AND round_id = 1
+ORDER BY po.hits DESC,
+         po.hit_last_game DESC,
+         dif_total_points,
+         po.dif_local_points,
+         po.dif_visit_points,
+         po.dif_winner_points,
+         po.dif_vict

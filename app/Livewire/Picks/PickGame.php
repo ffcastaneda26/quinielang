@@ -38,12 +38,15 @@ class PickGame extends Component
     public $winner;
     public $visit_points;
     public $local_points;
+    public $visit_logo;
+    public $local_logo;
 
     protected $listeners = ['prepare_data_to_view'];
 
     public function mount(){
         $this->prepare_data_to_view();
     }
+
 
     public function render()
     {
@@ -86,6 +89,9 @@ class PickGame extends Component
 
         $this->pick_user_winner = $this->pick_user->winner;
         $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
+        $this->visit_logo = $game->visit_team->logo;
+        $this->local_logo = $game->local_team->logo;
+
     }
 
     public function update_winner_game()

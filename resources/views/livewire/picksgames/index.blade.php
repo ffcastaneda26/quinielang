@@ -1,4 +1,4 @@
-<div wire:poll>
+<div >
     <style>
         input[type="radio"] {
             background-color: white; /* Cambiar el color de fondo a rojo */
