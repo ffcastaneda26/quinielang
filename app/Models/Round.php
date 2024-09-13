@@ -134,8 +134,12 @@ class Round extends Model
      * @param mixed $minutesBefore
      * @return int Survivos que el partido aun no comienza
      */
-    public function has_games_to_block_survivors($minutesBefore=5)
+    public function has_games_to_block_survivors($minutesBefore=null)
     {
+        if(!$minutesBefore){
+            $minutesBefore = Configuration::first()->minuts_before_picks;
+        }
+
         $records = UserSurvivor::where('round_id',$this->id)
                                 ->whereHas('team',function($query) use($minutesBefore) {
                                     $query->whereHas('local_games',function($query) use($minutesBefore) {

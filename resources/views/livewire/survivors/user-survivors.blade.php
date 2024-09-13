@@ -5,10 +5,11 @@
         </div>
         <div class="w-auto flex flex-col items-center">
             <div class="w-full bg-black text-white text-center font-bold text-xxs">
-                <div class="grid grid-cols-5 text-xxs sm:text-lg">
+                <div class="grid grid-cols-6 text-xxs sm:text-lg">
                     <div class="col-span-1 text-start">{{ __('Jor') }}</div>
-                    <div class="col-span-1 text-start">{{ __('Team') }}</div>
+                    <div class="col-span-1 text-start">{{ __('Selection') }}</div>
                     <div class="col-span-1 text-start">{{ __('Hit') }}</div>
+                    <div class="col-span-1 text-center">{{ __('Rival') }}</div>
                     <div class="col-span-1 text-start">{{ __('Delete') }}</div>
                     <div class="col-span-1 text-center">{{ __('Select') }}</div>
                 </div>

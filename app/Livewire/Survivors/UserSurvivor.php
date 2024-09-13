@@ -4,6 +4,7 @@ namespace App\Livewire\Survivors;
 
 use App\Models\Round;
 use App\Models\Survivor;
+use App\Models\Team;
 use App\Models\UserSurvivor as SurvivorUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,9 @@ class UserSurvivor extends Component
     public $round_has_games_to_block_survivors=false;
     public $minutesBefore;
     public $game_played = false;
+    public $team_survivor_is_local=false;
+    public $label_teams;
+    public $game;
 
     public function mount()
     {
@@ -42,13 +46,12 @@ class UserSurvivor extends Component
             ->first();
 
         if($this->user_survivor_current){
-            $team =$this->user_survivor_current->team;
-            $game = $team->local_games()->where('round_id',$this->round->id)->first();
-            if(!$game){
-                $game = $team->visit_games()->where('round_id',$this->round->id)->first();
-            }
-            $this->game_played = $game->was_played();
 
+            $team =$this->user_survivor_current->team;
+            $this->game = $this->read_team_game($team,$this->round->id);
+            $this->game_played = $this->game->was_played();
+
+            $this->game->game_played = $this->game->was_played();
         }
 
 
@@ -59,6 +62,12 @@ class UserSurvivor extends Component
         $this->team_survivor();
 
         $minutesBefore = $this->minutesBefore;
+
+
+        if($this->round->has_games_to_block_survivors()){
+            return;
+        }
+
         $locales = $this->round->local_teams()
             ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBefore))
             ->whereNull('games.local_points')
@@ -89,9 +98,20 @@ class UserSurvivor extends Component
             })
             ->get();
 
-        $this->teams = $locales->merge($visitas);
-        $this->teams = $this->teams->sortBy('name');
-
+        $teams_to_show = $locales->merge($visitas);
+        $teams_to_show = $teams_to_show->sortBy('name');
+        $teams = collect([]);
+        foreach($teams_to_show as $team){
+            $game = $this->read_team_game($team,$this->round->id);
+            $label_to_select_team = $team->name;
+            $label_to_select_team.= $team->id == $game->local_team_id ? ' VS ' . $game->visit_team->short
+                                                                       : '@ ' . $game->local_team->short;
+        $teams->push([
+                'id'  => $team->id,
+                'label' => $label_to_select_team
+            ]);
+        }
+        $this->teams = $teams;
     }
 
     public function update_team_survivor($round_id)
@@ -128,5 +148,14 @@ class UserSurvivor extends Component
     public function delete_survivor(SurvivorUser $survivorUser)
     {
         $survivorUser->delete();
+    }
+
+    public function read_team_game(Team $team,$round_id){
+        $game=null;
+        $game = $team->local_games()->where('round_id',$round_id)->first();
+        if(!$game){
+            $game = $team->visit_games()->where('round_id',$round_id)->first();
+        }
+        return $game;
     }
 }

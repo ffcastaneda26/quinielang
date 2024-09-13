@@ -100,3 +100,22 @@ ORDER BY po.hits DESC,
          po.dif_visit_points,
          po.dif_winner_points,
          po.dif_vict
+
+-- Partidos
+SELECT
+    ga.round_id AS JORNADA,
+    ga.game_date AS FECHA,
+    tv.name AS VISITA,
+      COALESCE(ga.visit_points, '') AS 'PUNTOS',
+    tl.name AS LOCAL,
+    COALESCE(ga.local_points, '') AS 'PTOS LOCAL',
+    CASE
+        WHEN ga.winner = 1 THEN 'LOCAL'
+        WHEN ga.winner = 2 THEN 'VISITA'
+        ELSE 'PENDIENTE'
+    END AS GANADOR
+FROM
+    games ga
+INNER JOIN teams tv ON tv.id = ga.visit_team_id
+INNER JOIN teams tl ON tl.id = ga.local_team_id
+ORDER BY ga.game_date;
