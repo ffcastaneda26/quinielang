@@ -149,6 +149,16 @@ class PickGame extends Component
             return;
         }
 
+        if($this->visit_points < 0){
+            $this->addError('visit_points', 'Puntos Positivos');
+            return;
+        }
+
+        if($this->local_points < 0){
+            $this->addError('local_points', 'Puntos Positivos');
+            return;
+        }
+
         if($pick_user){
             $pick_user->visit_points = $this->visit_points;
             $pick_user->local_points = $this->local_points;
