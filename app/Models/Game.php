@@ -100,7 +100,8 @@ class Game extends Model
     }
 
     // ¿Permite pronosticar?
-    public function allow_pick($minuts_before_picks = null)
+    // Al colocar $minuts_before_picks = 5 en lugar de null se reduce de 1367  a 727 queries (640 queries menos)
+    public function allow_pick($minuts_before_picks = 5)
     {
         if (!is_null($this->local_points) || !is_null($this->visit_points) || !is_null($this->winner)) {
             return false;
