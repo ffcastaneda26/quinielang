@@ -84,9 +84,9 @@ class Round extends Model
 
     public function  read_current_round()
     {
-        $sql = "UPDATE rounds SET active=0";
-        DB::update($sql);
+        date_default_timezone_set("America/Chihuahua");
 
+        $active_round = $this->where('active',1)->first();
         $today = now()->toDateString();
         $minDate = Round::min('start');
         $current_round = null;
@@ -94,7 +94,8 @@ class Round extends Model
             $current_round = Round::where('start', $minDate)->first();
         }
 
-        if (!$current_round) {
+        if (!$current_round || !$active_round) {
+
             $current_round = $this::where('start', '<=', $today)
                 ->where('finish', '>=', $today)
                 ->first();
@@ -103,15 +104,14 @@ class Round extends Model
             }
         }
 
-
-
-        if ($current_round) {
-
+        if($current_round && $current_round->id != $active_round->id){
+            $sql = "UPDATE rounds SET active=0";
+            DB::update($sql);
             $current_round->active = 1;
             $current_round->save();
             return $current_round;
         }
-        return null;
+        return $active_round;
     }
 
     // Regresa el último partido de la jornada

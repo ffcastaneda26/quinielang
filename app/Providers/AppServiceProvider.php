@@ -50,9 +50,5 @@ class AppServiceProvider extends ServiceProvider
             ->offColor('danger');
         });
 
-        // App::singleton(Configuration::class, function () {
-        //     return Configuration::getInstance();
-        // });
-
     }
 }
