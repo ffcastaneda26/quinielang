@@ -79,11 +79,13 @@
                             {{ $round_has_games_to_block_survivors ? 'disabled' : '' }}>
 
                             <option class="bg-red-500" value="">Ninguno</option>
-                            @foreach ($teams as $team)
-                                <option value="{{ $team['id']}}">
-                                    {{ $team['label'] }}
-                                </option>
-                            @endforeach
+                            @if($teams)
+                                @foreach ($teams as $team)
+                                    <option value="{{ $team['id']}}">
+                                        {{ $team['label'] }}
+                                    </option>
+                                @endforeach
+                            @endif
                     </select>
                 @endif
 
