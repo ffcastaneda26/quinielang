@@ -122,3 +122,11 @@ FROM
 INNER JOIN teams tv ON tv.id = ga.visit_team_id
 INNER JOIN teams tl ON tl.id = ga.local_team_id
 ORDER BY ga.game_date;
+
+-- Survivors de una Jornada
+SELECT us.name,te.name
+FROM users us,teams te,user_survivors su
+WHERE us.id = su.user_id
+  AND te.id = su.team_id
+  AND round_id = 6
+  AND team_id IN (15,16);

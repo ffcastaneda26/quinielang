@@ -120,6 +120,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->translateLabel()->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('name')->translateLabel()->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->translateLabel()->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('username')->translateLabel()->searchable()->sortable(),

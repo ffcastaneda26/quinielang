@@ -67,7 +67,7 @@ class UserSurvivorResource extends Resource
                     ->relationship('round','id')
                     ->translateLabel(),
                 Select::make('team_id')
-                    ->relationship('team','alias')
+                    ->relationship('team','name')
                     ->translateLabel(),
                 Toggle::make('survive')
 

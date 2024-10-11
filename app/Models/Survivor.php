@@ -21,4 +21,11 @@ class Survivor extends Model
     {
         return $this->hasMany(UserSurvivor::class);
     }
+
+    public function scopeActive($query, $active=true)
+    {
+        $query->where('active', $active);
+    }
+
+
 }
