@@ -159,6 +159,15 @@ class PickGame extends Component
             return;
         }
 
+        if($this->visit_points > 128 ){
+            $this->addError('visit_points', 'Máximo 128 puntos');
+            return;
+        }
+        if($this->local_points > 128 ){
+            $this->addError('local_points', 'Máximo 128 puntos');
+            return;
+        }
+
         if($pick_user){
             $pick_user->visit_points = $this->visit_points;
             $pick_user->local_points = $this->local_points;
