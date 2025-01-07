@@ -73,7 +73,10 @@ class UserSurvivor extends Component
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
             ->whereDoesntHave('survivors',function($query){
-                $query->where('user_id',Auth::user()->id);
+                $query->where('user_id',Auth::user()->id)
+                ->wherehas('round',function($query){
+                    $query->where('survivor_id',$this->survivor->id);
+                });
             })
             ->orWhereHas('survivors', function ($query) {
                 $query->where('round_id', $this->round->id)
@@ -89,7 +92,10 @@ class UserSurvivor extends Component
             ->whereNull('games.local_points')
             ->whereNull('games.visit_points')
             ->whereDoesntHave('survivors',function($query){
-                    $query->where('user_id',Auth::user()->id);
+                    $query->where('user_id',Auth::user()->id)
+                    ->wherehas('round',function($query){
+                        $query->where('survivor_id',$this->survivor->id);
+                    });
                 })
             ->orWhereHas('survivors', function ($query) {
                 $query->where('round_id', $this->round->id)

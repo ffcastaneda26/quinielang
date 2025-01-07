@@ -23,6 +23,7 @@ class Round extends Model
         'active',
         'type',
         'season_id',
+        'survivor_id'
     ];
     protected $casts = [
         'type'        => RoundTypeEnum::class,
