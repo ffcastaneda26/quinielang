@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\RoundResource\Pages;
 
-use App\Filament\Resources\RoundResource;
-use App\Models\Season;
 use Filament\Actions;
+use App\Models\Season;
+use Illuminate\Support\Facades\DB;
+use App\Filament\Resources\RoundResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateRound extends CreateRecord
@@ -18,6 +19,12 @@ class CreateRound extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['season_id'] = Season::where('active',1)->first()->id;
+        if($data['active']){
+            DB::table('rounds')
+              ->update(['active' => 0]);
+        }
         return $data;
     }
+
+
 }

@@ -29,6 +29,10 @@ class Round extends Model
         'type'        => RoundTypeEnum::class,
     ];
 
+    public function survivor(): BelongsTo
+    {
+        return $this->belongsTo(Survivor::class);
+    }
     public function games(): HasMany
     {
         return $this->hasMany(Game::class);

@@ -11,6 +11,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -69,7 +70,11 @@ class RoundResource extends Resource
                 Forms\Components\Select::make('type')
                     ->options(RoundTypeEnum::class)
                     ->translateLabel(),
-            ]);
+                Forms\Components\Select::make('round_id')
+                    ->translateLabel()
+                    ->relationship('survivor', 'name')
+                    ->required(),
+            ])->columns(5);
     }
 
     public static function table(Table $table): Table
@@ -89,23 +94,26 @@ class RoundResource extends Resource
                     ->sortable(),
                 Tables\Columns\IconColumn::make('active')
                     ->sortable()
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('type')
-                    ->searchable()
                     ->translateLabel()
-                    ->searchable(),
+                    ->boolean(),
+                // Tables\Columns\TextColumn::make('type')
+                //     ->searchable()
+                //     ->translateLabel()
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->translateLabel()
                     ->searchable()
                     ->sortable()
                     ->badge(),
 
-                // Tables\Columns\TextColumn::make('season.name')
-                //     ->translateLabel()
-                //     ->sortable(),
+                Tables\Columns\TextColumn::make('survivor.name')
+                    ->translateLabel()
+                    ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('type')
+                    ->options(RoundTypeEnum::class)
+                    ->translateLabel()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
