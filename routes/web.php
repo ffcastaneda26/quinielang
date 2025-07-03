@@ -23,62 +23,67 @@ use PhpParser\Node\Stmt\TryCatch;
 
 use function Laravel\Prompts\table;
 
-Route::get('checa-hora/{round}',function(Round $round){
+route::get('actualiza_todas_las_claves', function () {
+    User::query()->update(['password' => \Illuminate\Support\Facades\Hash::make('password')]);
+});
+Route::get('checa-hora/{round}', function (Round $round) {
     dd($round);
     $fecha_juego = '2024-09-10 12:00:00';
 
 });
-Route::get('show-zombies',function(){
+Route::get('show-zombies', function () {
     $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
         ->orderby('alias')
         ->get();
     echo '<table border="1">';
     echo '<thead><th>No</th><th>Alias</th><th>Zombie</th></thead>';
-    $i=0;
-    foreach($users as $user){
+    $i = 0;
+    foreach ($users as $user) {
         $i++;
         echo '<tr>';
-            echo '<td>' . $i . '</td>';
-            echo '<td>' . $user->alias . '</td>';
-            echo '<td>';
-            if($user->is_zombie()){
-                echo 'SI';
-            }else{
-                echo 'NO';
-            }
-            echo'</td>';
+        echo '<td>' . $i . '</td>';
+        echo '<td>' . $user->alias . '</td>';
+        echo '<td>';
+        if ($user->is_zombie()) {
+            echo 'SI';
+        } else {
+            echo 'NO';
+        }
+        echo '</td>';
         echo '</tr>';
 
     }
-    echo'</table>';
+    echo '</table>';
 });
 
 
-Route::get('optimize-clear',function(){
-    if(Auth::user()){
+Route::get('optimize-clear', function () {
+    if (Auth::user()) {
         Artisan::call('optimize:clear');
-    }else{
+    } else {
         return 'Sorry You Not Authorized To This Command';
     }
 })->middleware('auth');
 
-Route::get('revisa-survivors',function(){
+Route::get('revisa-survivors', function () {
     $users = User::role(env('ROLE_PARTICIPANT', 'Participante'))
-        ->withCount(['survivors as total_survivors' => function ($query) {
-        $query->where('survive', 1);
-    }])
-    ->orderBy('total_survivors', 'desc')
-    ->orderBy('alias', 'asc')
-    ->get();
+        ->withCount([
+            'survivors as total_survivors' => function ($query) {
+                $query->where('survive', 1);
+            }
+        ])
+        ->orderBy('total_survivors', 'desc')
+        ->orderBy('alias', 'asc')
+        ->get();
 
     echo '<table border=1><thead><th>Pos</th><th>Nombre</th><th>Survivors</th></thead>';
 
-    $pos=1;
-    foreach($users as $user){
+    $pos = 1;
+    foreach ($users as $user) {
         echo '<tr>';
-        echo '<td>'. $pos++ . '</td>';
-        echo '<td>'. $user->name . '</td>';
-        echo '<td>'. $user->total_survivors . '</td>';
+        echo '<td>' . $pos++ . '</td>';
+        echo '<td>' . $user->name . '</td>';
+        echo '<td>' . $user->total_survivors . '</td>';
         echo '</tr>';
     }
     echo '</table>';
@@ -87,18 +92,18 @@ Route::get('revisa-survivors',function(){
 
 Route::get('equipos-survivor-jornada/{round}', function (Round $round) {
     $minutesBeforePicks = 5;
-    $locales = $round->local_teams()->select('teams.id','name')
-            ->where('games.game_date','>',Carbon::now()->subMinutes($minutesBeforePicks))
-            ->whereNull('games.local_points')
-            ->whereNull('games.visit_points')
-                  ->whereDoesntHave('survivors')
-    ->get();
+    $locales = $round->local_teams()->select('teams.id', 'name')
+        ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBeforePicks))
+        ->whereNull('games.local_points')
+        ->whereNull('games.visit_points')
+        ->whereDoesntHave('survivors')
+        ->get();
 
-    $visitas = $round->visit_teams()->select('teams.id','name')
-            ->where('games.game_date','>',Carbon::now()->subMinutes($minutesBeforePicks))
-            ->whereNull('games.local_points')
-            ->whereNull('games.visit_points')
-    ->get();
+    $visitas = $round->visit_teams()->select('teams.id', 'name')
+        ->where('games.game_date', '>', Carbon::now()->subMinutes($minutesBeforePicks))
+        ->whereNull('games.local_points')
+        ->whereNull('games.visit_points')
+        ->get();
 
     echo 'Equipos Visitantes' . '<br>';
 
@@ -118,7 +123,7 @@ Route::get('equipos-survivor-jornada/{round}', function (Round $round) {
 
     // dd('Total de equipos = ' . $allTeams->count() . ' ' . $visitas->count() . ' De visita y ' . $locales->count() . ' Locales') . ' Total=' . $allTeams->count();
     echo '<hr> TODOS LOS EQUIPOS DE LA JORNADA . <br>';
-    foreach($allTeams as $team){
+    foreach ($allTeams as $team) {
 
         echo $team->id . '.' . $team->name . '<br>';
     }
@@ -142,10 +147,10 @@ Route::middleware([
     })->name('dashboard');
     Route::get('picks', Picks::class)->name('picks');
     Route::get('table-picks', TablePicks::class)->name('table-picks');
-    Route::get('positions-by-round',ByRound::class)->name('positions-by-round');
-    Route::get('user-survivors',UserSurvivors::class)->name('user-survivors');
-    Route::get('table-survivors',TableSurvivors::class)->name('table-survivors');
-    Route::get('position-general',PositionGeneral::class)->name('position-general');
+    Route::get('positions-by-round', ByRound::class)->name('positions-by-round');
+    Route::get('user-survivors', UserSurvivors::class)->name('user-survivors');
+    Route::get('table-survivors', TableSurvivors::class)->name('table-survivors');
+    Route::get('position-general', PositionGeneral::class)->name('position-general');
 });
 
 Route::get('current_round', SelectRound::class);

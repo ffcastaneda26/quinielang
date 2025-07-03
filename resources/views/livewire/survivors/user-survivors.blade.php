@@ -16,11 +16,11 @@
             </div>
 
             {{-- Detalle --}}
-            @foreach ($rounds as $round)
-                @livewire('survivors.user-survivor',['round' => $round,
-                                                    'minutesBefore' => $minutesBefore],
-                                                key('round_' . $round->id))
-            @endforeach
+                @foreach ($rounds as $round)
+                    @livewire('survivors.user-survivor',['round' => $round,
+                                                        'minutesBefore' => $minutesBefore],
+                                                    key('round_' . $round->id))
+                @endforeach
         </div>
     </div>
 </div>
