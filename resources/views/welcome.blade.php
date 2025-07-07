@@ -940,7 +940,7 @@
                     </div>
 
                     <div class="flex lg:justify-center lg:col-start-2">
-                        <p style="font-size: 36px">QUINIELA 2024</p>
+                        <p style="font-size: 36px">QUINIELA 2025</p>
                     </div>
 
                 </header>

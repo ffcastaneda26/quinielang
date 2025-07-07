@@ -85,9 +85,10 @@ class PickGame extends Component
             $this->local_points =  $this->pick_user->local_points;
         }
 
-        $this->winner = $this->pick_user->winner;
 
-        $this->pick_user_winner = $this->pick_user->winner;
+        $this->winner = $this->pick_user ? $this->pick_user->winner : null;
+
+        $this->pick_user_winner = $this->pick_user ? $this->pick_user->winner : null;
         $this->hit_game = $this->game_has_result && $this->pick_user_winner === $this->game->winner;
         $this->visit_logo = $game->visit_team->logo;
         $this->local_logo = $game->local_team->logo;
