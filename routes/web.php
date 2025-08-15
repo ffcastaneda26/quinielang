@@ -19,6 +19,7 @@ use App\Livewire\Positions\PositionGeneral;
 use App\Livewire\Picks\TablePicks\TablePicks;
 use App\Livewire\Survivors\Table\TableSurvivors;
 use App\Models\Configuration as ModelsConfiguration;
+use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
 
 use function Laravel\Prompts\table;
@@ -130,10 +131,12 @@ Route::get('equipos-survivor-jornada/{round}', function (Round $round) {
 });
 
 Route::get('/', function () {
+    Log::info('Ahora se vuelve a actualizar');
+    $users = User::all('id','name');
     if (Auth::check()) {
         return redirect('/dashboard');
     }
-    return view('welcome');
+    return view('welcome',compact('users'));
 });
 
 Route::middleware([

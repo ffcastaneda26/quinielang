@@ -913,6 +913,7 @@
                 font-size: 48px;
 
             }
+
             #screenshot-container img {
                 width: 100%;
                 height: 100%;
@@ -943,29 +944,34 @@
                         <p style="font-size: 36px">QUINIELA 2025</p>
                     </div>
 
+                    @if ($users && $users->count())
+                        <div class="flex lg:justify-center lg:col-start-2">
+                            <p style="font-size: 36px">Tenemos: {{ $users->count() }} Usuarios</p>
+                        </div>
+                    @endif
                 </header>
 
                 <main class="mt-6">
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                         <div id="docs-card"
-                        class="flex flex-col items-center justify-center gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-black/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-                       <div id="screenshot-container" class="flex justify-center items-center w-full flex-1">
-                           <img src="{{ asset('images/jugador.png') }}" width="400px">
-                       </div>
-                   </div>
+                            class="flex flex-col items-center justify-center gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-black/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                            <div id="screenshot-container" class="flex justify-center items-center w-full flex-1">
+                                <img src="{{ asset('images/jugador.png') }}" width="400px">
+                            </div>
+                        </div>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                    class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-                                    <div class="pt-3 sm:pt-5">
-                                        <h2 class="text-xl font-semibold text-black dark:text-white">
-                                            {{ __('Register') }}
-                                        </h2>
+                                class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
+                                <div class="pt-3 sm:pt-5">
+                                    <h2 class="text-xl font-semibold text-black dark:text-white">
+                                        {{ __('Register') }}
+                                    </h2>
 
-                                        <p class="mt-4 text-sm/relaxed">
-                                            Para ser participante de esta quiniela necesita registrarse en el sitio
-                                        </p>
-                                    </div>
+                                    <p class="mt-4 text-sm/relaxed">
+                                        Para ser participante de esta quiniela necesita registrarse en el sitio
+                                    </p>
+                                </div>
                             </a>
                         @else
                             <div
@@ -979,20 +985,20 @@
                                         Para ser participante de esta quiniela necesita registrarse en el sitio
                                     </p>
                                 </div>
-                             <div
-                                class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                                <img src="{{ asset('images/email.png') }}" alt="">
-                            </div>
+                                <div
+                                    class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
+                                    <img src="{{ asset('images/email.png') }}" alt="">
+                                </div>
 
-                            <div class="pt-3 sm:pt-5">
-                                <h2 class="text-xl font-semibold text-black dark:text-white">Atención:</h2>
+                                <div class="pt-3 sm:pt-5">
+                                    <h2 class="text-xl font-semibold text-black dark:text-white">Atención:</h2>
 
-                                <p class="mt-4 text-sm/relaxed">
-                                    Si tiene algún problema, observación o sugerencia sobre el sitio, favor de
-                                    enviar un correo a nuestro <a href="mailto:luandeje@yahoo.com.mx"
-                                        class="underline">Webmaster</a>.
-                                </p>
-                            </div>
+                                    <p class="mt-4 text-sm/relaxed">
+                                        Si tiene algún problema, observación o sugerencia sobre el sitio, favor de
+                                        enviar un correo a nuestro <a href="mailto:luandeje@yahoo.com.mx"
+                                            class="underline">Webmaster</a>.
+                                    </p>
+                                </div>
                             </div>
                         @endif
 
@@ -1006,7 +1012,8 @@
                             </div>
 
                             <div class="pt-3 sm:pt-5">
-                                <h2 class="text-xl font-semibold text-black dark:text-white">Introduzca sus credenciales:</h2>
+                                <h2 class="text-xl font-semibold text-black dark:text-white">Introduzca sus
+                                    credenciales:</h2>
 
                                 <p class="mt-4 text-sm/relaxed">
                                     @include('auth.login_form')
@@ -1019,7 +1026,11 @@
                 </main>
 
                 <footer>
-                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Desarrollado por Excellsus Corp. </p>
+                    <p>Copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> Desarrollado por Excellsus Corp.
+                    </p>
 
                 </footer>
             </div>
