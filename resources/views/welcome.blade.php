@@ -944,11 +944,7 @@
                         <p style="font-size: 36px">QUINIELA 2025</p>
                     </div>
 
-                    @if ($users && $users->count())
-                        <div class="flex lg:justify-center lg:col-start-2">
-                            <p style="font-size: 36px">Tenemos: {{ $users->count() }} Usuarios</p>
-                        </div>
-                    @endif
+
                 </header>
 
                 <main class="mt-6">

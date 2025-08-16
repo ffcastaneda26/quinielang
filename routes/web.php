@@ -131,12 +131,10 @@ Route::get('equipos-survivor-jornada/{round}', function (Round $round) {
 });
 
 Route::get('/', function () {
-    Log::info('Ahora se vuelve a actualizar');
-    $users = User::all('id','name');
     if (Auth::check()) {
         return redirect('/dashboard');
     }
-    return view('welcome',compact('users'));
+    return view('welcome');
 });
 
 Route::middleware([
