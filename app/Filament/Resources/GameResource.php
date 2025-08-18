@@ -110,22 +110,22 @@ class GameResource extends Resource
     {
         return $table
             ->columns([
-Tables\Columns\ImageColumn::make('visit_team.logo')
-    ->disk('public')
-    ->directory('teams')
-    ->alignCenter()
-    ->circular()
-    ->translateLabel(),
+                // Tables\Columns\ImageColumn::make('visit_team.logo')
+                //     ->alignCenter()
+                //     ->circular()
+                //     ->translateLabel(),
+                Tables\Columns\TextColumn::make('visit_team.alias'),
                 Tables\Columns\TextColumn::make('visit_points')
                     ->numeric()
                     ->label(__('Points'))
                     ->alignCenter()
                     ->sortable(),
 
-                Tables\Columns\ImageColumn::make('local_team.logo')
-                    ->alignCenter()
-                    ->circular()
-                    ->translateLabel(),
+                // Tables\Columns\ImageColumn::make('local_team.logo')
+                //     ->alignCenter()
+                //     ->circular()
+                //     ->translateLabel(),
+                                Tables\Columns\TextColumn::make('visit_team.alias'),
                 Tables\Columns\TextColumn::make('local_points')
                     ->label(__('Points'))
                     ->alignCenter()
