@@ -40,11 +40,10 @@ class JetstreamServiceProvider extends ServiceProvider
             $user = User::where('email', $request->login)
                 ->orwhere('username', $request->login)
                 ->first();
-            if($user){
+
+            if ($user && $user->active && Hash::check($request->password, $user->password)) {
                 $user->last_login = now();
                 $user->save();
-            }
-             if ($user && $user->active && Hash::check($request->password, $user->password)) {
                 return $user;
             }
         });
