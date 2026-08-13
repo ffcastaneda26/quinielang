@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::table('rounds', function (Blueprint $table) {
             $table->foreignIdFor(Season::class)->after('type')->default(1)->comment('Temporada');
-            $table->foreignIdFor(Survivor::class)->after('season_id')->default(1)->comment('Survivor');
         });
     }
 
