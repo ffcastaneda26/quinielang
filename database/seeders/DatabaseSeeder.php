@@ -40,7 +40,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ConfigurationSeeder::class);
         $this->call(RoleAndPermissionSeeder::class);
         $this->call(UserAdminTableSeeder::class);
-        $this->call(ParticipantesSeeder::class);
         $this->call(LeagueSeeder::class);
         $this->call(ConferenceSeeder::class);
         $this->call(DivisionSeeder::class);
@@ -48,9 +47,12 @@ class DatabaseSeeder extends Seeder
         $this->call(SeasonSeeder::class);
         $this->call(RoundSeeder::class);
         $this->call(GameSeeder::class);
+        // $this->call(ParticipantesSeeder::class);
+
     }
 
-    protected function truncateTables(array $tables) {
+    protected function truncateTables(array $tables)
+    {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;'); // Desactivamos la revisión de claves foráneas
         foreach ($tables as $table) {
             DB::table($table)->truncate();
