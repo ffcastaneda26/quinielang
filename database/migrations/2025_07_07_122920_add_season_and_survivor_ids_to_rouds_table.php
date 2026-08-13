@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('rounds', function (Blueprint $table) {
-            $table->foreignIdFor(Season::class)->after('type')->default(1)->comment('Temporada');
+            $table->foreignIdFor(Survivor::class)->after('season_id')->default(1)->comment('Survivor');
         });
     }
 
@@ -24,7 +24,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('rounds', function (Blueprint $table) {
-            $table->dropColumn('season_id');
             $table->dropColumn('survivor_id');
         });
     }
