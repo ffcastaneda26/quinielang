@@ -66,7 +66,8 @@
             </p>
 
             <p class="ms-3 mt-2 text-md  text-black">
-                <strong>Nota:</strong> En las Finales de Conferencia y el Super Bowl, que valen 2 y 3 puntos respectivamente, se pueden elegir
+                <strong>Nota:</strong> En las Finales de Conferencia y el Super Bowl, que valen 2 y 3 puntos
+                respectivamente, se pueden elegir
                 equipos distintos. Según las selecciones y el resultado, un partido puede dar entre 0 y 3 puntos. El
                 último partido del Super Bowl será el criterio de desempate en la Jornada 19 y, como los MNF, otorgará
                 solo 1 punto.
@@ -269,7 +270,7 @@
     </div>
 
     <footer class="text-right font-bold">
-        <p class="text-black bg-blue-900">Copyright &copy;
+        <p class="text-white bg-blue-900">Copyright &copy;
             <script>
                 document.write(new Date().getFullYear());
             </script> Desarrollado por Excellsus Corp.

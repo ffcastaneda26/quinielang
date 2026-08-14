@@ -109,7 +109,7 @@ class Round extends Model
             }
         }
 
-        if($current_round && $current_round->id != $active_round->id){
+        if($current_round && (!$active_round || $current_round->id != $active_round->id)){
             $sql = "UPDATE rounds SET active=0";
             DB::update($sql);
             $current_round->active = 1;

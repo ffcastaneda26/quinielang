@@ -47,8 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SeasonSeeder::class);
         $this->call(RoundSeeder::class);
         $this->call(GameSeeder::class);
-        // $this->call(ParticipantesSeeder::class);
-
+        $this->call(ParticipantesSeeder::class);
     }
 
     protected function truncateTables(array $tables)
